@@ -1,0 +1,28 @@
+html * {
+  margin: 0;
+}
+
+body {
+  min-width: 300px;
+}
+
+.layout {
+  padding: 16px 24px 24px 24px;
+  background: #fff;
+}
+
+@media (max-width: 1000px) {
+  .layout {
+    padding: 8px;
+  }
+}
+
+.layout-content {
+  padding: 0 20px;
+}
+
+@media (max-width: 1000px) {
+  .layout-content {
+    padding: 0;
+  }
+}
