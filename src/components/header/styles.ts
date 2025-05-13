@@ -27,7 +27,8 @@ export const CustomHeader = styled.header`
     }
   }
   .logo {
-    width: 32px;
+    width: 42px;
+    border-radius: 8px;
   }
   .search-icon {
     margin-left: 10px;
@@ -36,57 +37,9 @@ export const CustomHeader = styled.header`
       display: none;
     }
   }
-  @media (max-width: 1600px) {
-    width: 97%;
-  }
-  @media (max-width: 1200px) {
-    width: 96.5%;
-  }
-  @media (max-width: 1000px) {
-    width: 95.5%;
-  }
-  @media (max-width: 800px) {
-    width: 95%;
-  }
-  @media (max-width: 600px) {
-    width: 92.5%;
-  }
-  @media (max-width: 400px) {
-    width: 91%;
-  }
-  @media (max-width: 600px) {
-    padding: 20px 16px 20px 16px;
-  }
-  .hide {
-    @media (max-width: 600px) {
-      display: none;
-    }
-  }
 `;
 
-export const MobileHeader = styled.div`
-  padding-top: 98px;
-  display: flex;
-  justify-content: center;
-  max-height: 72px;
-  align-items: center;
-  animation: slideIn 0.2s ease-in-out;
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @media (min-width: 500px) {
-    display: none;
-  }
-`;
-
-export const Dolon = styled.h1`
+export const Goodrone = styled.h1`
   color: black;
   font-size: 25px;
   font-weight: 500;
@@ -105,9 +58,4 @@ export const InputContainer = styled.div`
   @media (max-width: 500px) {
     display: none;
   }
-`;
-
-export const MobileInputContainer = styled.div`
-  min-height: 40px;
-  width: 95%;
 `;

@@ -1,0 +1,22 @@
+{
+  "mainPage": {
+    "register": "Get register!",
+    "registerWelcome": "Welcome to GOODRONE: the platform for heavy music lovers!",
+    "registerDesc": "Register and explore",
+    "registerDescShort": "It doesn’t take a lot of time",
+    "regButton": "Okay let’s register!",
+    "demoHead1": "More information on our",
+    "demoHead2": "YouTube channel.",
+    "demoButton": "Subscribe",
+    "nav": "Navigation",
+    "info": "Heavy info",
+    "infoDesc": "Metal news and more",
+    "knowledge": "Questions",
+    "knowledgeDesc": "Find the answers",
+    "videos": "Videos",
+    "videosDesc": "Best metal videos",
+    "notExist": "Sorry, the page you visited does not exist",
+    "more": "Third party resources",
+    "link": "Explore more"
+  }
+}

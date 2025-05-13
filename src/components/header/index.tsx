@@ -1,8 +1,10 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { type MenuProps, Flex, Input, Dropdown } from 'antd';
+import { type MenuProps, Input, Dropdown } from 'antd';
 import { type Dispatch, type SetStateAction, type JSX, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { InputContainer, CustomHeader, Dolon } from './styles';
+import { InputContainer, CustomHeader, Goodrone } from './styles';
+import logo from '/src/assets/goodrone-logo.png';
+import { Flex } from '../commonStyled';
 
 type Iprops = {
   token: string | null | undefined;
@@ -13,7 +15,6 @@ type Iprops = {
 
 function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Element {
   const [searchString, setsearchString] = useState<string>('');
-
   const location = useLocation();
 
   const showDrawer = (e: { stopPropagation: () => void }) => {
@@ -26,11 +27,13 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
   return (
     <>
       <CustomHeader>
-        <Flex style={{ minWidth: '110px' }}>
+        <Flex style={{ minWidth: '110px', alignItems: 'center' }}>
           {location.pathname.includes('questions') && <button onClick={showDrawer} className="burger"></button>}
-          <Link style={{ textDecoration: 'none' }} to={'/'}></Link>
           <Link style={{ textDecoration: 'none' }} to={'/'}>
-            <Dolon className={`${location.pathname.includes('questions') && 'hide'}`}>Dolon</Dolon>
+            <img className="logo" src={logo} alt="logo" />
+          </Link>
+          <Link style={{ textDecoration: 'none' }} to={'/'}>
+            <Goodrone className={`${location.pathname.includes('questions') && 'hide'}`}>Goodrone</Goodrone>
           </Link>
           {location.pathname.includes('question') && <SearchOutlined className="search-icon" onClick={() => setmobileInputSearch((prev) => !prev)} />}
         </Flex>
