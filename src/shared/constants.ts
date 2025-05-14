@@ -1,11 +1,18 @@
+export const API_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const URLs = {
+  SIGNUP: 'auth/register',
+  SIGNIN: 'auth/login'
+};
+
 export const languages = [
   {
-    id: '1b174688-8529-440a-ac9a-76552011b818',
+    id: '1',
     value: 'English',
     code: 'en'
   },
   {
-    id: '4d3af8fe-5eab-4c3f-ae1b-dd7642c288cb',
+    id: '2',
     value: 'Русский',
     code: 'ru'
   }

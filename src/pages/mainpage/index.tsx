@@ -1,12 +1,16 @@
+import type { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'antd';
 import { LinkedinOutlined, YoutubeOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import i18n from '@src/localization/config';
 import { Container, Marketing, Navigation, CenterFlex, Copyright, Footer, Register, Link as StyledLink } from './styles';
-import type { JSX } from 'react';
 
-function MainPage(): JSX.Element {
+type Iprops = {
+  token: string | null | undefined;
+};
+
+function MainPage({ token }: Iprops): JSX.Element {
   const mainPageLinks = [
     {
       title: i18n.t('mainPage.info'),

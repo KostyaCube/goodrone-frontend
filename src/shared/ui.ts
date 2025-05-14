@@ -15,7 +15,7 @@ export const SpinnerWrapper = styled.div`
   align-items: center;
 `;
 
-export const BigContainer = styled.div`
+export const MainContainer = styled.div`
   max-width: 1920px;
   margin: 0 auto;
   font-family: 'Inter';

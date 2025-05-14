@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { BigContainer } from './components/commonStyled';
+import { MainContainer } from '../shared/ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Header from './components/header';
+import Header from '@src/components/header';
 import { Button, Result } from 'antd';
-import MainPage from './pages/mainpage';
+import MainPage from '@src/pages/mainpage';
 
 function App() {
   const token = 'test-token';
@@ -14,7 +14,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <BigContainer>
+    <MainContainer>
       <Routes>
         <Route path="/" element={<Navigate to="/main" />} />
         <Route
@@ -46,7 +46,7 @@ function App() {
           }
         />
       </Routes>
-    </BigContainer>
+    </MainContainer>
   );
 }
 

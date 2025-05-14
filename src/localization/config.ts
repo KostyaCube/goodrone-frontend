@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { defaultLang as defLang } from '@src/dataConstants';
+import { defaultLang as defLang } from '@src/shared/constants';
 import en from './translations/en.json';
 // import ru from './translations/ru.json';
 

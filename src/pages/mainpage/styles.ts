@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { BigContainer } from '@src/components/commonStyled';
+import { MainContainer } from '@src/shared/ui';
 
 export const CenterFlex = styled.div`
   display: flex;
   align-items: center;
 `;
 
-export const Container = styled(BigContainer)`
+export const Container = styled(MainContainer)`
   background: #f7f9fa;
   padding: 40px 128px 24px 128px;
   display: grid;
@@ -27,7 +27,7 @@ export const Container = styled(BigContainer)`
   }
 `;
 
-export const Register = styled(BigContainer)`
+export const Register = styled(MainContainer)`
   background: radial-gradient(circle at 22% 30%, rgb(197, 197, 198) 0%, rgb(0, 0, 0) 40%, rgb(44, 29, 60) 100%);
   min-height: 408px;
   padding: 120px 256px 0 256px;

@@ -4,7 +4,7 @@ import { type Dispatch, type SetStateAction, type JSX, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { InputContainer, CustomHeader, Goodrone } from './styles';
 import logo from '/src/assets/goodrone-logo.png';
-import { Flex } from '../commonStyled';
+import { Flex } from '@src/shared/ui';
 
 type Iprops = {
   token: string | null | undefined;
