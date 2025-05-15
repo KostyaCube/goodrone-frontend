@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
-export const Flex = styled.div`
+interface FlexProps {
+  justify?: 'start' | 'between';
+  wrap?: boolean;
+  margin?: string;
+}
+
+export const Flex = styled.div<FlexProps>`
   display: flex;
   align-items: center;
   min-width: 100px;
-  justify-content: space-between;
+  justify-content: ${({ justify }) =>
+    justify === 'between' ? 'space-between' : 'flex-start'};
+  flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
+  margin: ${({ margin }) => margin || '0'};
 `;
 
 export const SpinnerWrapper = styled.div`

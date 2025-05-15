@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'antd';
 import { LinkedinOutlined, YoutubeOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import i18n from '@src/localization/config';
-import { Container, Marketing, Navigation, CenterFlex, Copyright, Footer, Register, Link as StyledLink } from './styles';
+import i18n from '@src/shared/localization/config';
+import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as StyledLink } from './styles';
+import { Flex } from '@src/shared/ui';
 
 type Iprops = {
   token: string | null | undefined;
@@ -22,7 +23,7 @@ function MainPage({ token }: Iprops): JSX.Element {
     {
       title: i18n.t('mainPage.videos'),
       description: i18n.t('mainPage.videosDesc'),
-      image: '/src/assets/icons/tutor.svg',
+      image: '/src/assets/icons/video.svg',
       link: '/videos/',
       id: 2
     },
@@ -60,7 +61,6 @@ function MainPage({ token }: Iprops): JSX.Element {
             {mainPageLinks.map((item) => (
               <Link
                 to={item.link}
-                target={item.link === '/questions' || item.link === '/tutorials/' ? '_self' : '_blank'}
                 className="button-link"
                 key={item.id}
               >
@@ -95,20 +95,20 @@ function MainPage({ token }: Iprops): JSX.Element {
       </Container>
 
       <Footer>
-        <CenterFlex style={{ justifyContent: 'space-between' }}>
-          <CenterFlex style={{ width: '86px' }}>
+        <Flex justify="between">
+          <Flex style={{ width: '86px' }}>
             <a href="#" target="_blank">
               <LinkedinOutlined />
             </a>
             <a href="#" target="_blank">
               <YoutubeOutlined style={{ marginLeft: '20px' }} />
             </a>
-          </CenterFlex>
+          </Flex>
           <Copyright>© Goodrone {today.getFullYear()}</Copyright>
           <div style={{ paddingLeft: '60px' }}>
             <img src="/src/assets/black-logo.svg" alt="black-logo"></img>
           </div>
-        </CenterFlex>
+        </Flex>
       </Footer>
     </>
   );

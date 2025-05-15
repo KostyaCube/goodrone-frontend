@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import { MainContainer } from '@src/shared/ui';
-
-export const CenterFlex = styled.div`
-  display: flex;
-  align-items: center;
-`;
+import { Flex, MainContainer } from '@src/shared/ui';
 
 export const Container = styled(MainContainer)`
   background: #f7f9fa;
@@ -78,7 +73,7 @@ export const Register = styled(MainContainer)`
   }
 `;
 
-export const Marketing = styled(CenterFlex)`
+export const Marketing = styled(Flex)`
   flex-wrap: wrap;
   gap: 8px;
   .item {
