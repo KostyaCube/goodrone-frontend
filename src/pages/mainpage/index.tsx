@@ -59,11 +59,7 @@ function MainPage({ token }: Iprops): JSX.Element {
           <h3>{t('mainPage.nav')}</h3>
           <div className="items-container">
             {mainPageLinks.map((item) => (
-              <Link
-                to={item.link}
-                className="button-link"
-                key={item.id}
-              >
+              <Link to={item.link} className="button-link" key={item.id}>
                 <img src={item.image} alt="link-image" />
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>

@@ -1,6 +1,6 @@
 import { MailOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Modal, Select, Button } from 'antd';
-import { type Dispatch, type SetStateAction, type JSX, useState } from 'react';
+import { type Dispatch, type SetStateAction, type JSX, useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { CustomHeader, Goodrone } from './styles';
 import logo from '/src/assets/goodrone-logo.png';
@@ -18,13 +18,20 @@ type Iprops = {
 
 function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Element {
   const { openAuthModal, openModal, closeModal } = useAuthModal();
-  // const [searchString, setsearchString] = useState<string>('');
   const location = useLocation();
+
+  // const [searchString, setsearchString] = useState<string>('');
 
   // const showDrawer = (e: { stopPropagation: () => void }) => {
   //   e.stopPropagation();
   //   setOpenMenu(true);
   // };
+
+  useEffect(() => {
+    if (openAuthModal) {
+      document.body.style.width = '100%';
+    }
+  }, [openAuthModal]);
 
   return (
     <>
@@ -79,11 +86,11 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
         onCancel={() => {
           closeModal();
         }}
-        width={600}
+        width={650}
         className="auth"
         footer={[]}
       >
-        <Authorization />
+        <Authorization close={closeModal} />
       </Modal>
     </>
   );

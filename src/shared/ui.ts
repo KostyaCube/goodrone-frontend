@@ -12,7 +12,7 @@ export const Flex = styled.div<FlexProps>`
   align-items: center;
   min-width: 100px;
   justify-content: ${({ center, justify }) => {
-    if (center = "true") return 'center';
+    if ((center = 'true')) return 'center';
     if (justify === 'between') return 'space-between';
     return 'flex-start';
   }};

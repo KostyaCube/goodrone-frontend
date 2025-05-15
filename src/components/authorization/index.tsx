@@ -1,52 +1,75 @@
-import { JSX, useState } from 'react';
+import { JSX, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Tabs, Button, Checkbox, Form, Input, message } from 'antd';
-import { LockOutlined, MailOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import logo from '@src/assets/goodrone-logo.png';
-import { InnerContainer, OuterContainer } from './styles';
-import { useTranslation } from 'react-i18next';
-import { useLoginMutation } from '@src/app/store/api/API';
 import { setToken, setUser } from '@src/app/store/reducers/user';
+import { useLoginMutation, useRegisterMutation } from '@src/app/store/api/API';
+import { useTranslation } from 'react-i18next';
+
+import { Tabs, Button, Checkbox, Form, Input } from 'antd';
 import { Flex } from '@src/shared/ui';
+import { LockOutlined, MailOutlined, EyeInvisibleOutlined, EyeOutlined, FormOutlined } from '@ant-design/icons';
+import { InnerContainer, OuterContainer, TabsWrapper } from './styles';
+import logo from '@src/assets/goodrone-logo.png';
+import { AuthResponse, ISignin, ISignup } from '@src/shared/types';
 
-type ISignin = {
-  email: string;
-  password: string;
-  remember: boolean;
-};
+function Authorization({ close }: { close: () => void }): JSX.Element {
+  const [loginUser, { isLoading: loadingLogin, isSuccess: successLogin, isError: errorLogin }] = useLoginMutation();
+  const [registerUser, { isLoading: loadingRegister, isSuccess: successRegister, isError: errorRegister }] = useRegisterMutation();
 
-function Authorization( ): JSX.Element {
-  const { t } = useTranslation();
-  const [login, { isLoading, error }] = useLoginMutation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-  const onFinish = async ({ email, password, remember }: ISignin) => {
+  const processResponse = (res: AuthResponse, remember: boolean) => {
+    dispatch(setToken(res.token));
+    dispatch(setUser(res.user));
+    const storage = remember ? localStorage : sessionStorage;
+    storage.setItem('user', JSON.stringify(res.user));
+    storage.setItem('token', res.token);
+  };
+
+  const logIn = async ({ email, password, remember }: ISignin) => {
     try {
-      const res = await login({ email: email.trim(), password }).unwrap();
-      dispatch(setToken(res.token));
-      dispatch(setUser(res.user));
-      const storage = remember ? localStorage : sessionStorage;
-      storage.setItem('user', JSON.stringify(res.user));
-      storage.setItem('token', res.token);
+      const res = await loginUser({ email: email.trim(), password }).unwrap();
+      processResponse(res, !!remember);
     } catch (err) {
       console.error('Login error', err);
     }
   };
 
+  const register = async ({ email, password, firstname, lastname }: ISignup) => {
+    try {
+      const res = await registerUser({
+        email: email.trim(),
+        password,
+        firstname,
+        lastname
+      }).unwrap();
+
+      processResponse(res, false);
+    } catch (err) {
+      console.error('Login error', err);
+    }
+  };
+
+  useEffect(() => {
+    if (successLogin || successRegister) {
+      close();
+    }
+  }, [successLogin, successRegister]);
+
   function SignInForm() {
     return (
       <>
-        <Form name="normal_login" initialValues={{ remember: true }} size="large" onFinish={onFinish}>
-          <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
-            <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+        <Form name="login" initialValues={{ remember: true }} size="large" onFinish={logIn}>
+          <Form.Item name="email" rules={[{ required: true, message: t('auth.emailMessage') }]}>
+            <Input prefix={<MailOutlined />} placeholder={t('auth.email')} />
           </Form.Item>
 
-          <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]}>
+          <Form.Item name="password" rules={[{ required: true, message: t('auth.passwordMessage') }]}>
             <Input.Password
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<LockOutlined />}
               type="password"
-              placeholder="Password"
+              placeholder={t('auth.password')}
               autoComplete="password"
             />
           </Form.Item>
@@ -58,8 +81,44 @@ function Authorization( ): JSX.Element {
           </Form.Item>
 
           <Form.Item>
-            <Button loading={isLoading} type="primary" htmlType="submit" className="login-form-button">
+            <Button loading={loadingLogin} type="primary" htmlType="submit" className="form-button">
               {t('auth.login')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </>
+    );
+  }
+
+  function SignUpForm() {
+    return (
+      <>
+        <Form name="registration" size="large" onFinish={register}>
+          <Form.Item name="email" rules={[{ required: true, message: t('auth.emailMessage') }]}>
+            <Input prefix={<MailOutlined />} placeholder={t('auth.email')} />
+          </Form.Item>
+
+          <Form.Item name="firstname" rules={[{ required: true, message: t('auth.firstMessage') }]}>
+            <Input prefix={<FormOutlined />} placeholder={t('auth.firstname')} />
+          </Form.Item>
+
+          <Form.Item name="lastname" rules={[{ required: true, message: t('auth.lastMessage') }]}>
+            <Input prefix={<FormOutlined />} placeholder={t('auth.lastname')} />
+          </Form.Item>
+
+          <Form.Item name="password" rules={[{ required: true, message: t('auth.passwordMessage') }]}>
+            <Input.Password
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder={t('auth.password')}
+              autoComplete="password"
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button loading={loadingRegister} type="primary" htmlType="submit" className="form-button">
+              {t('auth.register')}
             </Button>
           </Form.Item>
         </Form>
@@ -75,24 +134,24 @@ function Authorization( ): JSX.Element {
           <h2>Goodrone</h2>
         </Flex>
         <p>The platform for heavy music lovers</p>
-        <div style={{ borderTop: 1, marginTop: '7px', paddingTop: '24px' }}>
+        <TabsWrapper>
           <Tabs
             defaultActiveKey="1"
             centered
             items={[
               {
-                key: 'login',
+                key: 'signin',
                 label: t('auth.login'),
                 children: <SignInForm />
               },
               {
                 key: 'signup',
                 label: t('auth.register'),
-                children: <div style={{ minHeight: '256px' }} />
+                children: <SignUpForm />
               }
             ]}
           />
-        </div>
+        </TabsWrapper>
       </InnerContainer>
     </OuterContainer>
   );

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const CustomHeader = styled.header`
   width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
   padding: 20px 24px;
   display: flex;
   justify-content: space-between;

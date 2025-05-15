@@ -1,10 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserState } from '@src/shared/types';
 
-const initialState: UserState = {
-  token: localStorage.getItem('token') || sessionStorage.getItem('token') || '',
-  user: null
-};
+function loadUserState(): UserState {
+  try {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+    const userJson = localStorage.getItem('user') || sessionStorage.getItem('user');
+    const user = userJson ? JSON.parse(userJson) : null;
+    return { token, user };
+  } catch (e) {
+    return { token: '', user: null };
+  }
+}
+
+const initialState: UserState = loadUserState();
 
 export const login = createSlice({
   name: 'login',
@@ -19,8 +27,8 @@ export const login = createSlice({
     logout: (state) => {
       state.token = '';
       state.user = null;
-      localStorage.removeItem('token');
-      sessionStorage.removeItem('token');
+      localStorage.clear();
+      sessionStorage.clear();
     }
   }
 });

@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL, URLs } from '@src/shared/constants';
-import { User } from '@src/shared/types';
+import { ISignin, ISignup, AuthResponse } from '@src/shared/types';
 
 export const API = createApi({
-  reducerPath: 'questions',
+  reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
@@ -13,9 +13,17 @@ export const API = createApi({
   }),
 
   endpoints: (builder) => ({
-    login: builder.mutation<{ token: string; user: User }, { email: string; password: string }>({
+    login: builder.mutation<AuthResponse, ISignin>({
       query: (credentials) => ({
         url: URLs.SIGNIN,
+        method: 'POST',
+        body: credentials
+      })
+    }),
+
+    register: builder.mutation<AuthResponse, ISignup>({
+      query: (credentials) => ({
+        url: URLs.SIGNUP,
         method: 'POST',
         body: credentials
       })
@@ -23,4 +31,4 @@ export const API = createApi({
   })
 });
 
-export const { useLoginMutation } = API;
+export const { useLoginMutation, useRegisterMutation } = API;

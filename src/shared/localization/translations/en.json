@@ -3,14 +3,14 @@
     "login": "Log in",
     "register": "Register",
     "email": "E-mail",
-    "emailPlaceholder": "Enter your E-mail adress",
+    "emailMessage": "Please input your Email!",
     "password": "Password",
-    "passwordPlaceholder": "Enter your password",
+    "passwordMessage": "Please input your password!",
     "remember": "Remember me",
-    "firstName": "First name",
-    "firstNamePlaceholder": "Enter your first name",
-    "lastName": "Last name",
-    "lastNamePlaceholder": "Enter your last name",
+    "firstname": "First name",
+    "firstMessage": "Enter your first name!",
+    "lastname": "Last name",
+    "lastMessage": "Enter your last name!",
     "logOut": "Log Out"
   },
   "mainPage": {
@@ -31,6 +31,7 @@
     "videosDesc": "Best metal videos",
     "notExist": "Sorry, the page you visited does not exist",
     "more": "Third party resources",
-    "link": "Explore more"
+    "link": "Explore more",
+    "backHome": "Back home"
   }
 }
