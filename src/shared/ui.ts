@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface FlexProps {
   justify?: 'start' | 'between';
+  center?: string;
   wrap?: boolean;
   margin?: string;
 }
@@ -10,8 +11,11 @@ export const Flex = styled.div<FlexProps>`
   display: flex;
   align-items: center;
   min-width: 100px;
-  justify-content: ${({ justify }) =>
-    justify === 'between' ? 'space-between' : 'flex-start'};
+  justify-content: ${({ center, justify }) => {
+    if (center = "true") return 'center';
+    if (justify === 'between') return 'space-between';
+    return 'flex-start';
+  }};
   flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
   margin: ${({ margin }) => margin || '0'};
 `;

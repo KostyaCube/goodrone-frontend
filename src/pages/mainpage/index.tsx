@@ -46,7 +46,7 @@ function MainPage({ token }: Iprops): JSX.Element {
           <h1>{t('mainPage.registerWelcome')}</h1>
           <p>{t('mainPage.registerDesc')}</p>
           <Link to="/authorization">
-            <Button style={{ height: '56px', backgroundColor: '#44958f' }} size="large" type="primary">
+            <Button style={{ height: '56px' }} size="large" type="primary">
               {t('mainPage.regButton')}
             </Button>
           </Link>

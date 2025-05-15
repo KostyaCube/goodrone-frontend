@@ -1,4 +1,18 @@
 {
+  "auth": {
+    "login": "Log in",
+    "register": "Register",
+    "email": "E-mail",
+    "emailPlaceholder": "Enter your E-mail adress",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "remember": "Remember me",
+    "firstName": "First name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last name",
+    "lastNamePlaceholder": "Enter your last name",
+    "logOut": "Log Out"
+  },
   "mainPage": {
     "register": "Get register!",
     "registerWelcome": "Welcome to GOODRONE: the platform for heavy music lovers!",
