@@ -6,12 +6,15 @@ import { LinkedinOutlined, YoutubeOutlined, ArrowRightOutlined } from '@ant-desi
 import i18n from '@src/shared/localization/config';
 import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as StyledLink } from './styles';
 import { Flex } from '@src/shared/ui';
+import { useAuthModal } from '@src/app/providers/authModal';
 
 type Iprops = {
   token: string | null | undefined;
 };
 
 function MainPage({ token }: Iprops): JSX.Element {
+  const { openModal } = useAuthModal();
+
   const mainPageLinks = [
     {
       title: i18n.t('mainPage.info'),
@@ -45,11 +48,9 @@ function MainPage({ token }: Iprops): JSX.Element {
         <div>
           <h1>{t('mainPage.registerWelcome')}</h1>
           <p>{t('mainPage.registerDesc')}</p>
-          <Link to="/authorization">
-            <Button style={{ height: '56px' }} size="large" type="primary">
-              {t('mainPage.regButton')}
-            </Button>
-          </Link>
+          <Button onClick={openModal} style={{ height: '56px' }} size="large" type="primary">
+            {t('mainPage.regButton')}
+          </Button>
         </div>
         <img src="/src/assets/images/demo-back.png" alt="goodrone-platform"></img>
       </Register>

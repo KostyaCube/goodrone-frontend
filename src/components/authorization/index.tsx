@@ -10,13 +10,15 @@ import { LockOutlined, MailOutlined, EyeInvisibleOutlined, EyeOutlined, FormOutl
 import { InnerContainer, OuterContainer, TabsWrapper } from './styles';
 import logo from '@src/assets/goodrone-logo.png';
 import { AuthResponse, ISignin, ISignup } from '@src/shared/types';
+import { useNotification } from '@src/app/providers/notifications';
 
 function Authorization({ close }: { close: () => void }): JSX.Element {
-  const [loginUser, { isLoading: loadingLogin, isSuccess: successLogin, isError: errorLogin }] = useLoginMutation();
-  const [registerUser, { isLoading: loadingRegister, isSuccess: successRegister, isError: errorRegister }] = useRegisterMutation();
+  const [loginUser, { isLoading: loadingLogin, isSuccess: successLogin }] = useLoginMutation();
+  const [registerUser, { isLoading: loadingRegister, isSuccess: successRegister }] = useRegisterMutation();
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const notify = useNotification();
 
   const processResponse = (res: AuthResponse, remember: boolean) => {
     dispatch(setToken(res.token));
@@ -30,8 +32,8 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
     try {
       const res = await loginUser({ email: email.trim(), password }).unwrap();
       processResponse(res, !!remember);
-    } catch (err) {
-      console.error('Login error', err);
+    } catch (err: any) {
+      notify('error', err?.data?.message || err?.data?.error || t('auth.error'));
     }
   };
 
@@ -45,8 +47,8 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
       }).unwrap();
 
       processResponse(res, false);
-    } catch (err) {
-      console.error('Login error', err);
+    } catch (err: any) {
+      notify('error', err?.data?.message || err?.data?.error || t('auth.error'));
     }
   };
 
@@ -60,11 +62,28 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
     return (
       <>
         <Form name="login" initialValues={{ remember: true }} size="large" onFinish={logIn}>
-          <Form.Item name="email" rules={[{ required: true, message: t('auth.emailMessage') }]}>
+          <Form.Item
+            validateTrigger={[]}
+            name="email"
+            rules={[
+              { required: true, message: t('auth.emailMessage') },
+              {
+                type: 'email',
+                message: t('auth.emailValid')
+              }
+            ]}
+          >
             <Input prefix={<MailOutlined />} placeholder={t('auth.email')} />
           </Form.Item>
 
-          <Form.Item name="password" rules={[{ required: true, message: t('auth.passwordMessage') }]}>
+          <Form.Item
+            validateTrigger={[]}
+            name="password"
+            rules={[
+              { required: true, message: t('auth.passwordMessage') },
+              { min: 6, message: t('auth.passwordValid') }
+            ]}
+          >
             <Input.Password
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               prefix={<LockOutlined />}
@@ -94,19 +113,50 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
     return (
       <>
         <Form name="registration" size="large" onFinish={register}>
-          <Form.Item name="email" rules={[{ required: true, message: t('auth.emailMessage') }]}>
+          <Form.Item
+            validateTrigger={[]}
+            name="email"
+            rules={[
+              { required: true, message: t('auth.emailMessage') },
+              {
+                type: 'email',
+                message: t('auth.emailValid')
+              }
+            ]}
+          >
             <Input prefix={<MailOutlined />} placeholder={t('auth.email')} />
           </Form.Item>
 
-          <Form.Item name="firstname" rules={[{ required: true, message: t('auth.firstMessage') }]}>
+          <Form.Item
+            name="firstname"
+            validateTrigger={[]}
+            rules={[
+              { required: true, message: t('auth.firstMessage') },
+              { pattern: /^[A-Za-z\u0400-\u04FF]+$/, message: t('auth.firstnameValid') }
+            ]}
+          >
             <Input prefix={<FormOutlined />} placeholder={t('auth.firstname')} />
           </Form.Item>
 
-          <Form.Item name="lastname" rules={[{ required: true, message: t('auth.lastMessage') }]}>
+          <Form.Item
+            name="lastname"
+            rules={[
+              { required: true, message: t('auth.lastMessage') },
+              { pattern: /^[A-Za-z\u0400-\u04FF]+$/, message: t('auth.lastnameValid') }
+            ]}
+            validateTrigger={[]}
+          >
             <Input prefix={<FormOutlined />} placeholder={t('auth.lastname')} />
           </Form.Item>
 
-          <Form.Item name="password" rules={[{ required: true, message: t('auth.passwordMessage') }]}>
+          <Form.Item
+            validateTrigger={[]}
+            name="password"
+            rules={[
+              { required: true, message: t('auth.passwordMessage') },
+              { min: 6, message: t('auth.passwordValid') }
+            ]}
+          >
             <Input.Password
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               prefix={<LockOutlined />}
