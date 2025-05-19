@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 
 export const OuterContainer = styled.section`
-  max-width: 1920px;
   margin: 0 auto;
   padding: 110px 0 140px 0;
   background-color: #f7f9fa;

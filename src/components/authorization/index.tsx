@@ -179,7 +179,7 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
   return (
     <OuterContainer>
       <InnerContainer>
-        <Flex center="true">
+        <Flex $center="true">
           <img className="logo" src={logo} alt="logo"></img>
           <h2>Goodrone</h2>
         </Flex>

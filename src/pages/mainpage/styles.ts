@@ -25,7 +25,7 @@ export const Container = styled(MainContainer)`
 export const Register = styled(MainContainer)`
   background: radial-gradient(circle at 22% 30%, rgb(197, 197, 198) 0%, rgb(0, 0, 0) 40%, rgb(44, 29, 60) 100%);
   min-height: 408px;
-  padding: 120px 256px 0 256px;
+  padding: 90px 256px 0 256px;
   display: flex;
   justify-content: space-between;
   color: black;
@@ -206,8 +206,8 @@ export const Navigation = styled.nav`
 
 export const Footer = styled.footer`
   margin: 0 auto;
-  max-width: 1920px;
-  background-color: #f5f5f7;
+  max-width: 1980px;
+  background-color: rgb(237, 237, 237);
   padding: 25px 80px;
   a {
     font-size: 20px;

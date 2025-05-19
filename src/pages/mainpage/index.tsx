@@ -92,8 +92,8 @@ function MainPage({ token }: Iprops): JSX.Element {
       </Container>
 
       <Footer>
-        <Flex justify="between">
-          <Flex style={{ width: '86px' }}>
+        <Flex $justify="between">
+          <Flex>
             <a href="#" target="_blank">
               <LinkedinOutlined />
             </a>
