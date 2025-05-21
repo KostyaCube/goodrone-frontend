@@ -1,24 +1,16 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_URL, URLs } from '@src/shared/constants';
+import { baseApi } from './APIbase';
+import { URLs } from '@src/shared/constants';
 import { ISignin, ISignup, AuthResponse } from '@src/shared/types';
 
-export const API = createApi({
-  reducerPath: 'auth',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    prepareHeaders: (headers) => {
-      headers.set('Access-Control-Allow-Origin', '*');
-      return headers;
-    }
-  }),
-
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, ISignin>({
       query: (credentials) => ({
         url: URLs.SIGNIN,
         method: 'POST',
         body: credentials
-      })
+      }),
+      invalidatesTags: [{ type: 'User' }]
     }),
 
     register: builder.mutation<AuthResponse, ISignup>({
@@ -31,4 +23,4 @@ export const API = createApi({
   })
 });
 
-export const { useLoginMutation, useRegisterMutation } = API;
+export const { useLoginMutation, useRegisterMutation } = authApi;

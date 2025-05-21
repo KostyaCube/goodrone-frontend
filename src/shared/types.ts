@@ -27,3 +27,55 @@ export type AuthResponse = {
   token: string;
   user: User;
 };
+
+export interface IKeyword {
+  id: number;
+  body: string;
+  questionId: null;
+}
+
+export interface IFile {
+  id: number;
+  link: string;
+  created_at: string;
+}
+
+export interface IArticle {
+  id: number;
+  lang: string;
+  title: string;
+  body: string;
+  views: number;
+  rating: number;
+  authorId: number;
+  comments: IComment[];
+  files: IFile[];
+  created_at: string;
+  author: { id: number; name: string; uuid: string };
+  keywords: IKeyword[];
+}
+
+export interface IComment {
+  id: number;
+  body: string;
+  postId: number;
+  rating: number;
+  authorId: number;
+  replyOn?: IComment;
+  created_at: string;
+  author: {
+    name: string;
+    position: string;
+  };
+}
+
+export interface ArticleResponse {
+  id: number;
+  title: string;
+  body: string;
+  created_at: Date;
+  views: number;
+  rating: number;
+  authorId: number;
+  lang: string;
+}

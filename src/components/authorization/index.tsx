@@ -1,7 +1,7 @@
 import { JSX, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setToken, setUser } from '@src/app/store/reducers/user';
-import { useLoginMutation, useRegisterMutation } from '@src/app/store/api/API';
+import { useLoginMutation, useRegisterMutation } from '@src/app/store/api/auth';
 import { useTranslation } from 'react-i18next';
 
 import { Tabs, Button, Checkbox, Form, Input } from 'antd';

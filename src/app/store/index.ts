@@ -1,17 +1,17 @@
 import { useSelector, type TypedUseSelectorHook } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { API } from './api/API';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { login } from './reducers/user';
+import { baseApi } from './api/APIbase';
 
 const reducers = combineReducers({
-  [API.reducerPath]: API.reducer,
+  [baseApi.reducerPath]: baseApi.reducer,
   login: login.reducer
 });
 
 export const store = configureStore({
   reducer: reducers,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(API.middleware)
+  middleware: (getDM) => getDM({ serializableCheck: false }).concat(baseApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -2,7 +2,14 @@ export const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const URLs = {
   SIGNUP: 'auth/register',
-  SIGNIN: 'auth/login'
+  SIGNIN: 'auth/login',
+  KEYWORDS: 'keywords',
+  ARTICLES: 'articles',
+  ARTICLES_LENGTH: 'articles-length',
+  ARTICLES_MAKE_VIEWED: 'articles/make-viewed',
+  ARTICLES_LIKE: 'articles/like',
+  COMMENTS: 'comments',
+  COMMENTS_LIKE: 'comments/like'
 };
 
 export const languages = [

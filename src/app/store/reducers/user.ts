@@ -3,8 +3,8 @@ import { User, UserState } from '@src/shared/types';
 
 function loadUserState(): UserState {
   try {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
-    const userJson = localStorage.getItem('user') || sessionStorage.getItem('user');
+    const token = sessionStorage.getItem('token') || localStorage.getItem('token') || '';
+    const userJson = sessionStorage.getItem('user') || localStorage.getItem('user');
     const user = userJson ? JSON.parse(userJson) : null;
     return { token, user };
   } catch (e) {
