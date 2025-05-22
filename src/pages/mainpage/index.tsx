@@ -1,20 +1,22 @@
-import type { JSX } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, type JSX } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'antd';
+import { Button, Tabs } from 'antd';
 import { LinkedinOutlined, YoutubeOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import pencil from '/src/assets/icons/pencil.svg';
 import i18n from '@src/shared/localization/config';
 import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as StyledLink } from './styles';
 import { Flex } from '@src/shared/ui';
 import { useAuthModal } from '@src/app/providers/authModal';
+import { FeedNavigation } from '@src/components/articleFeed/styles';
+import { useAppSelector } from '@src/app/store';
+import ArticleFeed from '@src/components/articleFeed';
 
 type Iprops = {
   token: string | null | undefined;
 };
 
 function MainPage({ token }: Iprops): JSX.Element {
-  const { openModal } = useAuthModal();
-
   const mainPageLinks = [
     {
       title: i18n.t('mainPage.info'),
@@ -39,8 +41,47 @@ function MainPage({ token }: Iprops): JSX.Element {
     }
   ];
 
+  const filterItems = [
+    {
+      key: '1',
+      label: i18n.t('Articles.feed'),
+      filter: 'all'
+    },
+    {
+      key: '2',
+      label: i18n.t('Articles.myArticles'),
+      filter: 'my'
+    },
+    {
+      key: '3',
+      label: i18n.t('stackOver.menuSaved'),
+      filter: 'saved'
+    }
+  ];
+
+  const me = useAppSelector((state) => state.login.user);
+  const [uid, setuid] = useState<string>('');
+  const [saved, setSaved] = useState<string>('');
+  const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const { openModal } = useAuthModal();
   const today = new Date();
+
+  function handleChangeSorting(e: string) {
+    if (e == '1') {
+      setuid('');
+      setSaved('');
+    }
+    if (e == '2' && me) {
+      setuid(`${me.id}`);
+      setSaved('');
+    }
+    if (e == '3' && me) {
+      setuid(`${me.id}`);
+      setSaved('saved');
+    }
+  }
 
   return (
     <>
@@ -88,6 +129,23 @@ function MainPage({ token }: Iprops): JSX.Element {
               </StyledLink>
             </div>
           </Marketing>
+
+          {me && token ? (
+            <FeedNavigation>
+              <Tabs items={filterItems} onChange={handleChangeSorting} />
+              <Button
+                onClick={() => navigate('/articles/create')}
+                type="primary"
+                style={{ display: 'flex', alignItems: 'unset', justifyContent: 'space-between' }}
+              >
+                <img style={{ marginRight: '4px' }} src={pencil} />
+                {t('Articles.writeButt')}
+              </Button>
+            </FeedNavigation>
+          ) : (
+            <FeedNavigation />
+          )}
+          <ArticleFeed uid={uid} saved={saved} />
         </div>
       </Container>
 

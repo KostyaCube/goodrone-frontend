@@ -3,6 +3,11 @@ export interface User {
   email: string;
   firstname: string;
   lastname: string;
+  activity: string | null;
+
+  likedArticles: number[];
+  likedComments: number[];
+  savedPosts: IArticle[];
 }
 
 export interface UserState {

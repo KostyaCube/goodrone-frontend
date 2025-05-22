@@ -186,7 +186,7 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
         <p>The platform for heavy music lovers</p>
         <TabsWrapper>
           <Tabs
-            defaultActiveKey="1"
+            defaultActiveKey="signin"
             centered
             items={[
               {

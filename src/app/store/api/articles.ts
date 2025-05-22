@@ -26,7 +26,7 @@ export const articlesApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Articles' }, { type: 'Words' }]
     }),
 
-    getPosts: builder.query<IArticle[], { lang: string; skip?: string; userUUID?: string; order?: string; saved?: string }>({
+    getPosts: builder.query<IArticle[], { lang: string; skip?: string; userID?: string; order?: string; saved?: string }>({
       query: (params = { lang: 'en' }) => {
         const queryParams = new URLSearchParams();
 
@@ -39,8 +39,8 @@ export const articlesApi = baseApi.injectEndpoints({
         if (params.skip) {
           queryParams.append('skip', params.skip);
         }
-        if (params.userUUID) {
-          queryParams.append('userUUID', params.userUUID);
+        if (params.userID) {
+          queryParams.append('userID', params.userID);
         }
         if (params.order) {
           queryParams.append('order', params.order);

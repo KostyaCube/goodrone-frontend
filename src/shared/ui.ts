@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface FlexProps {
   $justify?: 'start' | 'between';
   $center?: string;
-  $wrap?: boolean;
+  $wrap?: string;
   $margin?: string;
 }
 
@@ -16,7 +16,7 @@ export const Flex = styled.div<FlexProps>`
     if ($justify === 'between') return 'space-between';
     return 'flex-start';
   }};
-  flex-wrap: ${({ $wrap }) => ($wrap ? 'wrap' : 'nowrap')};
+  flex-wrap: ${({ $wrap }) => ($wrap === 'true' ? 'wrap' : 'nowrap')};
   margin: ${({ $margin }) => $margin || '0'};
 `;
 
