@@ -5,7 +5,7 @@ import { useLoginMutation, useRegisterMutation } from '@src/app/store/api/auth';
 import { useTranslation } from 'react-i18next';
 
 import { Tabs, Button, Checkbox, Form, Input } from 'antd';
-import { Flex } from '@src/shared/ui';
+import { Flex } from '@src/shared/ui/styled components';
 import { LockOutlined, MailOutlined, EyeInvisibleOutlined, EyeOutlined, FormOutlined } from '@ant-design/icons';
 import { InnerContainer, OuterContainer, TabsWrapper } from './styles';
 import logo from '@src/assets/goodrone-logo.png';

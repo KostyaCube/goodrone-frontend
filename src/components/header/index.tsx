@@ -4,7 +4,7 @@ import { type Dispatch, type SetStateAction, type JSX, useState, useEffect } fro
 import { useLocation, Link } from 'react-router-dom';
 import { CustomHeader, Goodrone } from './styles';
 import logo from '/src/assets/goodrone-logo.png';
-import { Flex } from '@src/shared/ui';
+import { Flex } from '@src/shared/ui/styled components';
 import Authorization from '../authorization';
 import { useAuthModal } from '@src/app/providers/authModal';
 import { defaultLang, languages } from '@src/shared/constants';

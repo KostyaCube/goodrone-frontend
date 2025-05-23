@@ -56,7 +56,7 @@ export interface IArticle {
   comments: IComment[];
   files: IFile[];
   created_at: string;
-  author: { id: number; name: string; uuid: string };
+  author: User;
   keywords: IKeyword[];
 }
 

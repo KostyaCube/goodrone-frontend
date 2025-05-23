@@ -9,7 +9,8 @@ export const URLs = {
   ARTICLES_MAKE_VIEWED: 'articles/make-viewed',
   ARTICLES_LIKE: 'articles/like',
   COMMENTS: 'comments',
-  COMMENTS_LIKE: 'comments/like'
+  COMMENTS_LIKE: 'comments/like',
+  ARTICLES_FAVORITES: 'articles/favorites'
 };
 
 export const languages = [

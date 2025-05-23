@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { Flex, MainContainer } from '@src/shared/ui';
+import { Flex, MainContainer } from '@src/shared/ui/styled components';
 
 export const Container = styled(MainContainer)`
-  background: #f7f9fa;
-  padding: 40px 128px 24px 128px;
+  padding: 16px 128px 24px 128px;
   display: grid;
   grid-template-columns: 336px auto;
   gap: 16px;
@@ -158,7 +157,7 @@ export const Navigation = styled.nav`
   min-height: 200px;
   max-height: 500px;
   background-color: #fff;
-  padding: 16px 16px 80px 16px;
+  padding: 24px;
   position: relative;
   h3 {
     text-align: left;

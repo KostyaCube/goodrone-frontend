@@ -1,5 +1,5 @@
 import { RightSide } from './styles';
-import ActionButtons from './articleActionButtons';
+import ActionButtons from './actions/articleButtons';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGetPostsQuery } from '@src/app/store/api/articles';

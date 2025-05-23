@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MainContainer } from '@src/shared/ui';
+import { MainContainer } from '@src/shared/ui/styled components';
 
 export const Container = styled(MainContainer)`
   padding: 24px 0px;
@@ -111,7 +111,6 @@ export const Article = styled.div`
     font-size: 16px;
     margin: 16px 0;
     overflow: hidden;
-    padding-right: 5px;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -121,15 +120,14 @@ export const Article = styled.div`
     }
   }
   .ava {
-    width: 16px;
-    height: 16px;
+    width: 30px;
+    height: 30px;
     position: relative;
     span {
       font-weight: 400;
-      font-size: 10px;
+      font-size: 14px;
       margin: 0;
       position: absolute;
-      top: -25%;
     }
   }
   .more-info {
@@ -221,7 +219,7 @@ export const FeedNavigation = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   background-color: #f7f9fa;
-  padding-top: 16px;
+  padding: 16px;
   .ant-tabs-nav {
     margin: 0;
   }

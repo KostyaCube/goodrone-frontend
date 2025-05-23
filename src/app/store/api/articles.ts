@@ -26,6 +26,16 @@ export const articlesApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Articles' }, { type: 'Words' }]
     }),
 
+    deletePost: builder.mutation<void, number | string>({
+      query: (id) => {
+        return {
+          url: `${URLs.ARTICLES}/${id}`,
+          method: 'delete'
+        };
+      },
+      invalidatesTags: [{ type: 'Articles' }]
+    }),
+
     getPosts: builder.query<IArticle[], { lang: string; skip?: string; userID?: string; order?: string; saved?: string }>({
       query: (params = { lang: 'en' }) => {
         const queryParams = new URLSearchParams();
@@ -85,17 +95,37 @@ export const articlesApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]
     }),
 
-    deletePost: builder.mutation<void, number | string>({
-      query: (id) => {
+    savePostToFav: builder.mutation<void, { userID: number; articleId: number }>({
+      query: (params) => {
         return {
-          url: `${URLs.ARTICLES}/${id}`,
+          url: `${URLs.ARTICLES_FAVORITES}/${params.userID}/${params.articleId}`,
+          method: 'post'
+        };
+      },
+      invalidatesTags: [{ type: 'User' }]
+    }),
+
+    removePostFromFav: builder.mutation<void, { userID: number; articleId: number }>({
+      query: (params) => {
+        return {
+          url: `${URLs.ARTICLES_FAVORITES}/${params.userID}/${params.articleId}`,
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }]
+      invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]
     })
   })
 });
 
-export const { useGetPostsQuery, useGetOnePostQuery, useGetUserPostsLengthQuery, usePostViewMutation, usePostLikeMutation, useDeletePostMutation } =
-  articlesApi;
+export const {
+  useCreatePostMutation,
+  useEditPostMutation,
+  useDeletePostMutation,
+  useGetPostsQuery,
+  useGetOnePostQuery,
+  useGetUserPostsLengthQuery,
+  usePostViewMutation,
+  usePostLikeMutation,
+  useSavePostToFavMutation,
+  useRemovePostFromFavMutation
+} = articlesApi;

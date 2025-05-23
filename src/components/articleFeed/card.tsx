@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { Avatar } from 'antd';
 import { Article } from './styles';
-import ActionButtons from './articleActionButtons';
+import ActionButtons from './actions/articleButtons';
 import { IArticle, IKeyword } from '@src/shared/types';
 import { extractTextFromHTML } from '@src/shared/utils';
-import { Flex } from '@src/shared/ui';
+import { Flex } from '@src/shared/ui/styled components';
 
 function ArticleCard({ data }: { data: IArticle }) {
   const { t } = useTranslation();
@@ -18,13 +18,15 @@ function ArticleCard({ data }: { data: IArticle }) {
         data-testid="card"
         className="author"
         onClick={() => {
-          navigate(`/authors/${data.authorId}`, { state: { uuid: data.author.uuid } });
+          navigate(`/authors/${data.authorId}`, { state: { id: data.author.id } });
         }}
       >
         <Avatar className="ava" style={{ backgroundColor: '#51a18bac', margin: 0 }} size="small">
-          {data?.author.name?.charAt(0).toUpperCase() || 'U'}
+          {`${data?.author.lastname?.charAt(0)}${data?.author.firstname?.charAt(0)}` || 'U'}
         </Avatar>
-        <span className="name">{data.author.name}</span>
+        <span className="name">
+          {data.author.lastname} {data.author.firstname}
+        </span>
 
         <span>{moment(data.created_at).fromNow()}</span>
       </div>

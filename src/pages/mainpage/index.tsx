@@ -6,7 +6,7 @@ import { LinkedinOutlined, YoutubeOutlined, ArrowRightOutlined } from '@ant-desi
 import pencil from '/src/assets/icons/pencil.svg';
 import i18n from '@src/shared/localization/config';
 import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as StyledLink } from './styles';
-import { Flex } from '@src/shared/ui';
+import { Flex } from '@src/shared/ui/styled components';
 import { useAuthModal } from '@src/app/providers/authModal';
 import { FeedNavigation } from '@src/components/articleFeed/styles';
 import { useAppSelector } from '@src/app/store';
@@ -54,7 +54,7 @@ function MainPage({ token }: Iprops): JSX.Element {
     },
     {
       key: '3',
-      label: i18n.t('stackOver.menuSaved'),
+      label: i18n.t('Articles.menuSaved'),
       filter: 'saved'
     }
   ];
@@ -133,12 +133,8 @@ function MainPage({ token }: Iprops): JSX.Element {
           {me && token ? (
             <FeedNavigation>
               <Tabs items={filterItems} onChange={handleChangeSorting} />
-              <Button
-                onClick={() => navigate('/articles/create')}
-                type="primary"
-                style={{ display: 'flex', alignItems: 'unset', justifyContent: 'space-between' }}
-              >
-                <img style={{ marginRight: '4px' }} src={pencil} />
+              <Button onClick={() => navigate('/articles/create')} type="primary" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <img style={{ height: '24px' }} src={pencil} />
                 {t('Articles.writeButt')}
               </Button>
             </FeedNavigation>

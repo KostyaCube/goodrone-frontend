@@ -4,7 +4,7 @@ import { Spin, Empty } from 'antd';
 import Discussed from './discussed';
 import i18n from '@src/shared/localization/config';
 import { useGetPostsQuery } from '@src/app/store/api/articles';
-import { SpinnerWrapper } from '@src/shared/ui';
+import { SpinnerWrapper } from '@src/shared/ui/styled components';
 import { IArticle } from '@src/shared/types';
 
 function ArticleFeed({ uid, simple, saved }: { uid: string; simple?: boolean; saved?: string }) {

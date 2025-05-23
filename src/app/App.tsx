@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { MainContainer } from '../shared/ui';
+import { MainContainer } from '../shared/ui/styled components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@src/components/header';
