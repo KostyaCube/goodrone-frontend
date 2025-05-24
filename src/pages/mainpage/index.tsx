@@ -44,17 +44,17 @@ function MainPage({ token }: Iprops): JSX.Element {
   const filterItems = [
     {
       key: '1',
-      label: i18n.t('Articles.feed'),
+      label: i18n.t('articles.feed'),
       filter: 'all'
     },
     {
       key: '2',
-      label: i18n.t('Articles.myArticles'),
+      label: i18n.t('articles.myArticles'),
       filter: 'my'
     },
     {
       key: '3',
-      label: i18n.t('Articles.menuSaved'),
+      label: i18n.t('articles.menuSaved'),
       filter: 'saved'
     }
   ];
@@ -135,7 +135,7 @@ function MainPage({ token }: Iprops): JSX.Element {
               <Tabs items={filterItems} onChange={handleChangeSorting} />
               <Button onClick={() => navigate('/articles/create')} type="primary" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <img style={{ height: '24px' }} src={pencil} />
-                {t('Articles.writeButt')}
+                {t('articles.writeButt')}
               </Button>
             </FeedNavigation>
           ) : (

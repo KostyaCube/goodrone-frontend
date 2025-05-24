@@ -1,0 +1,210 @@
+import { Avatar, Button, Result, Spin, UploadFile } from 'antd';
+import { useTranslation } from 'react-i18next';
+
+import { LeftSide, Article } from '@src/components/articleFeed/styles';
+
+import { ArticleWrapper, CommentWrapper, MainContainer, InputContainer, BackButton } from './styles';
+import moment from 'moment';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Edit, Remove } from '@src/assets/icons/icon-components';
+import { LeftOutlined } from '@ant-design/icons';
+import Discussed from '@src/components/articleFeed/discussed';
+import { useDeletePostMutation, useGetOnePostQuery, usePostViewMutation } from '@src/app/store/api/articles';
+import { IComment, IKeyword } from '@src/shared/types';
+import { useAppSelector } from '@src/app/store';
+import { useAuthModal } from '@src/app/providers/authModal';
+import { Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
+import ActionButtons from '@src/components/articleFeed/actions/articleButtons';
+
+function ArticlePage() {
+  let { id } = useParams();
+  const { t } = useTranslation();
+  const { data, isLoading } = useGetOnePostQuery(id);
+
+  const token = useAppSelector((state) => state.login.token);
+  const me = useAppSelector((state) => state.login.user);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const commentsBlock = useRef<HTMLDivElement | null>(null);
+
+  const [commentBody, setCommentBody] = useState<string>('');
+  const [commentFileList, setCommentFileList] = useState<UploadFile[]>([]);
+  const [replyingComment, setreplyingComment] = useState<IComment | null>(null);
+  const [edited, setEdited] = useState<IComment | null>(null);
+
+  const [makeViewed] = usePostViewMutation();
+  const [delPost] = useDeletePostMutation();
+
+  const { openModal } = useAuthModal();
+
+  function deletePost(id: string) {
+    delPost(id).then(() => navigate('/main?articles'));
+    // .catch(() => error());
+  }
+
+  function executeScroll() {
+    if (commentsBlock.current) {
+      const container = commentsBlock.current;
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  const reply = (comment: IComment) => {
+    setreplyingComment(comment);
+    if (replyingComment === comment) setreplyingComment(null);
+  };
+
+  useEffect(() => {
+    const element = document.querySelector('.content');
+    if (element && data) {
+      element.innerHTML = data.body;
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (id) makeViewed(id);
+  }, [id]);
+
+  useEffect(() => {
+    setreplyingComment(null);
+  }, [id]);
+
+  useEffect(() => {
+    if (location.search.includes('comments')) {
+      executeScroll();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location, commentsBlock.current]);
+
+  useEffect(() => {
+    if (edited) setCommentBody(edited.body);
+  }, [edited]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      navigate('/main?articles');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  if (!data && !isLoading)
+    return (
+      <Result
+        style={{ paddingTop: '180px' }}
+        status="404"
+        title="404"
+        subTitle={t('mainPage.notExist')}
+        extra={
+          <Button onClick={() => navigate('/main?articles')} type="primary">
+            {t('mainPage.backHome')}
+          </Button>
+        }
+      />
+    );
+  return (
+    <MainContainer>
+      <LeftSide style={{ background: '#f7f9fa' }}>
+        <BackButton onClick={() => navigate('/main?articles')}>
+          <LeftOutlined />
+        </BackButton>
+      </LeftSide>
+
+      {isLoading ? (
+        <Article style={{ height: '200px' }}>
+          <SpinnerWrapper>
+            <Spin size="large" />
+          </SpinnerWrapper>
+        </Article>
+      ) : (
+        <div>
+          <ArticleWrapper>
+            <Flex>
+              <div
+                className="author"
+                style={{ marginBottom: 0 }}
+                onClick={() => {
+                  data && navigate(`/authors/${data.authorId}`, { state: { id: data.author.id } });
+                }}
+              >
+                <Avatar className="ava" style={{ backgroundColor: '#51a18bac', margin: 0 }} size="small">
+                  {`${data?.author.lastname?.charAt(0)}${data?.author.firstname?.charAt(0)}` || 'U'}
+                </Avatar>
+                <span className="name">
+                  {data?.author.lastname} {data?.author.firstname}
+                </span>
+              </div>
+              {token && me && me.id === data?.authorId && (
+                <Flex style={{ margin: 0 }} className="actions-buttons">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // showDeletingConfirm({ callback: deletePost, id: `${data?.id}`, text: `${t('articles.deleteConfirmPost')}` });
+                    }}
+                  >
+                    <Remove />
+                    <span>{t('stackOver.delete')}</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate('/articles/create', { state: { article: data } });
+                    }}
+                    className="blue"
+                  >
+                    <Edit />
+                    <span>{t('stackOver.edit')}</span>
+                  </button>
+                </Flex>
+              )}
+            </Flex>
+            <span className="date">{moment(data?.created_at).format('DD.MM.YYYY')}</span>
+            <h1>{data?.title}</h1>
+
+            {!!data?.keywords.length && (
+              <Flex style={{ justifyContent: 'left', flexWrap: 'wrap', margin: '16px 0' }}>
+                {data?.keywords.map((keyword: IKeyword) => (
+                  <div key={keyword.id} className="keystyled">
+                    {keyword.body}
+                  </div>
+                ))}
+              </Flex>
+            )}
+
+            {!!data?.files.length && <img className="cover" src={`${data.files[0].link}`} />}
+
+            <div className="content" />
+
+            <ActionButtons article={data} />
+          </ArticleWrapper>
+
+          <div ref={commentsBlock}>
+            {data && data.comments.length > 0 && (
+              <CommentWrapper>
+                <h4 className="heading">
+                  {t('articles.comments')} <span>{data.comments.length}</span>
+                </h4>                
+              </CommentWrapper>
+            )}
+          </div>
+
+          <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
+            <p style={{ paddingTop: '16px' }}>
+              <Link onClick={openModal} to={''}>
+                {t('stackOver.auth')}
+              </Link>
+              {t('articles.toWrite')}
+            </p>
+          </InputContainer>
+        </div>
+      )}
+      <Discussed />
+    </MainContainer>
+  );
+}
+
+export default ArticlePage;

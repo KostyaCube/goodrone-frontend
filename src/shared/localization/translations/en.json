@@ -39,7 +39,7 @@
     "link": "Explore more",
     "backHome": "Back home"
   },
-  "Articles": {
+  "articles": {
     "more": "Read more",
     "comments": "Comments",
     "sendComment": "Add comment",
@@ -61,7 +61,7 @@
     "lang": "Article language",
     "linkCopied": "Link copied to clipboard!"
   },
-  "Common": {
+  "common": {
     "filters": "Filters",
     "delete": "Delete",
     "edit": "Edit",

@@ -37,7 +37,7 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
     navigator.clipboard.writeText(textToCopy).then(() => {
       message.success({
         type: 'success',
-        content: t('Articles.linkCopied'),
+        content: t('articles.linkCopied'),
         duration: 2
       });
     });

@@ -46,7 +46,7 @@ function ArticleCard({ data }: { data: IArticle }) {
       <h5>{data.title}</h5>
       <p className="short-desc">{extractTextFromHTML(data.body)}</p>
       <Link className="more-info" to={`/articles/${data.id}`}>
-        {t('Articles.more')}
+        {t('articles.more')}
       </Link>
 
       <ActionButtons article={data} />

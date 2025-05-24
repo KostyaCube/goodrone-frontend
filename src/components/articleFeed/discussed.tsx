@@ -1,4 +1,4 @@
-import { RightSide } from './styles';
+import { Discuss } from './styles';
 import ActionButtons from './actions/articleButtons';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -12,8 +12,8 @@ function Discussed() {
   const navigate = useNavigate();
 
   return (
-    <RightSide>
-      <h5>{t('Articles.discuss')}</h5>
+    <Discuss>
+      <h5>{t('articles.discuss')}</h5>
       {!!(data && data.length) &&
         data.map((item, index) => {
           if (index < 3)
@@ -27,7 +27,7 @@ function Discussed() {
               </div>
             );
         })}
-    </RightSide>
+    </Discuss>
   );
 }
 
