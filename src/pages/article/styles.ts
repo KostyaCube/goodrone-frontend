@@ -118,16 +118,15 @@ export const ArticleWrapper = styled(Article)`
         }
     }
     .ava {
-        width: 16px;
-        height: 16px;
+        width: 30px;
+        height: 30px;
         position: relative;
         span {
-            font-weight: 400;
-            font-size: 10px;
-            margin: 0;
-            position: absolute;
-            top: -25%;
-        }
+        font-weight: 400;
+        font-size: 14px;
+        margin: 0;
+        position: absolute;
+       }
     }
 `;
 

@@ -7,9 +7,9 @@ export const URLs = {
   ARTICLES: 'articles',
   ARTICLES_LENGTH: 'articles-length',
   ARTICLES_MAKE_VIEWED: 'articles/make-viewed',
-  ARTICLES_LIKE: 'articles/like',
+  ARTICLES_LIKE: 'user/articles/like',
   COMMENTS: 'comments',
-  COMMENTS_LIKE: 'comments/like',
+  COMMENTS_LIKE: 'user/comments/like',
   ARTICLES_FAVORITES: 'articles/favorites'
 };
 

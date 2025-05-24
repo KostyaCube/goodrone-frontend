@@ -16,6 +16,7 @@ import { useAppSelector } from '@src/app/store';
 import { useAuthModal } from '@src/app/providers/authModal';
 import { Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
 import ActionButtons from '@src/components/articleFeed/actions/articleButtons';
+import UserComment from '@src/components/articleFeed/comment/comment';
 
 function ArticlePage() {
   let { id } = useParams();
@@ -187,7 +188,10 @@ function ArticlePage() {
               <CommentWrapper>
                 <h4 className="heading">
                   {t('articles.comments')} <span>{data.comments.length}</span>
-                </h4>                
+                </h4>
+                {data.comments.map((item: IComment) => (
+                  <UserComment key={item.id} comment={item} setReply={reply} setEdited={setEdited} />
+                ))}
               </CommentWrapper>
             )}
           </div>
