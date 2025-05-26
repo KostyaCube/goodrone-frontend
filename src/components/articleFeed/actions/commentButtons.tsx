@@ -49,7 +49,7 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
         )}
       </div>
     );
-    
+
   return <div />;
 }
 

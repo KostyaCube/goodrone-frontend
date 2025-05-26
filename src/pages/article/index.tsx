@@ -17,6 +17,8 @@ import { useAuthModal } from '@src/app/providers/authModal';
 import { Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
 import ActionButtons from '@src/components/articleFeed/actions/articleButtons';
 import UserComment from '@src/components/articleFeed/comment/comment';
+import { ReachEditor } from '@src/components/reachEditor';
+import { useAddCommentMutation, useEditCommentMutation } from '@src/app/store/api/comments';
 
 function ArticlePage() {
   let { id } = useParams();
@@ -37,12 +39,31 @@ function ArticlePage() {
 
   const [makeViewed] = usePostViewMutation();
   const [delPost] = useDeletePostMutation();
+  const [sendComment] = useAddCommentMutation();
+  const [editComment] = useEditCommentMutation();
 
   const { openModal } = useAuthModal();
 
   function deletePost(id: string) {
     delPost(id).then(() => navigate('/main?articles'));
     // .catch(() => error());
+  }
+
+  function commentSending() {
+    try {
+      if (edited) {
+        editComment({ id: `${edited.id}`, body: commentBody });
+      } else {
+        if (id && me) {
+          replyingComment ? sendComment({ body: commentBody, postId: +id, replyOn: `${replyingComment.id}` }) : sendComment({ body: commentBody, postId: +id });
+        }
+      }
+      setCommentBody('');
+      setreplyingComment(null);
+      setEdited(null);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   function executeScroll() {
@@ -196,14 +217,53 @@ function ArticlePage() {
             )}
           </div>
 
-          <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
-            <p style={{ paddingTop: '16px' }}>
-              <Link onClick={openModal} to={''}>
-                {t('stackOver.auth')}
-              </Link>
-              {t('articles.toWrite')}
-            </p>
-          </InputContainer>
+          {me && token ? (
+            <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
+              <ReachEditor
+                simple
+                placeholder={t('Articles.writeC')}
+                fileList={commentFileList}
+                setFileList={setCommentFileList}
+                body={commentBody}
+                setBody={setCommentBody}
+              />
+              {replyingComment && (
+                <p className="replyFor">
+                  {t('Articles.replyFor')}{' '}
+                  <span>
+                    {replyingComment.author.firstname} {replyingComment.author.lastname}
+                  </span>
+                  <button onClick={() => setreplyingComment(null)} className="reply-cancel">
+                    x
+                  </button>
+                </p>
+              )}
+              {edited && (
+                <Button
+                  style={{ marginRight: '8px' }}
+                  onClick={() => {
+                    setCommentBody('');
+                    setEdited(null);
+                  }}
+                  key="cancel"
+                >
+                  {t('stackOver.cancel')}
+                </Button>
+              )}
+              <Button type="primary" onClick={me && token ? commentSending : undefined} disabled={commentBody.trim().length < 15} style={{ marginTop: '1rem' }}>
+                {edited ? t('stackOver.save') : t('Articles.sendComment')}
+              </Button>
+            </InputContainer>
+          ) : (
+            <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
+              <p style={{ paddingTop: '16px' }}>
+                <Link onClick={openModal} to={''}>
+                  {t('stackOver.auth')}
+                </Link>
+                {t('Articles.toWrite')}
+              </p>
+            </InputContainer>
+          )}
         </div>
       )}
       <Discussed />

@@ -68,10 +68,7 @@ export interface IComment {
   authorId: number;
   replyOn?: IComment;
   created_at: string;
-  author: {
-    name: string;
-    position: string;
-  };
+  author: User;
 }
 
 export interface ArticleResponse {

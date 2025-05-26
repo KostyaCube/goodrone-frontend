@@ -204,7 +204,7 @@ export const Discuss = styled.div`
   }
 `;
 
-export const LikeButton = styled.button<{ $blue?: string; }>`
+export const LikeButton = styled.button<{ $blue?: string }>`
   color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
   svg path {
     stroke: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')};
@@ -232,7 +232,7 @@ export const FeedNavigation = styled.div`
   }
 `;
 
-export const SaveButton = styled.button<{ $blue?: string; }>`
+export const SaveButton = styled.button<{ $blue?: string }>`
   color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
   svg {
     fill: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')} !important;

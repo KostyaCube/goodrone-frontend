@@ -1,3 +1,5 @@
+import { RcFile } from 'antd/es/upload';
+
 export function extractTextFromHTML(html: string): string {
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
@@ -11,4 +13,13 @@ export function extractTextFromHTML(html: string): string {
     styles[0].parentNode?.removeChild(styles[0]);
   }
   return tempDiv.textContent || tempDiv.innerText || '';
+}
+
+export function getBase64(file: RcFile): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
 }

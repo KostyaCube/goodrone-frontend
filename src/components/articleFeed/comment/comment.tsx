@@ -22,7 +22,7 @@ export type CommentProps = {
 function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { setEdited: Dispatch<SetStateAction<IComment | null>> }) {
   const token = useAppSelector((state) => state.login.token);
   const me = useAppSelector((state) => state.login.user);
-  
+
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
           label: (
             <ActionButton
               onClick={() => {
-              //  showDeletingConfirm({ callback: deleteComment, id: `${comment.id}`, text: `${t('Articles.deleteConfirmComment')}` });
+                //  showDeletingConfirm({ callback: deleteComment, id: `${comment.id}`, text: `${t('Articles.deleteConfirmComment')}` });
               }}
             >
               <Remove />
@@ -63,14 +63,17 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
 
   return (
     <div className="container">
-      <Flex>
+      <Flex $justify="between">
         <Flex>
           <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#51a18bac', gap: 4, marginRight: '8px' }} size="default">
-            {comment.author.name?.charAt(0).toUpperCase() || 'U'}
+            {`${comment?.author.lastname?.charAt(0)}${comment?.author.firstname?.charAt(0)}` || 'U'}
           </Avatar>
           <div>
-            <h4>{comment.author.name.charAt(0).toUpperCase() + comment.author.name.slice(1) || 'Unknown user'}</h4>
-            {!simple && <Position>{comment.author.position || `${t('stackOver.position')}`}</Position>}
+            <h4>
+              {comment.author.lastname.charAt(0).toUpperCase() + comment.author.lastname.slice(1)}{' '}
+              {comment.author.firstname.charAt(0).toUpperCase() + comment.author.firstname.slice(1)}
+            </h4>
+            {!simple && <Position>{comment.author.activity || `${t('stackOver.position')}`}</Position>}
           </div>
           {simple && (
             <div className="date-wrapper">
@@ -89,7 +92,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
       <p className="content">
         {comment.replyOn && (
           <span style={{ color: '#4096ff' }}>
-            @{comment.replyOn.author.name}
+            @{comment.replyOn.author.firstname} {comment.replyOn.author.lastname}
             {', '}
           </span>
         )}

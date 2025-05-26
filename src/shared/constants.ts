@@ -29,3 +29,5 @@ export const languages = [
 const langFromLocalStorage = localStorage.getItem('lang');
 export const parsedLang = langFromLocalStorage ? JSON.parse(langFromLocalStorage) : null;
 export const defaultLang = languages.find((item) => item.id === parsedLang)?.id || languages[0].id;
+
+export const supportedImageTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/gif'];
