@@ -170,7 +170,7 @@ function ArticlePage() {
                     }}
                   >
                     <Remove />
-                    <span>{t('stackOver.delete')}</span>
+                    <span>{t('articles.delete')}</span>
                   </button>
                   <button
                     onClick={() => {
@@ -179,7 +179,7 @@ function ArticlePage() {
                     className="blue"
                   >
                     <Edit />
-                    <span>{t('stackOver.edit')}</span>
+                    <span>{t('articles.edit')}</span>
                   </button>
                 </Flex>
               )}
@@ -247,18 +247,18 @@ function ArticlePage() {
                   }}
                   key="cancel"
                 >
-                  {t('stackOver.cancel')}
+                  {t('articles.cancel')}
                 </Button>
               )}
               <Button type="primary" onClick={me && token ? commentSending : undefined} disabled={commentBody.trim().length < 15} style={{ marginTop: '1rem' }}>
-                {edited ? t('stackOver.save') : t('Articles.sendComment')}
+                {edited ? t('articles.save') : t('Articles.sendComment')}
               </Button>
             </InputContainer>
           ) : (
             <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
               <p style={{ paddingTop: '16px' }}>
                 <Link onClick={openModal} to={''}>
-                  {t('stackOver.auth')}
+                  {t('articles.auth')}
                 </Link>
                 {t('Articles.toWrite')}
               </p>

@@ -219,26 +219,6 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const CreateWrapper = styled.div`
-  padding: 16px;
-  border-radius: 8px;
-  background-color: #f7f9fa;
-  margin-bottom: 16px;
-  min-height: 200px;
-  .ant-upload-select {
-    background-color: #fff !important;
-  }
-  .ant-tag-close-icon {
-    color: #fff;
-    margin: 0 0 4px 6px;
-  }
-`;
-
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 export const BackButton = styled.button`
   transform: scale(1.4);
   color: #535354;

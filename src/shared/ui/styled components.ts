@@ -34,3 +34,20 @@ export const MainContainer = styled.div`
   font-family: 'Inter';
   font-style: normal;
 `;
+
+export const Chips = styled.div<{ $pressed?: string; $events?: string }>`
+  pointer-events: ${(props) => `${props.$events}`};
+  border-radius: 16px;
+  padding: 4px 12px;
+  width: max-content;
+  margin: 8px 4px 0 0;
+  background: ${(props) => (props.$pressed === 'true' ? '#44958f' : '#E8F1FF')};
+  color: ${(props) => (props.$pressed === 'true' ? '#FFF' : 'black')};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  @media (max-width: 1000px) {
+    font-size: 12px;
+  }
+`;

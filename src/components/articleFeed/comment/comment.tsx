@@ -38,7 +38,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
               }}
             >
               <Remove />
-              <span>{t('stackOver.delete')}</span>
+              <span>{t('articles.delete')}</span>
             </ActionButton>
           ),
           key: '0'
@@ -53,7 +53,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
               className="blue"
             >
               <Edit />
-              <span>{t('stackOver.edit')}</span>
+              <span>{t('articles.edit')}</span>
             </ActionButton>
           ),
           key: '1'
@@ -73,7 +73,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
               {comment.author.lastname.charAt(0).toUpperCase() + comment.author.lastname.slice(1)}{' '}
               {comment.author.firstname.charAt(0).toUpperCase() + comment.author.firstname.slice(1)}
             </h4>
-            {!simple && <Position>{comment.author.activity || `${t('stackOver.position')}`}</Position>}
+            {!simple && <Position>{comment.author.activity || `${t('articles.position')}`}</Position>}
           </div>
           {simple && (
             <div className="date-wrapper">

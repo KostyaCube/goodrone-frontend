@@ -10,7 +10,8 @@ export const URLs = {
   ARTICLES_LIKE: 'user/articles/like',
   COMMENTS: 'comments',
   COMMENTS_LIKE: 'user/comments/like',
-  ARTICLES_FAVORITES: 'articles/favorites'
+  ARTICLES_FAVORITES: 'articles/favorites',
+  FILE: 'file'
 };
 
 export const languages = [

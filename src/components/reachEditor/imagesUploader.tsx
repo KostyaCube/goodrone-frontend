@@ -16,7 +16,7 @@ type IUploadProps = {
 };
 
 function ImagesUploader({ show, fileList, setFileList, imagesLength, maxFiles }: IUploadProps): JSX.Element {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as RcFile);
@@ -36,7 +36,7 @@ function ImagesUploader({ show, fileList, setFileList, imagesLength, maxFiles }:
   const uploadButton = (
     <div>
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>{t('stackOver.dragFiles')}</div>
+      {/* <div style={{ marginTop: 8 }}>{t('common.dragFiles')}</div> */}
     </div>
   );
 
@@ -49,11 +49,11 @@ function ImagesUploader({ show, fileList, setFileList, imagesLength, maxFiles }:
           beforeUpload={(file) => {
             const isImage = supportedImageTypes.includes(file.type);
             if (!isImage) {
-              message.error({
-                type: 'error',
-                content: t('stackOver.onlyImages'),
-                duration: 2
-              });
+              // message.error({
+              //   type: 'error',
+              //   content: t('common.onlyImages'),
+              //   duration: 2
+              // });
             }
             return false;
           }}
@@ -64,7 +64,7 @@ function ImagesUploader({ show, fileList, setFileList, imagesLength, maxFiles }:
         >
           {imagesLength >= maxFiles ? null : uploadButton}
         </Upload>
-        {imagesLength === maxFiles && <h6>{t('stackOver.maxFiles')}</h6>}
+        {/* {imagesLength === maxFiles && <h6>{t('common.maxFiles')}</h6>} */}
       </div>
     );
   return <div className="uploader" />;
