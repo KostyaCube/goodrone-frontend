@@ -99,7 +99,6 @@
     "writeA": "Write answer",
     "deleteConfirm": "Are you sure you want to delete the question?",
     "lostData": "You will lost your data",
-    "noCancel": "This action cannot be undone",
     "loading": "Loading...",
     "success": "Success!",
     "error": "Sending error",
@@ -130,6 +129,7 @@
     "enter": "Sign in",
     "close": "Close",
     "cancel": "Cancel",
-    "continue": "Continue"
+    "continue": "Continue",
+    "noCancel": "This action cannot be undone"
   }
 }

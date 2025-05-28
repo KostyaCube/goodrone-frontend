@@ -202,7 +202,6 @@ function CreateArticle() {
               tagRender={tagRender}
               tokenSeparators={[' ']}
               onChange={onChangeKeywords}
-              // dropdownStyle={{ display: 'none' }}
               placeholder={t('articles.tagsPlaceholder')}
               value={chosedkeywords as unknown as RadioChangeEvent}
               defaultValue={state?.keywords.map((word: any) => word.body) as unknown as RadioChangeEvent}
@@ -232,7 +231,7 @@ function CreateArticle() {
             disabled={title.trim().length <= 0 || articleBody.trim().length <= 0 || chosedkeywords.length > 5}
             onClick={me ? createPost : undefined}
           >
-            {state ? t('articles.save') : t('common.publish')}
+            {state ? t('articles.save') : t('articles.publish')}
           </Button>
         </ButtonsWrapper>
       </CreateWrapper>

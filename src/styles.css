@@ -15,6 +15,11 @@ body {
   background: #fff;
 }
 
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 1000px) {
   .layout {
     padding: 8px;

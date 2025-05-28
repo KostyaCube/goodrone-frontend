@@ -41,7 +41,7 @@ export const Chips = styled.div<{ $pressed?: string; $events?: string }>`
   padding: 4px 12px;
   width: max-content;
   margin: 8px 4px 0 0;
-  background: ${(props) => (props.$pressed === 'true' ? '#44958f' : '#E8F1FF')};
+  background: ${(props) => (props.$pressed === 'true' ? '#44958f' : '#e8fffe')};
   color: ${(props) => (props.$pressed === 'true' ? '#FFF' : 'black')};
   cursor: pointer;
   &:hover {

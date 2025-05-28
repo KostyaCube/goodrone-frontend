@@ -69,7 +69,7 @@ export const ArticleWrapper = styled(Article)`
     font-size: 12px;
   }
   .keystyled {
-    background-color: #e8f1ff;
+    background-color: #e8fffe;
     padding: 8px 16px;
     color: black;
     border-radius: 20px;

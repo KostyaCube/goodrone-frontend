@@ -15,14 +15,12 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Articles' }]
     }),
 
-    editComment: builder.mutation<void, { id: string; body: string }>({
-      query: (body) => {
-        return {
-          url: `${URLs.COMMENTS}/${body.id}`,
-          method: 'put',
-          body
-        };
-      },
+    editComment: builder.mutation<void, { id: string; commentBody: string }>({
+      query: ({ id, commentBody }) => ({
+        url: `${URLs.COMMENTS}/${id}`,
+        method: 'PUT',
+        body: { body: commentBody }
+      }),
       invalidatesTags: [{ type: 'Articles' }]
     }),
 
