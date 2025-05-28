@@ -33,6 +33,7 @@ i18n.use(initReactI18next).init({
     escapeValue: false
   },
   resources,
+  debug: true,
   react: { useSuspense: false }
 });
 

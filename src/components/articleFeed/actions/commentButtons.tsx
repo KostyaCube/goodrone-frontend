@@ -4,8 +4,7 @@ import { useAppSelector } from '@src/app/store';
 import { LikeButton } from '../styles';
 import { useLikeCommentMutation } from '@src/app/store/api/comments';
 import { CommentProps } from '../comment/comment';
-import { useAuthModal } from '@src/app/providers/authModal';
-import { needAuthMessage } from '@src/shared/ui/moldals';
+import { useCustomModals, useModal } from '@src/app/providers/modals';
 
 function CommentActionButton({ comment, setReply }: CommentProps) {
   const token = useAppSelector((state) => state.login.token);
@@ -14,7 +13,9 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
   const arrOfFavIds: number[] = me ? me.likedComments : [];
   const { t } = useTranslation();
 
-  const { openModal } = useAuthModal();
+  const { needAuthMessage } = useCustomModals();
+
+  const { openAuthModal } = useModal();
   const [likeRequest] = useLikeCommentMutation();
 
   function handleLike() {
@@ -33,9 +34,9 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
               ? handleLike()
               : needAuthMessage({
                   callback: () => {
-                    openModal();
+                    openAuthModal();
                   },
-                  action: t('Authors.toLike')
+                  action: t('articles.toLikeComments')
                 });
           }}
         >
@@ -44,7 +45,7 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
         </LikeButton>
         {token && (
           <button onClick={() => setReply(comment)} className="reply" data-testid="reply">
-            {t('Articles.reply')}
+            {t('articles.reply')}
           </button>
         )}
       </div>

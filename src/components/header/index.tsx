@@ -6,7 +6,7 @@ import { CustomHeader, Goodrone } from './styles';
 import logo from '/src/assets/goodrone-logo.png';
 import { Flex } from '@src/shared/ui/styled components';
 import Authorization from '../authorization';
-import { useAuthModal } from '@src/app/providers/authModal';
+import { useModal } from '@src/app/providers/modals';
 import { defaultLang, languages } from '@src/shared/constants';
 
 type Iprops = {
@@ -17,7 +17,7 @@ type Iprops = {
 };
 
 function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Element {
-  const { openAuthModal, openModal, closeModal } = useAuthModal();
+  const { openModal, openAuthModal, closeAuthModal } = useModal();
   const location = useLocation();
 
   // const [searchString, setsearchString] = useState<string>('');
@@ -28,7 +28,7 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
   // };
 
   useEffect(() => {
-    if (openAuthModal) {
+    if (openModal) {
       document.body.style.width = '100%';
     }
   }, [openAuthModal]);
@@ -74,7 +74,7 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
             </Button>
           )}
 
-          <Button onClick={() => openModal()}>
+          <Button onClick={() => openAuthModal()}>
             <UserOutlined style={{ color: '#6C6C6C', fontSize: 20 }} />
           </Button>
         </Flex>
@@ -82,15 +82,15 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
 
       <Modal
         centered
-        open={openAuthModal}
+        open={openModal}
         onCancel={() => {
-          closeModal();
+          closeAuthModal();
         }}
         width={650}
         className="auth"
         footer={[]}
       >
-        <Authorization close={closeModal} />
+        <Authorization close={closeAuthModal} />
       </Modal>
     </>
   );

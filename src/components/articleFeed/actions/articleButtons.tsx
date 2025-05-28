@@ -6,8 +6,7 @@ import { Comments, Like, Save, ShareArrow, Views } from '@src/assets/icons/icon-
 import { useAppSelector } from '@src/app/store';
 import { IArticle } from '@src/shared/types';
 import { usePostLikeMutation, useRemovePostFromFavMutation, useSavePostToFavMutation } from '@src/app/store/api/articles';
-import { needAuthMessage } from '@src/shared/ui/moldals';
-import { useAuthModal } from '@src/app/providers/authModal';
+import { useCustomModals, useModal } from '@src/app/providers/modals';
 
 function ActionButtons({ article }: { article: IArticle | undefined }) {
   const token = useAppSelector((state) => state.login.token);
@@ -16,7 +15,8 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
   const arrOfLiked: number[] = me ? me.likedArticles : [];
   const arrOfFavorites: number[] = me ? me.savedPosts.map((item) => item.id) : [];
 
-  const { openModal } = useAuthModal();
+  const { openAuthModal } = useModal();
+  const { needAuthMessage } = useCustomModals();
   const { t } = useTranslation();
   const navigate = useNavigate();
   let paramId = useParams().id;
@@ -58,9 +58,9 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
               ? handleLike()
               : needAuthMessage({
                   callback: () => {
-                    openModal();
+                    openAuthModal();
                   },
-                  action: t('Authors.toLike')
+                  action: t('articles.toLikeArticles')
                 });
           }}
         >

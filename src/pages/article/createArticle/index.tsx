@@ -15,12 +15,13 @@ import { IFile, IKeyword } from '@src/shared/types';
 import { defaultLang, languages } from '@src/shared/constants';
 import { tagRender } from '@src/shared/ui/tag render';
 import { Chips } from '@src/shared/ui/styled components';
-import { showConfirm, showDeletingConfirm } from '@src/shared/ui/moldals';
+import { useCustomModals } from '@src/app/providers/modals';
 
 function CreateArticle() {
   const location = useLocation();
   let state = location?.state?.article;
 
+  const { showConfirm, showDeletingConfirm } = useCustomModals();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const { t } = useTranslation();
@@ -141,16 +142,16 @@ function CreateArticle() {
       <LeftSide style={{ background: '#f7f9fa' }}></LeftSide>
 
       <CreateWrapper>
-        <h2>{t('Articles.create')}</h2>
+        <h2>{t('articles.create')}</h2>
 
         <Form size="large" layout={'vertical'} form={form}>
           <Form.Item>
-            <p style={{ marginTop: '1rem', marginBottom: '4px' }}>{t('Articles.title')}</p>
+            <p style={{ marginTop: '1rem', marginBottom: '4px' }}>{t('articles.title')}</p>
             <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder={t('articles.headingDesc')} />
           </Form.Item>
 
           <Form.Item>
-            <p style={{ marginBottom: '4px' }}>{t('Articles.lang')}</p>
+            <p style={{ marginBottom: '4px' }}>{t('articles.lang')}</p>
             <Select
               defaultValue={language || languages.find((item) => item.id === defaultLang)?.code}
               onChange={handleLangChange}
@@ -161,7 +162,7 @@ function CreateArticle() {
             />
           </Form.Item>
 
-          <p style={{ marginTop: '1rem', marginBottom: '4px' }}>{t('Articles.cover')}</p>
+          <p style={{ marginTop: '1rem', marginBottom: '4px' }}>{t('articles.cover')}</p>
           {state && state?.files && !!state?.files.length ? (
             <ImagesContainer>
               <Image.PreviewGroup>
@@ -189,7 +190,7 @@ function CreateArticle() {
           )}
 
           <Form.Item>
-            <ReachEditor textWihImages body={articleBody} setBody={setarticleBody} placeholder={t('Articles.writeArticle')} setArrOfImage={setArrOfImage} />
+            <ReachEditor textWihImages body={articleBody} setBody={setarticleBody} placeholder={t('articles.writeArticle')} setArrOfImage={setArrOfImage} />
           </Form.Item>
 
           <Form.Item>

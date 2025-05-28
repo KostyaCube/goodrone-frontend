@@ -108,7 +108,7 @@ export const ReachEditor = ({ fileList, setFileList, body, setBody, placeholder,
 
   return (
     <div className="text-editor">
-      <InputContainer focus={`${areaFocus}`} gray={`${textWihImages}`}>
+      <InputContainer $focus={`${areaFocus}`} $gray={`${textWihImages}`}>
         <div ref={setToolbarNode}>
           {!simple && (
             <>

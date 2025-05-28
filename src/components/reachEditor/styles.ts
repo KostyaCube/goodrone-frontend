@@ -1,10 +1,10 @@
 import { styled } from 'styled-components';
 
-export const InputContainer = styled.div<{ focus: string; gray?: string }>`
+export const InputContainer = styled.div<{ $focus: string; $gray?: string }>`
   .ql-container.ql-snow {
     border-radius: 8px;
-    border: ${(props) => (props.focus === 'true' ? '1px solid #4096ff' : '1px solid #ccc')};
-    box-shadow: ${(props) => (props.focus === 'true' ? ' 0 0 0 1px rgba(5, 145, 255, 0.1)' : 'none')};
+    border: ${(props) => (props.$focus === 'true' ? '1px solid #4096ff' : '1px solid #ccc')};
+    box-shadow: ${(props) => (props.$focus === 'true' ? ' 0 0 0 1px rgba(5, 145, 255, 0.1)' : 'none')};
   }
   .ql-toolbar {
     border: none;
@@ -15,7 +15,7 @@ export const InputContainer = styled.div<{ focus: string; gray?: string }>`
       flex-wrap: wrap;
     }
     .ql-picker-options {
-      background-color: ${(props) => props.gray === 'true' && '#f7f9fa'};
+      background-color: ${(props) => props.$gray === 'true' && '#f7f9fa'};
       display: flex;
       border: none;
       top: -1.7px;

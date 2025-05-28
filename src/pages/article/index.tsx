@@ -13,7 +13,7 @@ import Discussed from '@src/components/articleFeed/discussed';
 import { useDeletePostMutation, useGetOnePostQuery, usePostViewMutation } from '@src/app/store/api/articles';
 import { IComment, IKeyword } from '@src/shared/types';
 import { useAppSelector } from '@src/app/store';
-import { useAuthModal } from '@src/app/providers/authModal';
+import { useCustomModals, useModal } from '@src/app/providers/modals';
 import { Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
 import ActionButtons from '@src/components/articleFeed/actions/articleButtons';
 import UserComment from '@src/components/articleFeed/comment/comment';
@@ -30,6 +30,7 @@ function ArticlePage() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { showDeletingConfirm } = useCustomModals();
   const commentsBlock = useRef<HTMLDivElement | null>(null);
 
   const [commentBody, setCommentBody] = useState<string>('');
@@ -42,7 +43,7 @@ function ArticlePage() {
   const [sendComment] = useAddCommentMutation();
   const [editComment] = useEditCommentMutation();
 
-  const { openModal } = useAuthModal();
+  const { openAuthModal } = useModal();
 
   function deletePost(id: string) {
     delPost(id).then(() => navigate('/main?articles'));
@@ -132,7 +133,7 @@ function ArticlePage() {
   return (
     <MainContainer>
       <LeftSide style={{ background: '#f7f9fa' }}>
-        <BackButton onClick={() => navigate('/main?articles')}>
+        <BackButton onClick={() => navigate(-1)}>
           <LeftOutlined />
         </BackButton>
       </LeftSide>
@@ -166,7 +167,7 @@ function ArticlePage() {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      // showDeletingConfirm({ callback: deletePost, id: `${data?.id}`, text: `${t('articles.deleteConfirmPost')}` });
+                      showDeletingConfirm({ callback: deletePost, id: `${data?.id}`, text: `${t('articles.deleteConfirmPost')}` });
                     }}
                   >
                     <Remove />
@@ -221,7 +222,7 @@ function ArticlePage() {
             <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
               <ReachEditor
                 simple
-                placeholder={t('Articles.writeC')}
+                placeholder={t('articles.writeC')}
                 fileList={commentFileList}
                 setFileList={setCommentFileList}
                 body={commentBody}
@@ -229,7 +230,7 @@ function ArticlePage() {
               />
               {replyingComment && (
                 <p className="replyFor">
-                  {t('Articles.replyFor')}{' '}
+                  {t('articles.replyFor')}{' '}
                   <span>
                     {replyingComment.author.firstname} {replyingComment.author.lastname}
                   </span>
@@ -251,16 +252,16 @@ function ArticlePage() {
                 </Button>
               )}
               <Button type="primary" onClick={me && token ? commentSending : undefined} disabled={commentBody.trim().length < 15} style={{ marginTop: '1rem' }}>
-                {edited ? t('articles.save') : t('Articles.sendComment')}
+                {edited ? t('articles.save') : t('articles.sendComment')}
               </Button>
             </InputContainer>
           ) : (
             <InputContainer style={{ borderRadius: `${data?.comments.length === 0 && '8px'}` }}>
               <p style={{ paddingTop: '16px' }}>
-                <Link onClick={openModal} to={''}>
+                <Link onClick={openAuthModal} to={''}>
                   {t('articles.auth')}
                 </Link>
-                {t('Articles.toWrite')}
+                {t('articles.toWrite')}
               </p>
             </InputContainer>
           )}

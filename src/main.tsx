@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from '@src/app/store/index.ts';
 import { NotificationProvider } from './app/providers/notifications';
-import { ModalProvider } from '@src/app/providers/authModal';
+import { ModalProvider } from '@src/app/providers/modals';
 import '@ant-design/v5-patch-for-react-19';
 import { ConfigProvider } from 'antd';
 import App from '@src/app/App.tsx';

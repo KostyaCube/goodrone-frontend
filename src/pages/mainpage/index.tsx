@@ -7,7 +7,7 @@ import pencil from '/src/assets/icons/pencil.svg';
 import i18n from '@src/shared/localization/config';
 import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as StyledLink } from './styles';
 import { Flex } from '@src/shared/ui/styled components';
-import { useAuthModal } from '@src/app/providers/authModal';
+import { useModal } from '@src/app/providers/modals';
 import { FeedNavigation } from '@src/components/articleFeed/styles';
 import { useAppSelector } from '@src/app/store';
 import ArticleFeed from '@src/components/articleFeed';
@@ -65,7 +65,7 @@ function MainPage({ token }: Iprops): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { openModal } = useAuthModal();
+  const { openAuthModal } = useModal();
   const today = new Date();
 
   function handleChangeSorting(e: string) {
@@ -89,7 +89,7 @@ function MainPage({ token }: Iprops): JSX.Element {
         <div>
           <h1>{t('mainPage.registerWelcome')}</h1>
           <p>{t('mainPage.registerDesc')}</p>
-          <Button onClick={openModal} style={{ height: '56px' }} size="large" type="primary">
+          <Button onClick={openAuthModal} style={{ height: '56px' }} size="large" type="primary">
             {t('mainPage.regButton')}
           </Button>
         </div>

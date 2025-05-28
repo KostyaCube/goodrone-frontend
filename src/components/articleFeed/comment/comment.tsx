@@ -12,6 +12,7 @@ import { extractTextFromHTML } from '@src/shared/utils';
 import { Flex } from '@src/shared/ui/styled components';
 import { useDeleteCommentMutation } from '@src/app/store/api/comments';
 import CommentActionButton from '../actions/commentButtons';
+import { useCustomModals } from '@src/app/providers/modals';
 
 export type CommentProps = {
   comment: IComment;
@@ -24,6 +25,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
   const me = useAppSelector((state) => state.login.user);
 
   const navigate = useNavigate();
+  const { showDeletingConfirm } = useCustomModals();
 
   const { t } = useTranslation();
   const [deleteComment] = useDeleteCommentMutation();
@@ -34,7 +36,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
           label: (
             <ActionButton
               onClick={() => {
-                //  showDeletingConfirm({ callback: deleteComment, id: `${comment.id}`, text: `${t('Articles.deleteConfirmComment')}` });
+                showDeletingConfirm({ callback: deleteComment, id: `${comment.id}`, text: `${t('articles.deleteConfirmComment')}` });
               }}
             >
               <Remove />
@@ -101,7 +103,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
       {simple ? (
         <div className="look">
           <button onClick={() => navigate(`/articles/${comment.postId}?comments`)} className="reply" data-testid="look">
-            {t('Authors.look')}
+            {t('articles.look')}
           </button>
         </div>
       ) : (
