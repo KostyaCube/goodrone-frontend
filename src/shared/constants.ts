@@ -11,7 +11,10 @@ export const URLs = {
   COMMENTS: 'comments',
   COMMENTS_LIKE: 'user/comments/like',
   ARTICLES_FAVORITES: 'articles/favorites',
-  FILE: 'file'
+  FILE: 'file',
+  USER: 'user',
+  SUBSCRIPTION: 'subscriptions/create',
+  SUBSCRIPTION_DEL: 'subscriptions'
 };
 
 export const languages = [

@@ -2,7 +2,7 @@ import { ArticleResponse, IArticle } from '@src/shared/types';
 import { baseApi } from './APIbase';
 import { URLs } from '@src/shared/constants';
 
-export const articlesApi = baseApi.injectEndpoints({
+const articlesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createPost: builder.mutation<ArticleResponse, FormData>({
       query: (body) => {

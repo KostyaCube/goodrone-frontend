@@ -8,6 +8,7 @@ import MainPage from '@src/pages/mainpage';
 import { useAppSelector } from './store';
 import ArticlePage from '@src/pages/article';
 import CreateArticle from '@src/pages/article/createArticle';
+import Authors from '@src/pages/authors';
 
 function App() {
   const token = useAppSelector((state) => state.login.token);
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/main" element={<MainPage token={token} />} />
                 <Route path="/articles/:id" element={<ArticlePage />} />
                 <Route path="/articles/create" element={<CreateArticle />} />
+                <Route path="/authors/:id" element={<Authors token={token} />} />
                 <Route
                   path="/*"
                   element={

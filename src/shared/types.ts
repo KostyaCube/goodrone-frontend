@@ -8,6 +8,9 @@ export interface User {
   likedArticles: number[];
   likedComments: number[];
   savedPosts: IArticle[];
+
+  subscribers: ISubscription[];
+  subscriptions: ISubscription[];
 }
 
 export interface UserState {
@@ -80,4 +83,12 @@ export interface ArticleResponse {
   rating: number;
   authorId: number;
   lang: string;
+}
+
+export interface ISubscription {
+  id: number;
+  subscriberId: number;
+  subscribedToId: number;
+  subscriber?: User;
+  subscribedTo?: User;
 }

@@ -2,7 +2,7 @@ import { baseApi } from './APIbase';
 import { URLs } from '@src/shared/constants';
 import { IComment } from '@src/shared/types';
 
-export const authApi = baseApi.injectEndpoints({
+const commentsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     addComment: builder.mutation<void, { body: string; postId: number; replyOn?: string }>({
       query: (body) => {
@@ -53,4 +53,4 @@ export const authApi = baseApi.injectEndpoints({
   })
 });
 
-export const { useAddCommentMutation, useEditCommentMutation, useDeleteCommentMutation, useLikeCommentMutation, useGetCommentsByUserIdQuery } = authApi;
+export const { useAddCommentMutation, useEditCommentMutation, useDeleteCommentMutation, useLikeCommentMutation, useGetCommentsByUserIdQuery } = commentsApi;
