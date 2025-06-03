@@ -1,4 +1,4 @@
-import { ISubscription, User } from '@src/shared/types';
+import { IProfile, ISubscription, User } from '@src/shared/types';
 import { baseApi } from './APIbase';
 import { URLs } from '@src/shared/constants';
 
@@ -6,6 +6,11 @@ const authorsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getUserInfoById: builder.query<User, string>({
       query: (id) => `${URLs.USER}/${id}`,
+      providesTags: [{ type: 'User' }]
+    }),
+
+    getAuthorProfile: builder.query<IProfile, string>({
+      query: (id) => `${URLs.PROFILE}/${id}`,
       providesTags: [{ type: 'User' }]
     }),
 
@@ -32,4 +37,4 @@ const authorsApi = baseApi.injectEndpoints({
   })
 });
 
-export const { useGetUserInfoByIdQuery, useCreateSubsMutation, useDeleteSubsMutation } = authorsApi;
+export const { useGetUserInfoByIdQuery, useCreateSubsMutation, useDeleteSubsMutation, useGetAuthorProfileQuery } = authorsApi;

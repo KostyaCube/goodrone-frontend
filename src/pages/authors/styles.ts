@@ -169,20 +169,20 @@ export const AuthorComments = styled(Wrapper)`
   }
 `;
 
-export const ProfileInfo = styled(Wrapper)` 
-    background-color: white;
-    border-radius: 8px;
-    padding: 16px;
-    .info-item {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 32px;
-        .field {
-            font-size: 14px;
-            color: #3C3C3D;
-        }
-        .value {
-            font-size: 16px;
-        }
+export const ProfileInfo = styled(Wrapper)`
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+    .field {
+      font-size: 14px;
+      color: #3c3c3d;
     }
+    .value {
+      font-size: 16px;
+    }
+  }
 `;

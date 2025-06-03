@@ -41,7 +41,7 @@ function Authors({ token }: IProps) {
     {
       key: '1',
       label: `${t('authors.all')}${length ? ` (${length})` : ''}`,
-      children: <ArticleFeed simple uid={`${author?.id}` || ''} />
+      children: <ArticleFeed simple uid={`${id}` || ''} />
     },
     {
       key: '2',

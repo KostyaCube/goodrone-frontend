@@ -1,54 +1,48 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { ProfileInfo } from './styles';
 import { useAppSelector } from '@src/app/store';
+import { useGetAuthorProfileQuery } from '@src/app/store/api/authors';
 
-type IProps = {
-  user: User | undefined;
-  setauthAvatar: Dispatch<SetStateAction<string | null>>;
-  id: string;
-};
-
-function AuthorProfile({ user, id }: IProps) {
+function AuthorProfile({ id }: { id: string }) {
   const { t } = useTranslation();
   const token = useAppSelector((state) => state.login.token);
 
-  const [profile, setauthorProfile] = useState<any>(null);
-
-  async function getProfile() {}
-
-
-
-  useEffect(() => {
-    getProfile();
-  }, [user]);
+  const profile = useGetAuthorProfileQuery(id, { skip: !token }).data;
 
   return (
     <ProfileInfo>
       <div className="info-item">
-        <span className="field">{t('profile.currentPlace')}:</span>
-        <span className="value">{profile && profile.organization ? profile.organization : '-'}</span>
-      </div>
-      <div className="info-item">
-        <span className="field">{t('profile.position')}:</span>
-        <span className="value">{(user && user.position) || (profile && profile.position) || '-'}</span>
-      </div>
-      <div className="info-item">
         <span className="field">{t('profile.location')}:</span>
-        <span className="value">{profile && profile.location ? profile.location : '-'}</span>
+        <span className="value">{profile?.location || '-'}</span>
       </div>
       <div className="info-item">
         <span className="field">{t('profile.birthdate')}:</span>
-        <span className="value">{profile && profile.birthDate ? moment(profile.birthDate).format('DD.MM.YYYY') : '-'}</span>
+        <span className="value">{profile?.birthdate ? moment(profile.birthdate).format('DD.MM.YYYY') : '-'}</span>
       </div>
       <div className="info-item">
         <span className="field">{t('profile.registered')}:</span>
-        <span className="value">{profile && profile.registered ? moment(profile.registered).format('DD.MM.YYYY') : '-'}</span>
+        <span className="value">{profile?.createdAt ? moment(profile.createdAt).format('DD.MM.YYYY') : '-'}</span>
       </div>
       <div className="info-item">
         <span className="field">{t('profile.bio')}:</span>
-        <span className="value">{profile && profile.bio ? profile.bio : '-'}</span>
+        <span className="value">{profile?.bio || '-'}</span>
+      </div>
+      <div className="info-item">
+        <span className="field">{t('profile.website')}:</span>
+        <span className="value">{profile?.website || '-'}</span>
+      </div>
+      <div className="info-item">
+        <span className="field">{t('profile.gender')}:</span>
+        <span className="value">{profile?.gender || '-'}</span>
+      </div>
+      <div className="info-item">
+        <span className="field">{t('profile.phone')}:</span>
+        <span className="value">{profile?.phone || '-'}</span>
+      </div>
+      <div className="info-item">
+        <span className="field">{t('profile.userId')}:</span>
+        <span className="value">{profile?.userId ?? '-'}</span>
       </div>
     </ProfileInfo>
   );

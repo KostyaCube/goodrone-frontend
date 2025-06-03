@@ -92,3 +92,14 @@ export interface ISubscription {
   subscriber?: User;
   subscribedTo?: User;
 }
+
+export interface IProfile {
+  bio?: string;
+  location?: string;
+  website?: string;
+  birthdate?: string;
+  gender?: string;
+  phone?: string;
+  userId: number;
+  createdAt: string;
+}

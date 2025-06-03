@@ -14,7 +14,8 @@ export const URLs = {
   FILE: 'file',
   USER: 'user',
   SUBSCRIPTION: 'subscriptions/create',
-  SUBSCRIPTION_DEL: 'subscriptions'
+  SUBSCRIPTION_DEL: 'subscriptions',
+  PROFILE: 'profile'
 };
 
 export const languages = [
