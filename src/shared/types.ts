@@ -103,3 +103,20 @@ export interface IProfile {
   userId: number;
   createdAt: string;
 }
+
+export interface IQuestion {
+  id: number;
+  title: string;
+  body: string;
+  views: number;
+  rating: number;
+  chapterId: number;
+  authorId: number;
+  created_at: string;
+  updated_at: string;
+  author: User;
+  keywords: IKeyword[];
+  answers: any[];
+  files: IFile[];
+  savedBy: User[];
+}
