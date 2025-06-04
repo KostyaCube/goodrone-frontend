@@ -7,7 +7,10 @@ export interface User {
 
   likedArticles: number[];
   likedComments: number[];
+  likedQuestions: number[];
+
   savedPosts: IArticle[];
+  savedQuestions: IQuestion[];
 
   subscribers: ISubscription[];
   subscriptions: ISubscription[];

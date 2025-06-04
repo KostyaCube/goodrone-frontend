@@ -3,6 +3,7 @@ import { IKeyword, IQuestion } from '@src/shared/types';
 import { SpinnerWrapper } from '@src/shared/ui/styled components';
 import { Spin, Empty, Pagination, PaginationProps } from 'antd';
 import { JSX, useState } from 'react';
+import { QuestionCard } from './card';
 
 type IProps = {
   chosenWords: IKeyword[];
