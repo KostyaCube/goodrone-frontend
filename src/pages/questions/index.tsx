@@ -4,6 +4,7 @@ import { SpinnerWrapper } from '@src/shared/ui/styled components';
 import { Spin, Empty, Pagination, PaginationProps } from 'antd';
 import { JSX, useState } from 'react';
 import { QuestionCard } from './card';
+import { useGetQuestionsCountQuery, useGetQuestionsQuery } from '@src/app/store/api/questions';
 
 type IProps = {
   chosenWords: IKeyword[];
@@ -23,7 +24,7 @@ function QuestionList({ chosenWords, sorting, own, chapter, savedQuestions }: IP
     {
       keywords: chosenWords.map((word) => `${word.id}`),
       order: sorting,
-      userID: own ? me?.id : '',
+      userID: own && me ? `${me.id}` : '',
       chapter,
       skip: `${skip}`
     },

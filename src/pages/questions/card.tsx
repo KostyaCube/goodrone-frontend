@@ -8,13 +8,15 @@ import { extractTextFromHTML } from '@src/shared/utils';
 import { Chips, Flex } from '@src/shared/ui/styled components';
 import { QuestionWrapper, Rating, SaveButton } from './styles';
 import { useAppSelector } from '@src/app/store';
+import { useDeleteQuestionMutation, useRemoveFromFavoritesMutation, useSaveToFavoritesMutation, useVoteQuestionMutation } from '@src/app/store/api/questions';
 
 type IProps = {
   question: IQuestion;
   fromSearch?: boolean;
+  me?: User;
 };
 
-export function QuestionCard({ question, fromSearch }: IProps): JSX.Element {
+export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element {
   const [voteQuestion] = useVoteQuestionMutation();
   const [deleteQuestion, { isSuccess, isError }] = useDeleteQuestionMutation();
   const [addToFav] = useSaveToFavoritesMutation();
@@ -24,7 +26,6 @@ export function QuestionCard({ question, fromSearch }: IProps): JSX.Element {
   const { t } = useTranslation();
 
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
 
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const arrOfFavIds: number[] = me ? me.savedQuestions.map((item) => item.id) : [];
@@ -117,9 +118,9 @@ export function QuestionCard({ question, fromSearch }: IProps): JSX.Element {
                 onClick={(e) => {
                   e.preventDefault();
                   if (arrOfFavIds.includes(question.id)) {
-                    removeFromFav({ userID: me.id, questionId: question.id });
+                    removeFromFav({ userID: `${me.id}`, questionId: question.id });
                   } else {
-                    addToFav({ userID: me.id, questionId: question.id });
+                    addToFav({ userID: `${me.id}`, questionId: question.id });
                   }
                 }}
               >

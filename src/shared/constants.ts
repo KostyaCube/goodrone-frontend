@@ -3,19 +3,29 @@ export const API_URL = import.meta.env.VITE_API_BASE_URL;
 export const URLs = {
   SIGNUP: 'auth/register',
   SIGNIN: 'auth/login',
+
   KEYWORDS: 'keywords',
   ARTICLES: 'articles',
-  ARTICLES_LENGTH: 'articles-length',
-  ARTICLES_MAKE_VIEWED: 'articles/make-viewed',
   ARTICLES_LIKE: 'user/articles/like',
+  ARTICLES_LENGTH: 'articles-length',
+  ARTICLES_FAVORITES: 'articles/favorites',
+  ARTICLES_MAKE_VIEWED: 'articles/make-viewed',
+
   COMMENTS: 'comments',
   COMMENTS_LIKE: 'user/comments/like',
-  ARTICLES_FAVORITES: 'articles/favorites',
+
   FILE: 'file',
   USER: 'user',
   SUBSCRIPTION: 'subscriptions/create',
   SUBSCRIPTION_DEL: 'subscriptions',
-  PROFILE: 'profile'
+  PROFILE: 'profile',
+
+  QUESTIONS: 'questions',
+  QUESTIONS_LIKE: 'questions/like',
+  QUESTIONS_MAKE_VIEWED: 'questions/make-viewed',
+  QUESTIONS_FAVORITES: 'questions/favorites',
+  QUESTIONS_SEARCH: 'questions-search',
+  QUESTIONS_LENGTH: 'questions-length'
 };
 
 export const languages = [
