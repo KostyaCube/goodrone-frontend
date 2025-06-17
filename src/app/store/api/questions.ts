@@ -1,4 +1,4 @@
-import { ArticleResponse, IArticle, IQuestion } from '@src/shared/types';
+import { IQuestion } from '@src/shared/types';
 import { baseApi } from './APIbase';
 import { URLs } from '@src/shared/constants';
 
@@ -82,20 +82,20 @@ const questionsApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Questions' }, { type: 'User' }]
     }),
 
-    saveToFavorites: builder.mutation<void, { userID: string; questionId: number }>({
+    saveToFavorites: builder.mutation<void, { questionId: number }>({
       query: (params) => {
         return {
-          url: `${URLs.QUESTIONS_FAVORITES}/${params.userID}/${params.questionId}`,
+          url: `${URLs.QUESTIONS_FAVORITES}/${params.questionId}`,
           method: 'post'
         };
       },
       invalidatesTags: [{ type: 'User' }]
     }),
 
-    removeFromFavorites: builder.mutation<void, { userID: string; questionId: number }>({
+    removeFromFavorites: builder.mutation<void, { questionId: number }>({
       query: (params) => {
         return {
-          url: `${URLs.QUESTIONS_FAVORITES}/${params.userID}/${params.questionId}`,
+          url: `${URLs.QUESTIONS_FAVORITES}/${params.questionId}`,
           method: 'delete'
         };
       },

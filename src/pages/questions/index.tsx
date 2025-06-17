@@ -15,7 +15,6 @@ type IProps = {
 };
 
 function QuestionList({ chosenWords, sorting, own, chapter, savedQuestions }: IProps): JSX.Element {
-  const token = useAppSelector((state) => state.login.token);
   const me = useAppSelector((state) => state.login.user);
   const [skip, setskip] = useState<number>(0);
 

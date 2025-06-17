@@ -9,6 +9,7 @@ import { Chips, Flex } from '@src/shared/ui/styled components';
 import { QuestionWrapper, Rating, SaveButton } from './styles';
 import { useAppSelector } from '@src/app/store';
 import { useDeleteQuestionMutation, useRemoveFromFavoritesMutation, useSaveToFavoritesMutation, useVoteQuestionMutation } from '@src/app/store/api/questions';
+import { useCustomModals, useModal } from '@src/app/providers/modals';
 
 type IProps = {
   question: IQuestion;
@@ -22,7 +23,9 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
   const [addToFav] = useSaveToFavoritesMutation();
   const [removeFromFav] = useRemoveFromFavoritesMutation();
 
-  // const { openModal } = useAuthModal();
+  const { needAuthMessage, showDeletingConfirm } = useCustomModals();
+  const { openAuthModal } = useModal();
+
   const { t } = useTranslation();
 
   const token = useAppSelector((state) => state.login.token);
@@ -65,7 +68,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    // showDeletingConfirm({ callback: deleteQuestion, id: `${question.id}`, text: `${t('questions.deleteConfirm')}` });
+                    showDeletingConfirm({ callback: deleteQuestion, id: `${question.id}`, text: `${t('questions.deleteConfirm')}` });
                   }}
                 >
                   <Remove />
@@ -118,9 +121,9 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
                 onClick={(e) => {
                   e.preventDefault();
                   if (arrOfFavIds.includes(question.id)) {
-                    removeFromFav({ userID: `${me.id}`, questionId: question.id });
+                    removeFromFav({ questionId: question.id });
                   } else {
-                    addToFav({ userID: `${me.id}`, questionId: question.id });
+                    addToFav({ questionId: question.id });
                   }
                 }}
               >
@@ -142,16 +145,14 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
         <Rating
           onClick={(e) => {
             e.preventDefault();
-            // {
-            //   me
-            //     ? voteUp(question.id)
-            //     : needAuthMessage({
-            //         callback: () => {
-            //           openModal();
-            //         },
-            //         action: `${t('questions.rateQ')}`
-            //       });
-            // }
+            token
+              ? voteUp(question.id)
+              : needAuthMessage({
+                  callback: () => {
+                    openAuthModal();
+                  },
+                  action: `${t('questions.rateQ')}`
+                });
           }}
           $blue={`${me && me.likedQuestions.includes(question.id) && 'true'}`}
         >

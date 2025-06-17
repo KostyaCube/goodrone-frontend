@@ -9,6 +9,7 @@ import { Edit, Remove } from '@src/assets/icons/icon-components';
 import { useAppSelector } from '@src/app/store';
 import { Chips, Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
 import { IFile, IKeyword } from '@src/shared/types';
+import { useDeleteQuestionMutation, useGetQuestionByIdQuery, useMakeViewedMutation } from '@src/app/store/api/questions';
 
 type Iprops = {
   setOpenCreateModal?: Dispatch<SetStateAction<boolean>>;
@@ -26,12 +27,12 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
   const token = useAppSelector((state) => state.login.token);
   const me = useAppSelector((state) => state.login.user);
 
-  const [createMessage] = useCreateMessageMutation();
+  // const [createMessage] = useCreateMessageMutation();
   const { data, isLoading } = useGetQuestionByIdQuery(id);
   const [deleteQuestion, { isSuccess }] = useDeleteQuestionMutation();
 
   const [makeViewed] = useMakeViewedMutation();
-  const [sendAnswer] = useCreateAnswerMutation();
+  // const [sendAnswer] = useCreateAnswerMutation();
 
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
 
@@ -110,11 +111,11 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
           <Flex>
             <Flex>
               <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#51a18bac', gap: 4, marginRight: '8px' }} size="default">
-                {data.author.name?.charAt(0).toUpperCase() || 'U'}
+                {data.author.firstname?.charAt(0).toUpperCase() || 'U'}
               </Avatar>
               <div>
-                <h4>{data.author.name.charAt(0).toUpperCase() + data.author.name.slice(1) || 'Unknown user'}</h4>
-                <Position>{data.author.position || `${t('questions.position')}`}</Position>
+                <h4>{data.author.firstname.charAt(0).toUpperCase() + data.author.firstname.slice(1) || 'Unknown user'}</h4>
+                <Position>{data.author.activity || `${t('questions.position')}`}</Position>
               </div>
             </Flex>
             {token && me && me.id === data.authorId && (
