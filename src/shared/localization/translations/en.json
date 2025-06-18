@@ -165,7 +165,7 @@
     "publish": "Publish",
     "rateQ": "To rate questions",
     "rateA": "To rate answers",
-    "position": "Position not provided",
+    "position": "Unknown activity",
     "sendA": "Send answer",
     "writeA": "Write answer",
     "deleteConfirm": "Are you sure you want to delete the question?",
@@ -182,5 +182,20 @@
     "deleteImg": "Delete attached file?",
     "linkCopied": "Link copied to clipboard!",
     "searchRes": "Showed results by your query"
+  },
+  "authors": {
+    "profile": "Profile",
+    "all": "All publications",
+    "comments": "Comments",
+    "subscribers": "Subscribers",
+    "sendMess": "Send message",
+    "follow": "Follow",
+    "following": "Following",
+    "editProfile": "Edit profile",
+    "look": "Look",
+    "noComments": "The user has not left any comments yet.",
+    "toLike": "To like articles",
+    "toFollow": "To follow users",
+    "chat": "Chat"
   }
 }

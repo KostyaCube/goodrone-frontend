@@ -15,7 +15,7 @@ const questionsApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Questions' }, { type: 'Words' }]
     }),
 
-    updateQuestion: builder.mutation<void, { id: string; formData: FormData; }>({
+    updateQuestion: builder.mutation<void, { id: string; formData: FormData }>({
       query: (body) => {
         return {
           url: `${URLs.QUESTIONS}/${body.id}`,
@@ -26,7 +26,7 @@ const questionsApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Questions' }, { type: 'User' }, { type: 'Words' }]
     }),
 
-    getQuestions: builder.query<IQuestion[], { keywords: string[]; order: string; userID: string; skip: string; }>({
+    getQuestions: builder.query<IQuestion[], { keywords: string[]; order: string; userID: string; skip: string }>({
       query: (params = { keywords: [], order: '', userID: '', skip: '' }) => {
         if (params.keywords.length === 0) {
           return `${URLs.QUESTIONS}?order=${params.order}&userID=${params.userID}&skip=${params.skip}`;
@@ -71,7 +71,7 @@ const questionsApi = baseApi.injectEndpoints({
       providesTags: [{ type: 'Questions' }]
     }),
 
-    voteQuestion: builder.mutation<void, { userId: number; questionId: number; }>({
+    voteQuestion: builder.mutation<void, { userId: number; questionId: number }>({
       query: (body) => {
         return {
           url: URLs.QUESTIONS_LIKE,
@@ -82,7 +82,7 @@ const questionsApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Questions' }, { type: 'User' }]
     }),
 
-    saveToFavorites: builder.mutation<void, { questionId: number; }>({
+    saveToFavorites: builder.mutation<void, { questionId: number }>({
       query: (params) => {
         return {
           url: `${URLs.QUESTIONS_FAVORITES}/${params.questionId}`,
@@ -92,7 +92,7 @@ const questionsApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'User' }]
     }),
 
-    removeFromFavorites: builder.mutation<void, { questionId: number; }>({
+    removeFromFavorites: builder.mutation<void, { questionId: number }>({
       query: (params) => {
         return {
           url: `${URLs.QUESTIONS_FAVORITES}/${params.questionId}`,

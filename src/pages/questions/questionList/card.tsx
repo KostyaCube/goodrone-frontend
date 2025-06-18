@@ -1,10 +1,10 @@
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, message } from 'antd';
 import { Remove, Edit, Share, Save, Arrow } from '@src/assets/icons/icon-components';
 import { useTranslation } from 'react-i18next';
 import { IKeyword, IQuestion, User } from '@src/shared/types';
-import { extractTextFromHTML } from '@src/shared/utils';
+import { extractTextFromHTML, getDay, getTime } from '@src/shared/utils';
 import { Chips, Flex } from '@src/shared/ui/styled components';
 import { QuestionWrapper, Rating, SaveButton } from './styles';
 import { useAppSelector } from '@src/app/store';
@@ -54,7 +54,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
   return (
     <Link target={fromSearch ? '_blank' : '_self'} to={!openEditModal ? `${question.id}` : ''}>
       <QuestionWrapper>
-        <Flex>
+        <Flex $justify="between">
           <Flex>
             <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#51a18bac', gap: 4, marginRight: '8px' }} size="small">
               {`${question?.author.lastname?.charAt(0)}${question?.author.firstname?.charAt(0)}` || 'U'}
@@ -87,8 +87,8 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
               </Flex>
             ) : (
               <>
-                {/* <span className="span nomargin">{getTime(question.created_at)}</span> */}
-                {/* <span className="span nomargin">{getDay(question.created_at)}</span> */}
+                <span className="span nomargin">{getTime(question.created_at)}</span>
+                <span className="span nomargin">{getDay(question.created_at)}</span>
               </>
             )}
           </Flex>
@@ -109,7 +109,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
           </div>
         )}
 
-        <Flex>
+        <Flex $justify="between">
           <Flex className="actions-buttons start" style={{ paddingLeft: '24px' }}>
             <button onClick={copyToClipboard}>
               <Share />

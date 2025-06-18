@@ -14,7 +14,7 @@ export const Container = styled(MainContainer)`
     text-align: center;
   }
   .actions {
-    margin-top: 8px;
+    /* margin-top: 8px; */
     display: flex;
     min-width: 270px;
     button {

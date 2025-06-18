@@ -8,7 +8,7 @@ export const Position = styled.span`
 `;
 
 export const Heading = styled.h4`
-  margin: 32px 0 6px 0;
+  margin: 24px 0 6px 0;
   font-size: 16px;
   font-weight: 600;
   @media (max-width: 1000px) {
