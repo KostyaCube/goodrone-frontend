@@ -123,3 +123,9 @@ export interface IQuestion {
   files: IFile[];
   savedBy: User[];
 }
+
+export type IMenuItem = {
+  id: string | number;
+  body: string;
+  link?: string;
+};

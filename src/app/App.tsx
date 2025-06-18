@@ -9,11 +9,15 @@ import { useAppSelector } from './store';
 import ArticlePage from '@src/pages/article';
 import CreateArticle from '@src/pages/article/createArticle';
 import Authors from '@src/pages/authors';
+import Questions from '@src/pages/questions';
+import Question from '@src/pages/questions/questionPage';
 
 function App() {
   const token = useAppSelector((state) => state.login.token);
 
   const [mobileInputSearch, setmobileInputSearch] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -31,6 +35,12 @@ function App() {
                 <Route path="/articles/:id" element={<ArticlePage />} />
                 <Route path="/articles/create" element={<CreateArticle />} />
                 <Route path="/authors/:id" element={<Authors token={token} />} />
+                <Route
+                  path="/questions"
+                  element={<Questions openMenu={openMenu} setOpenMenu={setOpenMenu} token={token} mobileInputSearch={mobileInputSearch} />}
+                >
+                  <Route path="/questions/:id" element={<Question />} />
+                </Route>
                 <Route
                   path="/*"
                   element={
