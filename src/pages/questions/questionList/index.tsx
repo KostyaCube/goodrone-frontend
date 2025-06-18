@@ -10,11 +10,10 @@ type IProps = {
   chosenWords: IKeyword[];
   sorting: string;
   own: boolean;
-  chapter: string;
   savedQuestions?: IQuestion[];
 };
 
-function QuestionList({ chosenWords, sorting, own, chapter, savedQuestions }: IProps): JSX.Element {
+function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JSX.Element {
   const me = useAppSelector((state) => state.login.user);
   const [skip, setskip] = useState<number>(0);
 
@@ -24,7 +23,6 @@ function QuestionList({ chosenWords, sorting, own, chapter, savedQuestions }: IP
       keywords: chosenWords.map((word) => `${word.id}`),
       order: sorting,
       userID: own && me ? `${me.id}` : '',
-      chapter,
       skip: `${skip}`
     },
     { refetchOnMountOrArgChange: true, skip: !!savedQuestions }
@@ -59,7 +57,7 @@ function QuestionList({ chosenWords, sorting, own, chapter, savedQuestions }: IP
           ) : (
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
           )}
-          <Pagination onChange={onChange} showLessItems style={{ textAlign: 'center', marginTop: '1rem' }} defaultCurrent={1} total={count && count + 5} />
+          <Pagination onChange={onChange} showLessItems style={{ justifyContent: 'center' }} defaultCurrent={1} total={count && count + 5} />
         </>
       )}
     </>

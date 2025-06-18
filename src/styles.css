@@ -1,37 +1,128 @@
 html * {
   margin: 0;
 }
-
 html {
   overflow-y: scroll;
 }
-
 body {
   min-width: 300px;
 }
-
 .layout {
-  padding: 16px 24px 24px 24px;
+  padding: 24px;
   background: #fff;
 }
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 @media (max-width: 1000px) {
   .layout {
     padding: 8px;
   }
 }
-
 .layout-content {
   padding: 0 20px;
 }
-
 @media (max-width: 1000px) {
   .layout-content {
     padding: 0;
   }
+}
+@media (max-width: 1000px) {
+  .ant-tabs-tab {
+    font-size: 12px !important;
+  }
+}
+@media (max-width: 400px) {
+  .ant-modal-content {
+    padding: 10px 12px !important;
+  }
+}
+.ant-tabs .ant-tabs-content-holder {
+  display: none;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.blue {
+  color: #418dff !important;
+}
+.anticon-eye {
+  display: none;
+}
+.ant-upload.ant-upload-select {
+  width: 100% !important;
+}
+.ant-image .ant-image-mask {
+  border-radius: 8px;
+}
+.ql-align-right {
+  text-align: right;
+}
+.ql-align-left {
+  text-align: left;
+}
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-justify {
+  text-align: justify;
+}
+.ql-snow .ql-tooltip {
+  border-radius: 8px;
+}
+.ql-snow .ql-tooltip[data-mode='link']::before {
+  content: 'Link:';
+}
+.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+  content: 'Save';
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+.mobile-button {
+  margin: 8px 8px 0 8px;
+  width: calc(100% - 16px);
+}
+@media (min-width: 1000px) {
+  .mobile-button {
+    display: none;
+  }
+}
+.ant-tabs-right > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab {
+  margin: 0;
+}
+.ant-tabs-right > .ant-tabs-nav .ant-tabs-tab {
+  padding: 3px 14px;
+  border-left: 1px solid #f0f0f0;
+}
+.ant-tabs-right > .ant-tabs-nav .ant-tabs-tab:not(:first-child):not(:nth-last-child(2)):not(:nth-last-child(3)) {
+  padding-left: 24px;
+}
+.burger {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  align-items: flex-end;
+  margin-left: -12px;
+}
+@media (min-width: 1000px) {
+  .burger {
+    display: none;
+  }
+}
+.ant-drawer .ant-drawer-body {
+  padding: 18px;
+}
+.exit {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  min-height: 40px;
+}
+.auth > .ant-modal-content {
+  background-color: #f7f9fa;
 }

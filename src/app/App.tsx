@@ -29,7 +29,7 @@ function App() {
           path="*"
           element={
             <>
-              <Header setOpenMenu={() => {}} token={token} mobileInputSearch={mobileInputSearch} setmobileInputSearch={setmobileInputSearch} />
+              <Header setOpenMenu={setOpenMenu} token={token} mobileInputSearch={mobileInputSearch} setmobileInputSearch={setmobileInputSearch} />
               <Routes>
                 <Route path="/main" element={<MainPage token={token} />} />
                 <Route path="/articles/:id" element={<ArticlePage />} />

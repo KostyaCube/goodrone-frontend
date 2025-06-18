@@ -113,7 +113,6 @@ export interface IQuestion {
   body: string;
   views: number;
   rating: number;
-  chapterId: number;
   authorId: number;
   created_at: string;
   updated_at: string;
