@@ -46,7 +46,7 @@ export const ImagesContainer = styled.div`
         background: #cdcdcd;
       }
       &:active {
-        border: 2px solid #418dff;
+        border: 2px solid #44958f;
       }
     }
   }

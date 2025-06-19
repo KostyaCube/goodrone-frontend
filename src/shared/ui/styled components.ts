@@ -43,11 +43,25 @@ export const Chips = styled.div<{ $pressed?: string; $events?: string }>`
   margin: 8px 4px 0 0;
   background: ${(props) => (props.$pressed === 'true' ? '#44958f' : '#e8fffe')};
   color: ${(props) => (props.$pressed === 'true' ? '#FFF' : 'black')};
+  border: ${(props) => (props.$pressed === 'true' ? 'none' : '1px solid gray')};
   cursor: pointer;
+  span {
+    margin-left: 4px;
+  }
+  svg:hover {
+    fill: black;
+  }
   &:hover {
     opacity: 0.8;
   }
   @media (max-width: 1000px) {
     font-size: 12px;
+  }
+`;
+
+export const ResultWrapper = styled.div`
+  margin-top: 4rem;
+  svg {
+    fill: #44958f;
   }
 `;

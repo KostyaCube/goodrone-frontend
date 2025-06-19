@@ -110,7 +110,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
         <>
           <Flex $justify="between">
             <Flex>
-              <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#51a18bac', gap: 4, marginRight: '8px' }} size="default">
+              <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="default">
                 {data.author.firstname?.charAt(0).toUpperCase() || 'U'}
               </Avatar>
               <div>

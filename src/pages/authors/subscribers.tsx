@@ -23,7 +23,7 @@ function UserCard({ user }: { user: any }) {
           {authAvatar ? (
             <img src={authAvatar} />
           ) : (
-            <Avatar style={{ width: '48px', height: '48px', fontSize: '24px' }} className="ava">
+            <Avatar style={{ width: '48px', height: '48px', fontSize: '24px', backgroundColor: '#553c70' }} className="ava">
               {user?.name?.charAt(0).toUpperCase() || 'U'}
             </Avatar>
           )}

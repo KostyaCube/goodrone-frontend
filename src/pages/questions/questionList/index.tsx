@@ -1,6 +1,6 @@
 import { useAppSelector } from '@src/app/store';
 import { IKeyword, IQuestion } from '@src/shared/types';
-import { SpinnerWrapper } from '@src/shared/ui/styled components';
+import { ResultWrapper, SpinnerWrapper } from '@src/shared/ui/styled components';
 import { Spin, Empty, Pagination, PaginationProps } from 'antd';
 import { JSX, useState } from 'react';
 import { QuestionCard } from './card';
@@ -36,9 +36,11 @@ function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JS
     return (
       <>
         {savedQuestions.length > 0 ? (
-          savedQuestions.map((item: IQuestion) => <QuestionCard fromSearch me={me ? me : undefined} question={item} key={item.id} />)
+          savedQuestions.map((item: IQuestion) => <QuestionCard me={me ? me : undefined} question={item} key={item.id} />)
         ) : (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <ResultWrapper>
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          </ResultWrapper>
         )}
       </>
     );
@@ -55,7 +57,9 @@ function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JS
           {data?.length ? (
             data.map((item: IQuestion) => <QuestionCard me={me ? me : undefined} question={item} key={item.id} />)
           ) : (
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            <ResultWrapper>
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            </ResultWrapper>
           )}
           <Pagination onChange={onChange} showLessItems style={{ justifyContent: 'center' }} defaultCurrent={1} total={count && count + 5} />
         </>

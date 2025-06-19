@@ -155,7 +155,7 @@ function ArticlePage() {
                   data && navigate(`/authors/${data.authorId}`, { state: { id: data.author.id } });
                 }}
               >
-                <Avatar className="ava" style={{ backgroundColor: '#51a18bac', margin: 0 }} size="small">
+                <Avatar className="ava" style={{ backgroundColor: '#553c70', margin: 0 }} size="small">
                   {`${data?.author.lastname?.charAt(0)}${data?.author.firstname?.charAt(0)}` || 'U'}
                 </Avatar>
                 <span className="name">
@@ -200,7 +200,7 @@ function ArticlePage() {
 
             {!!data?.files.length && <img className="cover" src={`${data.files[0].link}`} />}
 
-            <div className="content" />
+            <div className="content" style={{ marginBottom: '1.5rem' }} />
 
             <ActionButtons article={data} />
           </ArticleWrapper>

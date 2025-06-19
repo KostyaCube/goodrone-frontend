@@ -69,7 +69,9 @@ function Authors({ token }: IProps) {
         <AuthorHeader>
           <div className="author-data">
             <div className="img-container">
-              <Avatar className="ava">{author?.firstname?.charAt(0).toUpperCase() || 'U'}</Avatar>
+              <Avatar style={{ backgroundColor: '#553c70' }} className="ava">
+                {author?.firstname?.charAt(0).toUpperCase() || 'U'}
+              </Avatar>
             </div>
             <div>
               <h3>{author ? author.firstname : 'Loading..'}</h3>

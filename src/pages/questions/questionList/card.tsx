@@ -52,11 +52,11 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
   };
 
   return (
-    <Link target={fromSearch ? '_blank' : '_self'} to={!openEditModal ? `${question.id}` : ''}>
+    <Link target={fromSearch ? '_blank' : '_self'} to={!openEditModal ? `/questions/${question.id}` : ''}>
       <QuestionWrapper>
         <Flex $justify="between">
           <Flex>
-            <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#51a18bac', gap: 4, marginRight: '8px' }} size="small">
+            <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }}>
               {`${question?.author.lastname?.charAt(0)}${question?.author.firstname?.charAt(0)}` || 'U'}
             </Avatar>
             <h4 className="nomargin">{question.author.firstname.charAt(0).toUpperCase() + question.author.firstname.slice(1) || 'Unknown user'}</h4>

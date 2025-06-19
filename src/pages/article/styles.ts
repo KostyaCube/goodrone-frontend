@@ -70,6 +70,7 @@ export const ArticleWrapper = styled(Article)`
   }
   .keystyled {
     background-color: #e8fffe;
+    border: 1px solid grey;
     padding: 8px 16px;
     color: black;
     border-radius: 20px;
@@ -173,7 +174,7 @@ export const CommentWrapper = styled.div`
     }
   }
   .reply {
-    color: #418dff;
+    color: #44958f;
     font-size: 14px;
     &:hover {
       opacity: 0.8;

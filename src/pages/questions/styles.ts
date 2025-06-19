@@ -88,7 +88,6 @@ export const QuestionWrapper = styled.div`
   .position {
     margin: 0 0px -4px 8px;
     color: #6c6c6c;
-    font-family: 'Roboto';
     font-size: 14px;
     font-weight: 400;
     @media (max-width: 1200px) {
@@ -156,7 +155,7 @@ export const Rating = styled.div<{ $blue?: string }>`
   color: #6c6c6c;
   text-align: center;
   font-size: 12px;
-  color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
+  color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
   &:hover {
     cursor: pointer;
     color: black;
@@ -168,10 +167,10 @@ export const Rating = styled.div<{ $blue?: string }>`
     margin: 4px 0 0 2px;
   }
   svg {
-    fill: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')};
+    fill: ${(props) => (props.$blue === 'true' ? '#44958f' : '')};
   }
   svg path {
-    stroke: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')};
+    stroke: ${(props) => (props.$blue === 'true' ? '#44958f' : '')};
   }
 `;
 
@@ -203,12 +202,12 @@ export const FilterButton = styled.button`
 `;
 
 export const SaveButton = styled.button<{ $blue?: string }>`
-  color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
+  color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
   svg {
-    fill: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')} !important;
+    fill: ${(props) => (props.$blue === 'true' ? '#44958f' : '')} !important;
   }
   svg path {
-    stroke: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')} !important;
+    stroke: ${(props) => (props.$blue === 'true' ? '#44958f' : '')} !important;
   }
   .save-article {
     transform: scale(1.4) !important;

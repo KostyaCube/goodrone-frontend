@@ -2,7 +2,6 @@ import { styled } from 'styled-components';
 
 export const Position = styled.span`
   color: #6c6c6c;
-  font-family: 'Roboto';
   font-size: 14px;
   font-weight: 400;
 `;

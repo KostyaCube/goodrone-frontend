@@ -5,7 +5,6 @@ export const OuterContainer = styled.section`
   padding: 110px 0 140px 0;
   background-color: #f7f9fa;
   position: relative;
-  font-family: 'Roboto';
   @media (max-width: 600px) {
     padding: 0;
     height: calc(100vh - 120px);
@@ -26,7 +25,6 @@ export const InnerContainer = styled.div`
   }
   h2 {
     font-size: 2.5rem;
-    font-family: inherit;
     font-weight: 500;
     line-height: 1.2;
     color: #19082a;

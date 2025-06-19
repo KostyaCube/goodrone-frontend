@@ -67,7 +67,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
     <div className="container">
       <Flex $justify="between">
         <Flex>
-          <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#51a18bac', gap: 4, marginRight: '8px' }} size="default">
+          <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="default">
             {`${comment?.author.lastname?.charAt(0)}${comment?.author.firstname?.charAt(0)}` || 'U'}
           </Avatar>
           <div>

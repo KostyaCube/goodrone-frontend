@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const InputContainer = styled.div<{ $focus: string; $gray?: string }>`
   .ql-container.ql-snow {
     border-radius: 8px;
-    border: ${(props) => (props.$focus === 'true' ? '1px solid #4096ff' : '1px solid #ccc')};
+    border: ${(props) => (props.$focus === 'true' ? '1px solid #44958f' : '1px solid #ccc')};
     box-shadow: ${(props) => (props.$focus === 'true' ? ' 0 0 0 1px rgba(5, 145, 255, 0.1)' : 'none')};
   }
   .ql-toolbar {

@@ -12,6 +12,8 @@ import { IKeyword, IMenuItem } from '@src/shared/types';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import QuestionList from './questionList';
 import Question from './questionPage';
+import Tags from './tags';
+import Favorites from './favorites';
 
 type Iprops = {
   token: string | null | undefined;
@@ -212,9 +214,9 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
           <Routes>
             <Route path="/" element={<QuestionList sorting={sorting} chosenWords={chosenWords} own={own} />} />
             <Route path="/:id" element={<Question openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} />} />
-            {/* <Route path="/saved" element={<Favorites />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/tags" element={<Tags />} /> */}
+            <Route path="/saved" element={<Favorites />} />
+            {/* <Route path="/search" element={<Search />} /> */}
+            <Route path="/tags" element={<Tags />} />
           </Routes>
         </Content>
 

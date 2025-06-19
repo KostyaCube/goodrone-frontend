@@ -94,7 +94,7 @@ export const AuthorHeader = styled(Wrapper)<{ $hover?: string }>`
   display: flex;
   justify-content: space-between;
   &:hover {
-    color: ${(props) => props.$hover && '#418DFF'};
+    color: ${(props) => props.$hover && '#44958f'};
     cursor: ${(props) => props.$hover && 'pointer'};
   }
   .author-data {

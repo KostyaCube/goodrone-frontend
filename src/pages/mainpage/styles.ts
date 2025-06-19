@@ -232,7 +232,6 @@ export const Footer = styled.footer`
 `;
 
 export const Copyright = styled.h6`
-  font-family: 'Roboto';
   font-weight: 500;
   font-size: 16px;
   line-height: 16px;

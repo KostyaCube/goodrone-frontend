@@ -96,7 +96,6 @@ export const Article = styled.div`
     margin: 8px;
   }
   span:nth-child(3) {
-    font-size: 13px;
     font-weight: 400;
     color: #6c6c6c;
   }
@@ -131,7 +130,7 @@ export const Article = styled.div`
     }
   }
   .more-info {
-    color: #418dff;
+    color: #44958f;
     text-decoration: none;
     display: block;
     width: 100%;
@@ -205,12 +204,12 @@ export const Discuss = styled.div`
 `;
 
 export const LikeButton = styled.button<{ $blue?: string }>`
-  color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
+  color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
   svg path {
-    stroke: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')};
+    stroke: ${(props) => (props.$blue === 'true' ? '#44958f' : '')};
   }
   .count {
-    color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
+    color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
   }
 `;
 
@@ -233,12 +232,12 @@ export const FeedNavigation = styled.div`
 `;
 
 export const SaveButton = styled.button<{ $blue?: string }>`
-  color: ${(props) => (props.$blue === 'true' ? '#418DFF' : '#6C6C6C')};
+  color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
   svg {
-    fill: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')} !important;
+    fill: ${(props) => (props.$blue === 'true' ? '#44958f' : '')} !important;
   }
   svg path {
-    stroke: ${(props) => (props.$blue === 'true' ? '#418DFF' : '')} !important;
+    stroke: ${(props) => (props.$blue === 'true' ? '#44958f' : '')} !important;
   }
   .save-article {
     transform: scale(1.4) !important;
