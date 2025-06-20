@@ -8,7 +8,7 @@ export const MainContainer = styled(Container)`
   display: grid;
   grid-template-columns: 216px auto 336px;
   gap: 16px;
-  background-color: #f7f9fa;
+  background-color: transparent;
   h3 {
     color: #171717;
     font-size: 24px;
@@ -221,13 +221,12 @@ export const InputContainer = styled.div`
 `;
 
 export const BackButton = styled.button`
-  transform: scale(1.4);
-  color: #535354;
+  transform: scale(2);
   cursor: pointer;
   background: transparent;
   border: none;
   &:hover {
-    opacity: 0.8;
+    opacity: 0.6;
   }
   @media (max-width: 800px) {
     top: 3%;

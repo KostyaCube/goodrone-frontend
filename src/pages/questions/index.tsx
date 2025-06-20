@@ -7,7 +7,7 @@ import filter from '/src/assets/icons/filter.svg';
 import { useTranslation } from 'react-i18next';
 import { useGetKeywordsQuery } from '@src/app/store/api/APIbase';
 import { Chips } from '@src/shared/ui/styled components';
-import { Sidebar, FilterButton, ChosenChips, ButtonWrapper } from './styles';
+import { Sidebar, FilterButton, ChosenChips, TabsWrapper } from './styles';
 import { IKeyword, IMenuItem } from '@src/shared/types';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import QuestionList from './questionList';
@@ -143,7 +143,7 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
   function renderFilters() {
     return (
       <>
-        <h4 className="filters">{t('questions.filters')}</h4>
+        <h4>{t('questions.filters')}</h4>
         <div className="chips">
           {!!keywords?.length &&
             keywords.map((item: IKeyword) => {
@@ -184,14 +184,31 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
           <FilterButton onClick={showFiltersDrawer} className="burger">
             <img src={filter}></img>
           </FilterButton>
-          {id != 'saved' && id != 'tags' && id != 'search' && (
-            <Tabs
-              style={{ maxWidth: `${token ? '290px' : '180px'}` }}
-              onTabClick={() => navigate('/questions')}
-              items={token ? filterItems : filterItems.slice(0, -1)}
-              onChange={handleChangeSorting}
-            />
-          )}
+          <TabsWrapper>
+            {id != 'saved' && id != 'tags' && id != 'search' && (
+              <Tabs
+                style={{ maxWidth: `${token ? '290px' : '180px'}` }}
+                onTabClick={() => navigate('/questions')}
+                items={token ? filterItems : filterItems.slice(0, -1)}
+                onChange={handleChangeSorting}
+              />
+            )}
+            <Button
+              type="primary"
+              onClick={() => {
+                token
+                  ? setOpenCreateModal(true)
+                  : needAuthMessage({
+                      callback: () => {
+                        openAuthModal();
+                      },
+                      action: t('questions.toaskQ')
+                    });
+              }}
+            >
+              {t('questions.askQ')}
+            </Button>
+          </TabsWrapper>
 
           {!id && (
             <ChosenChips style={{ justifyContent: `${chosenWords.length ? 'flex-start' : 'flex-end'}` }}>
@@ -221,23 +238,6 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
         </Content>
 
         <Sidebar>
-          <ButtonWrapper $nomargin={`true`}>
-            <Button
-              type="primary"
-              onClick={() => {
-                token
-                  ? setOpenCreateModal(true)
-                  : needAuthMessage({
-                      callback: () => {
-                        openAuthModal();
-                      },
-                      action: t('questions.toaskQ')
-                    });
-              }}
-            >
-              {t('questions.askQ')}
-            </Button>
-          </ButtonWrapper>
           {id != 'saved' && id != 'tags' && isNaN(Number(id)) && renderFilters()}
           {/* <CreateModal openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} /> */}
         </Sidebar>

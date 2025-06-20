@@ -2,18 +2,14 @@ import styled from 'styled-components';
 
 export const Sidebar = styled.nav`
   background: #fff;
-  max-width: min-content;
+  width: 240px;
+  padding: 16px;
+  border-radius: 8px;
   @media (min-width: 1200px) {
     min-width: 197px;
   }
   @media (max-width: 1000px) {
     display: none;
-  }
-  .filters {
-    margin-top: 18px;
-    @media (max-width: 800px) {
-      margin-top: 14px;
-    }
   }
 `;
 
@@ -174,15 +170,6 @@ export const Rating = styled.div<{ $blue?: string }>`
   }
 `;
 
-export const ButtonWrapper = styled.div<{ $nomargin?: string }>`
-  display: flex;
-  justify-content: flex-end;
-  margin: ${(props) => (props.$nomargin === 'true' ? '0' : '8px 0')};
-  @media (max-width: 1400px) {
-    justify-content: flex-start;
-  }
-`;
-
 export const ChosenChips = styled.div`
   min-width: 300px;
   display: flex;
@@ -193,9 +180,9 @@ export const ChosenChips = styled.div`
 `;
 
 export const FilterButton = styled.button`
-  margin: 12px 4px 0 0;
+  margin: 16px 4px 0 0;
   position: absolute;
-  right: 0;
+  right: 8px;
   @media (max-width: 300px) {
     display: none;
   }
@@ -213,5 +200,23 @@ export const SaveButton = styled.button<{ $blue?: string }>`
     transform: scale(1.4) !important;
     display: flex;
     margin: 2px 20px 0 13px;
+  }
+`;
+
+export const TabsWrapper = styled.div`
+  background-color: #f7f9fa;
+  padding: 0 16px 16px 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  .ant-tabs-nav {
+    margin: 0;
+  }
+  button {
+    @media (max-width: 1000px) {
+      display: none;
+    }
   }
 `;

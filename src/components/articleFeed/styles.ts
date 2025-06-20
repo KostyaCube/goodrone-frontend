@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { MainContainer } from '@src/shared/ui/styled components';
 
 export const Container = styled(MainContainer)`
-  padding: 24px 0px;
+  padding: 16px 0px;
   display: grid;
   grid-template-columns: auto 336px;
   gap: 16px;
-  background-color: #f7f9fa;
+  background-color: transparent;
   h3 {
     color: #171717;
     font-size: 24px;
@@ -45,8 +45,9 @@ export const Container = styled(MainContainer)`
   }
   .keyword {
     margin: 0 16px 16px 0;
-    font-size: 14px;
+    font-size: 16px;
     color: #6c6c6c;
+    font-weight: 600;
   }
   @media (max-width: 1600px) {
     grid-template-columns: auto !important;
@@ -56,12 +57,11 @@ export const Container = styled(MainContainer)`
   }
 `;
 
-export const LeftSide = styled.div`
-  border-radius: 8px;
+export const LeftBlock = styled.div`
   margin-bottom: 16px;
   min-height: 200px;
   max-height: 500px;
-  background-color: #fff;
+  background-color: transparent;
   @media (max-width: 1600px) {
     display: none;
   }
@@ -218,7 +218,9 @@ export const FeedNavigation = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   background-color: #f7f9fa;
-  padding: 16px;
+  padding: 0 16px 16px 16px;
+  border-radius: 8px;
+  margin-top: 16px;
   .ant-tabs-nav {
     margin: 0;
   }

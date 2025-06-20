@@ -6,6 +6,7 @@ export const Container = styled(MainContainer)`
   display: grid;
   grid-template-columns: 336px auto;
   gap: 16px;
+  background: transparent;
   h3 {
     color: #171717;
     font-size: 24px;
@@ -13,7 +14,7 @@ export const Container = styled(MainContainer)`
     text-align: center;
   }
   @media (max-width: 1600px) {
-    padding: 10px 24px 0 24px;
+    padding: 16px 24px 0 24px;
   }
   @media (max-width: 800px) {
     grid-template-columns: auto;
@@ -59,7 +60,7 @@ export const Register = styled(MainContainer)`
   }
   @media (max-width: 1200px) {
     padding: 80px 0px 0 80px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
   @media (max-width: 1000px) {
     padding: 80px 0px 0 40px;
@@ -206,8 +207,14 @@ export const Navigation = styled.nav`
 export const Footer = styled.footer`
   margin: 0 auto;
   max-width: 1980px;
-  background-color: rgb(237, 237, 237);
+  background-color: #fff;
   padding: 25px 80px;
+  box-shadow:
+    0px -2px 4.6px -5px rgba(0, 0, 0, 0.024),
+    0px -5.5px 12.6px -5px rgba(0, 0, 0, 0.035),
+    0px -13.3px 30.4px -5px rgba(0, 0, 0, 0.046),
+    0px -44px 101px -5px rgba(0, 0, 0, 0.07);
+
   a {
     font-size: 20px;
     color: #535354;

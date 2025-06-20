@@ -1,7 +1,7 @@
 import { Avatar, Button, Result, Spin, UploadFile } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { LeftSide, Article } from '@src/components/articleFeed/styles';
+import { LeftBlock, Article } from '@src/components/articleFeed/styles';
 
 import { ArticleWrapper, CommentWrapper, MainContainer, InputContainer, BackButton } from './styles';
 import moment from 'moment';
@@ -132,11 +132,11 @@ function ArticlePage() {
     );
   return (
     <MainContainer>
-      <LeftSide style={{ background: '#f7f9fa' }}>
+      <LeftBlock>
         <BackButton onClick={() => navigate(-1)}>
           <LeftOutlined />
         </BackButton>
-      </LeftSide>
+      </LeftBlock>
 
       {isLoading ? (
         <Article style={{ height: '200px' }}>

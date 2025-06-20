@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, RadioChangeEvent, Select, Image, UploadFile } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import { LeftSide, Discuss, Container } from '@src/components/articleFeed/styles';
+import { LeftBlock, Discuss, Container } from '@src/components/articleFeed/styles';
 import { ButtonsWrapper, CreateWrapper, ImagesContainer } from './styles';
 import { ReachEditor } from '@src/components/reachEditor';
 import { useTranslation } from 'react-i18next';
@@ -139,7 +139,7 @@ function CreateArticle() {
 
   return (
     <Container style={{ margin: 0, minHeight: '87vh', paddingTop: '104px', gridTemplateColumns: '336px auto 336px' }}>
-      <LeftSide style={{ background: '#f7f9fa' }}></LeftSide>
+      <LeftBlock style={{ background: '#f7f9fa' }}></LeftBlock>
 
       <CreateWrapper>
         <h2>{t('articles.create')}</h2>
