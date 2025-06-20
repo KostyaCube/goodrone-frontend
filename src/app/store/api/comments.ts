@@ -34,12 +34,11 @@ const commentsApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Articles' }]
     }),
 
-    likeComment: builder.mutation<void, { userId: number; commentId: number }>({
+    likeComment: builder.mutation<void, { commentId: number }>({
       query: (body) => {
         return {
-          url: URLs.COMMENTS_LIKE,
-          method: 'post',
-          body
+          url: `${URLs.COMMENTS_LIKE}/${body.commentId}`,
+          method: 'post'
         };
       },
       invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]

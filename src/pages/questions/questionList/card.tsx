@@ -35,7 +35,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
 
   function voteUp(questionId: number): void {
     if (me) {
-      voteQuestion({ userId: me.id, questionId });
+      voteQuestion({ questionId });
     }
   }
 

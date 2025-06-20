@@ -71,12 +71,11 @@ const questionsApi = baseApi.injectEndpoints({
       providesTags: [{ type: 'Questions' }]
     }),
 
-    voteQuestion: builder.mutation<void, { userId: number; questionId: number }>({
+    voteQuestion: builder.mutation<void, { questionId: number }>({
       query: (body) => {
         return {
-          url: URLs.QUESTIONS_LIKE,
-          method: 'post',
-          body
+          url: `${URLs.QUESTIONS_LIKE}/${body.questionId}`,
+          method: 'post'
         };
       },
       invalidatesTags: [{ type: 'Questions' }, { type: 'User' }]

@@ -21,7 +21,7 @@ export const URLs = {
   PROFILE: 'profile',
 
   QUESTIONS: 'questions',
-  QUESTIONS_LIKE: 'questions/like',
+  QUESTIONS_LIKE: 'user/questions/like',
   QUESTIONS_MAKE_VIEWED: 'questions/make-viewed',
   QUESTIONS_FAVORITES: 'questions/favorites',
   QUESTIONS_SEARCH: 'questions-search',

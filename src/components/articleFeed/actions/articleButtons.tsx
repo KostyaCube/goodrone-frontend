@@ -27,7 +27,7 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
 
   function handleLike() {
     if (me && article) {
-      likeRequest({ userId: me.id, articleId: article.id });
+      likeRequest({ articleId: article.id });
     }
   }
 

@@ -84,12 +84,11 @@ const articlesApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'Articles' }]
     }),
 
-    postLike: builder.mutation<void, { userId: number; articleId: number }>({
+    postLike: builder.mutation<void, { articleId: number }>({
       query: (body) => {
         return {
-          url: URLs.ARTICLES_LIKE,
-          method: 'post',
-          body
+          url: `${URLs.ARTICLES_LIKE}/${body.articleId}`,
+          method: 'post'
         };
       },
       invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]

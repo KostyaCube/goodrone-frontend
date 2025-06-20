@@ -20,7 +20,7 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
 
   function handleLike() {
     if (me && comment) {
-      likeRequest({ userId: me.id, commentId: comment.id });
+      likeRequest({ commentId: comment.id });
     }
   }
 
