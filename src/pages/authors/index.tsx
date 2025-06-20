@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Tabs, Button, Avatar } from 'antd';
-import Discussed from '@src/components/articleFeed/discussed';
+import Popular from '@src/components/articleFeed/popular';
 import ArticleFeed from '@src/components/articleFeed';
 import { CheckOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { AuthorHeader, Container } from './styles';
@@ -145,7 +145,7 @@ function Authors({ token }: IProps) {
       </div>
 
       <div className="right-column">
-        <Discussed />
+        <Popular />
       </div>
     </Container>
   );

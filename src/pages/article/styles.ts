@@ -203,7 +203,7 @@ export const CommentWrapper = styled.div`
 
 export const InputContainer = styled.div`
   background-color: white;
-  padding: 0 16px 32px 16px;
+  padding: 0 16px 16px 16px;
   margin-bottom: 16px;
   border-radius: 0 0 8px 8px;
   .replyFor {

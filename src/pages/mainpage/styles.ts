@@ -158,7 +158,7 @@ export const Navigation = styled.nav`
   min-height: 200px;
   max-height: 500px;
   background-color: #fff;
-  padding: 24px;
+  padding: 16px;
   position: relative;
   h3 {
     text-align: left;

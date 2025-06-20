@@ -1,7 +1,7 @@
 import { Container, Article } from './styles';
 import ArticleCard from './card';
 import { Spin, Empty } from 'antd';
-import Discussed from './discussed';
+import Popular from './popular';
 import i18n from '@src/shared/localization/config';
 import { useGetPostsQuery } from '@src/app/store/api/articles';
 import { SpinnerWrapper } from '@src/shared/ui/styled components';
@@ -32,7 +32,7 @@ function ArticleFeed({ uid, simple, saved }: { uid: string; simple?: boolean; sa
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} data-testid={'empty'} />
         </Article>
       )}
-      {!simple && <Discussed />}
+      {!simple && <Popular />}
     </Container>
   );
 }

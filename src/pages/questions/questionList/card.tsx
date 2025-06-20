@@ -75,6 +75,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
                   <span>{t('questions.delete')}</span>
                 </button>
                 <button
+                  style={{ marginRight: 0 }}
                   onClick={(e) => {
                     e.preventDefault();
                     setOpenEditModal(true);

@@ -22,7 +22,7 @@ export const QuestionWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-height: 223px;
-  padding: 20px 16px 16px 30px;
+  padding: 16px 16px 16px 32px;
   background-color: #f5f5f7;
   border-radius: 16px;
   margin-bottom: 16px;

@@ -139,7 +139,7 @@ function CreateArticle() {
 
   return (
     <Container style={{ margin: 0, minHeight: '87vh', paddingTop: '104px', gridTemplateColumns: '336px auto 336px' }}>
-      <LeftBlock style={{ background: '#f7f9fa' }}></LeftBlock>
+      <LeftBlock></LeftBlock>
 
       <CreateWrapper>
         <h2>{t('articles.create')}</h2>
@@ -236,7 +236,7 @@ function CreateArticle() {
         </ButtonsWrapper>
       </CreateWrapper>
 
-      <Discuss className="create-right" style={{ background: '#f7f9fa' }}></Discuss>
+      <Discuss className="create-right" style={{ background: 'transparent' }}></Discuss>
     </Container>
   );
 }

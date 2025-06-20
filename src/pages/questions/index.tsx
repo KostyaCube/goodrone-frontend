@@ -105,6 +105,7 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
       if (id === 'saved') setActiveTab('10');
       if (id === 'tags') setActiveTab('11');
     }
+    console.log(id);
   }, [id]);
 
   useEffect(() => {
@@ -237,11 +238,10 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
           </Routes>
         </Content>
 
-        <Sidebar>
-          {id != 'saved' && id != 'tags' && isNaN(Number(id)) && renderFilters()}
-          {/* <CreateModal openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} /> */}
-        </Sidebar>
+        <Sidebar>{id != 'saved' && id != 'tags' && isNaN(Number(id)) && renderFilters()}</Sidebar>
       </Layout>
+
+      {/* <CreateModal openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} /> */}
 
       <Drawer width={'75%'} className="drawer" closable={false} placement={'left'} onClose={onClose} open={openMenu} key={'left'}>
         {renderMenu()}

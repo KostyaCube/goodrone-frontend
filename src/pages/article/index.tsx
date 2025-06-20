@@ -9,7 +9,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Edit, Remove } from '@src/assets/icons/icon-components';
 import { LeftOutlined } from '@ant-design/icons';
-import Discussed from '@src/components/articleFeed/discussed';
+import Popular from '@src/components/articleFeed/popular';
 import { useDeletePostMutation, useGetOnePostQuery, usePostViewMutation } from '@src/app/store/api/articles';
 import { IComment, IKeyword } from '@src/shared/types';
 import { useAppSelector } from '@src/app/store';
@@ -147,7 +147,7 @@ function ArticlePage() {
       ) : (
         <div>
           <ArticleWrapper>
-            <Flex>
+            <Flex $justify="between">
               <div
                 className="author"
                 style={{ marginBottom: 0 }}
@@ -163,7 +163,7 @@ function ArticlePage() {
                 </span>
               </div>
               {token && me && me.id === data?.authorId && (
-                <Flex style={{ margin: 0 }} className="actions-buttons">
+                <Flex className="actions-buttons">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -174,6 +174,7 @@ function ArticlePage() {
                     <span>{t('articles.delete')}</span>
                   </button>
                   <button
+                    style={{ marginRight: 0 }}
                     onClick={() => {
                       navigate('/articles/create', { state: { article: data } });
                     }}
@@ -267,7 +268,7 @@ function ArticlePage() {
           )}
         </div>
       )}
-      <Discussed />
+      <Popular />
     </MainContainer>
   );
 }

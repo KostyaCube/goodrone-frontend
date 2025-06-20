@@ -9,7 +9,6 @@ export const Container = styled.div`
   padding: 120px 24px 24px 260px;
   display: grid;
   grid-template-columns: 973px 408px;
-  background-color: #f7f9fa;
   gap: 16px;
   min-height: 85vh;
   .left-column {

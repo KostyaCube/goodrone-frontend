@@ -6,7 +6,7 @@ import { useGetPostsQuery } from '@src/app/store/api/articles';
 import i18n from '@src/shared/localization/config';
 import { extractTextFromHTML } from '@src/shared/utils';
 
-function Discussed() {
+function Popular() {
   const { data } = useGetPostsQuery({ order: 'rating', lang: i18n.language });
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -31,4 +31,4 @@ function Discussed() {
   );
 }
 
-export default Discussed;
+export default Popular;
