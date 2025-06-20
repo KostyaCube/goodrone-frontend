@@ -14,6 +14,7 @@ import QuestionList from './questionList';
 import Question from './questionPage';
 import Tags from './tags';
 import Favorites from './favorites';
+import CreateModal from './create';
 
 type Iprops = {
   token: string | null | undefined;
@@ -241,7 +242,7 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
         <Sidebar>{id != 'saved' && id != 'tags' && isNaN(Number(id)) && renderFilters()}</Sidebar>
       </Layout>
 
-      {/* <CreateModal openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} /> */}
+      <CreateModal openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} />
 
       <Drawer width={'75%'} className="drawer" closable={false} placement={'left'} onClose={onClose} open={openMenu} key={'left'}>
         {renderMenu()}

@@ -106,15 +106,12 @@ const questionsApi = baseApi.injectEndpoints({
 
 export const {
   useGetQuestionsQuery,
-  useGetKeywordsQuery,
   useGetQuestionByIdQuery,
   useCreateQuestionMutation,
   useDeleteQuestionMutation,
   useMakeViewedMutation,
   useUpdateQuestionMutation,
-  useDeleteFileMutation,
   useGetQuestionsCountQuery,
-  useLazyGetQuestionsSearchQuery,
   useVoteQuestionMutation,
   useSaveToFavoritesMutation,
   useRemoveFromFavoritesMutation

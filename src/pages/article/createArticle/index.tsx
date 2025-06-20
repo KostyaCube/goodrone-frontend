@@ -202,6 +202,7 @@ function CreateArticle() {
               tagRender={tagRender}
               tokenSeparators={[' ']}
               onChange={onChangeKeywords}
+              popupRender={() => <div style={{ display: 'none' }} />}
               placeholder={t('articles.tagsPlaceholder')}
               value={chosedkeywords as unknown as RadioChangeEvent}
               defaultValue={state?.keywords.map((word: any) => word.body) as unknown as RadioChangeEvent}
