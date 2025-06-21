@@ -15,6 +15,7 @@ import Question from './questionPage';
 import Tags from './tags';
 import Favorites from './favorites';
 import CreateModal from './create';
+import Search from './search';
 
 type Iprops = {
   token: string | null | undefined;
@@ -234,7 +235,7 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
             <Route path="/" element={<QuestionList sorting={sorting} chosenWords={chosenWords} own={own} />} />
             <Route path="/:id" element={<Question openCreateModal={openCreateModal} setOpenCreateModal={setOpenCreateModal} />} />
             <Route path="/saved" element={<Favorites />} />
-            {/* <Route path="/search" element={<Search />} /> */}
+            <Route path="/search" element={<Search />} />
             <Route path="/tags" element={<Tags />} />
           </Routes>
         </Content>

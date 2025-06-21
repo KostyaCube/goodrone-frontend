@@ -113,5 +113,6 @@ export const {
   useGetQuestionsCountQuery,
   useVoteQuestionMutation,
   useSaveToFavoritesMutation,
-  useRemoveFromFavoritesMutation
+  useRemoveFromFavoritesMutation,
+  useLazyGetQuestionsSearchQuery
 } = questionsApi;
