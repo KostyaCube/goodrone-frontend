@@ -2,7 +2,7 @@ import { MailOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Modal, Select, Button, Input } from 'antd';
 import { type Dispatch, type SetStateAction, type JSX, useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { CustomHeader, Goodrone, InputContainer } from './styles';
+import { CustomHeader, Goodrone, InputContainer, MobileHeader, MobileInputContainer } from './styles';
 import logo from '/src/assets/goodrone-logo.png';
 import { Flex } from '@src/shared/ui/styled components';
 import Authorization from '../authorization';
@@ -10,6 +10,7 @@ import { useModal } from '@src/app/providers/modals';
 import { defaultLang, languages } from '@src/shared/constants';
 import { useLazyGetQuestionsSearchQuery } from '@src/app/store/api/questions';
 import { useTranslation } from 'react-i18next';
+import burger from '/src/assets/icons/burger.svg';
 
 type Iprops = {
   token: string | null | undefined;
@@ -18,7 +19,7 @@ type Iprops = {
   setmobileInputSearch: Dispatch<SetStateAction<boolean>>;
 };
 
-function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Element {
+function Header({ token, setOpenMenu, mobileInputSearch, setmobileInputSearch }: Iprops): JSX.Element {
   const { openModal, openAuthModal, closeAuthModal } = useModal();
   const location = useLocation();
   const navigate = useNavigate();
@@ -27,10 +28,10 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
   const [searchString, setsearchString] = useState<string>('');
   const [search, { isLoading }] = useLazyGetQuestionsSearchQuery();
 
-  // const showDrawer = (e: { stopPropagation: () => void }) => {
-  //   e.stopPropagation();
-  //   setOpenMenu(true);
-  // };
+  const showDrawer = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+    setOpenMenu(true);
+  };
 
   const searchExec = async () => {
     if (searchString.trim().length > 3) {
@@ -56,7 +57,11 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
     <>
       <CustomHeader>
         <Flex style={{ minWidth: '110px' }}>
-          {/* {location.pathname.includes('questions') && <button onClick={showDrawer} className="burger"></button>} */}
+          {location.pathname.includes('questions') && (
+            <button onClick={showDrawer} className="burger">
+              <img src={burger} alt="burger" />
+            </button>
+          )}
           <Link style={{ textDecoration: 'none' }} to={'/'}>
             <img className="logo" src={logo} alt="logo" />
           </Link>
@@ -100,6 +105,22 @@ function Header({ token, setOpenMenu, setmobileInputSearch }: Iprops): JSX.Eleme
           </Button>
         </Flex>
       </CustomHeader>
+
+      {mobileInputSearch && (
+        <MobileHeader>
+          <MobileInputContainer>
+            {location.pathname.includes('/questions') && (
+              <Input
+                value={searchString}
+                onChange={(e) => setsearchString(e.target.value)}
+                size="large"
+                placeholder={t('questions.search')}
+                onPressEnter={searchExec}
+              />
+            )}
+          </MobileInputContainer>
+        </MobileHeader>
+      )}
 
       <Modal
         centered

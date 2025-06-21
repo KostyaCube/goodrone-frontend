@@ -56,3 +56,30 @@ export const InputContainer = styled.div`
     display: none;
   }
 `;
+
+export const MobileHeader = styled.div`
+  padding-top: 98px;
+  display: flex;
+  justify-content: center;
+  max-height: 72px;
+  align-items: center;
+  animation: slideIn 0.2s ease-in-out;
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (min-width: 500px) {
+    display: none;
+  }
+`;
+
+export const MobileInputContainer = styled.div`
+  min-height: 40px;
+  width: 95%;
+`;
