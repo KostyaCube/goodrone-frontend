@@ -183,9 +183,11 @@ export const Navigation = styled.nav`
       transition: all 0.5s ease;
     }
     img {
+      border-radius: 8px;
+      width: 32px;
       float: left;
       margin-right: 16px;
-      margin-top: 4px;
+      margin-top: 7px;
     }
     p {
       margin: 0;

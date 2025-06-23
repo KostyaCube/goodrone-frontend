@@ -21,21 +21,21 @@ function MainPage({ token }: Iprops): JSX.Element {
     {
       title: i18n.t('mainPage.info'),
       description: i18n.t('mainPage.infoDesc'),
-      image: '/src/assets/icons/cube.svg',
+      image: '/src/assets/goodrone-logo.png',
       link: '/',
       id: 0
     },
     {
       title: i18n.t('mainPage.videos'),
       description: i18n.t('mainPage.videosDesc'),
-      image: '/src/assets/icons/video.svg',
+      image: '/src/assets/goodrone-logo.png',
       link: '/videos/',
       id: 2
     },
     {
       title: i18n.t('mainPage.knowledge'),
       description: i18n.t('mainPage.knowledgeDesc'),
-      image: '/src/assets/icons/know.svg',
+      image: '/src/assets/goodrone-logo.png',
       link: '/questions',
       id: 3
     }
@@ -130,7 +130,7 @@ function MainPage({ token }: Iprops): JSX.Element {
             </div>
           </Marketing>
 
-          {me && token ? (
+          {me && token && (
             <FeedNavigation>
               <Tabs items={filterItems} onChange={handleChangeSorting} />
               <Button onClick={() => navigate('/articles/create')} type="primary" style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -138,8 +138,6 @@ function MainPage({ token }: Iprops): JSX.Element {
                 {t('articles.writeButt')}
               </Button>
             </FeedNavigation>
-          ) : (
-            <FeedNavigation />
           )}
           <ArticleFeed uid={uid} saved={saved} />
         </div>

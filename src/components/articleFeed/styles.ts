@@ -161,7 +161,7 @@ export const Discuss = styled.div`
   border-radius: 8px;
   background-color: white;
   margin-bottom: 16px;
-  min-height: 200px;
+  min-height: 185px;
   max-width: 336px;
   min-width: 300px;
   height: min-content;

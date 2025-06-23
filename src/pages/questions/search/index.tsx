@@ -16,7 +16,7 @@ function Search(): JSX.Element {
   return (
     <>
       <p style={{ margin: '0 0 1.5rem 0' }}>
-        {t('questions.searchRes')} "{location.state.search}"
+        {data.length > 0 ? t('questions.searchRes') : t('questions.noSearchRes')}"{location.state.search}"
       </p>
       {location.state.loading && (
         <SpinnerWrapper>

@@ -38,7 +38,7 @@ function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JS
         {savedQuestions.length > 0 ? (
           savedQuestions.map((item: IQuestion) => <QuestionCard me={me ? me : undefined} question={item} key={item.id} />)
         ) : (
-          <ResultWrapper>
+          <ResultWrapper $background="true">
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
           </ResultWrapper>
         )}

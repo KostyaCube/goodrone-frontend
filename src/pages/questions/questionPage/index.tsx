@@ -2,7 +2,7 @@ import { Dispatch, JSX, SetStateAction, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Empty, Spin, Image, UploadFile, Button, MenuProps, Dropdown } from 'antd';
-import { Position, Heading, LightSpan, ImagesContainer, ActionButton, Content, ChipsWrapper, Wrapper, ImageDesc, MoreButton } from './styles';
+import { Position, Heading, LightSpan, ImagesContainer, ActionButton, Content, ChipsWrapper, Wrapper, ImageDesc, MoreButton, Answers } from './styles';
 import { ReachEditor } from '@src/components/reachEditor';
 import { MoreOutlined } from '@ant-design/icons';
 import { Edit, Remove } from '@src/assets/icons/icon-components';
@@ -107,7 +107,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
           <Spin size="large" />
         </SpinnerWrapper>
       ) : data ? (
-        <>
+        <Wrapper>
           <Flex $justify="between">
             <Flex>
               <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="default">
@@ -172,13 +172,13 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
           )}
 
           {/* {!!data.answers.length && (
-            <Wrapper>
+            <Answers>
               {data.answers.map((answer: IAnswer) => {
                 return <Answer answer={answer} me={me ? me : undefined} key={answer.id} />;
               })}
-            </Wrapper>
+            </Answers>
           )} */}
-        </>
+        </Wrapper>
       ) : (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}

@@ -63,11 +63,9 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
     const formData = new FormData();
     formData.append('title', title);
     formData.append('body', body);
-    formData.append('chapterId', `${1}`);
     chosedkeywords.forEach((keyword) => {
       formData.append('keywords[]', `${keyword}`);
     });
-    !state && me && formData.append('userID', `${me.id}`);
 
     for (let i = 0; i < fileList.length; i++) {
       formData.append('images', fileList[i].originFileObj as File);
@@ -93,6 +91,7 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
             //     console.error(err);
             //   }
             // }
+            clear();
           } else {
             console.error('error:', res.error);
           }
@@ -101,7 +100,6 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
     } catch (err: any) {
       console.error(err?.message);
     }
-    clear();
   }
 
   const onChangeKeywords = (e: RadioChangeEvent) => {

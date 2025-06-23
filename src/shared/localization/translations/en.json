@@ -181,7 +181,8 @@
     "maxWords": "Max 5 keywords",
     "deleteImg": "Delete attached file?",
     "linkCopied": "Link copied to clipboard!",
-    "searchRes": "Showed results by your query"
+    "searchRes": "Showed results by your query",
+    "noSearchRes": "No results by your query"
   },
   "authors": {
     "profile": "Profile",

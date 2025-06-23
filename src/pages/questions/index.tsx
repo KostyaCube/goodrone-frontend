@@ -107,7 +107,6 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
       if (id === 'saved') setActiveTab('10');
       if (id === 'tags') setActiveTab('11');
     }
-    console.log(id);
   }, [id]);
 
   useEffect(() => {
@@ -162,7 +161,7 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
   }
 
   return (
-    <div style={{ paddingTop: `${mobileInputSearch ? '7px' : '84px'}` }}>
+    <div style={{ paddingTop: `${mobileInputSearch ? '7px' : '88px'}` }}>
       <Button
         className="mobile-button"
         type="primary"

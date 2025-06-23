@@ -36,7 +36,7 @@ function Header({ token, setOpenMenu, mobileInputSearch, setmobileInputSearch }:
   const searchExec = async () => {
     if (searchString.trim().length > 3) {
       const result = (await search(searchString)).data;
-      navigate('questions/search', {
+      navigate('/questions/search', {
         state: {
           data: result,
           search: searchString,

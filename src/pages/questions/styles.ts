@@ -17,7 +17,7 @@ export const ChosenChips = styled.div`
   min-width: 300px;
   display: flex;
   flex-direction: row;
-  margin: -10px 0 13px 0;
+  margin: -13px 0 13px 0;
   flex-wrap: wrap;
   padding-right: 44px;
 `;

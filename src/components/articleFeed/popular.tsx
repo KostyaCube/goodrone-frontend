@@ -13,20 +13,23 @@ function Popular() {
 
   return (
     <Discuss>
-      <h5>{t('articles.discuss')}</h5>
-      {!!(data && data.length) &&
-        data.map((item, index) => {
-          if (index < 3)
-            return (
-              <div className="wrapper" key={item.id}>
-                <h6 onClick={() => navigate(`/articles/${item.id}`)} className="title">
-                  {item.title}
-                </h6>
-                <p className="content">{extractTextFromHTML(item.body)}</p>
-                <ActionButtons article={item} />
-              </div>
-            );
-        })}
+      {!!(data && data.length) && (
+        <>
+          <h5>{t('articles.discuss')}</h5>
+          {data.map((item, index) => {
+            if (index < 3)
+              return (
+                <div className="wrapper" key={item.id}>
+                  <h6 onClick={() => navigate(`/articles/${item.id}`)} className="title">
+                    {item.title}
+                  </h6>
+                  <p className="content">{extractTextFromHTML(item.body)}</p>
+                  <ActionButtons article={item} />
+                </div>
+              );
+          })}
+        </>
+      )}
     </Discuss>
   );
 }

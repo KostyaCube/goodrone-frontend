@@ -1,5 +1,11 @@
 import { styled } from 'styled-components';
 
+export const Wrapper = styled.div`
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 16px;
+`;
+
 export const Position = styled.span`
   color: #6c6c6c;
   font-size: 14px;
@@ -38,14 +44,13 @@ export const Content = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Answers = styled.div`
   margin-top: 12px;
 `;
 
-export const ChipsWrapper = styled(Wrapper)`
+export const ChipsWrapper = styled.div`
   display: flex;
   position: relative;
-  margin-bottom: 30px;
   flex-wrap: wrap;
 `;
 

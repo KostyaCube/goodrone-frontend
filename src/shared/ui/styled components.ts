@@ -31,8 +31,6 @@ export const SpinnerWrapper = styled.div`
 export const MainContainer = styled.div`
   max-width: 1980px;
   margin: 0 auto;
-  font-family: 'Inter';
-  font-style: normal;
 `;
 
 export const Chips = styled.div<{ $pressed?: string; $events?: string }>`
@@ -59,9 +57,12 @@ export const Chips = styled.div<{ $pressed?: string; $events?: string }>`
   }
 `;
 
-export const ResultWrapper = styled.div`
-  margin-top: 4rem;
+export const ResultWrapper = styled.div<{ $background?: string }>`
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: ${({ $background }) => ($background === 'true' ? '1.5rem' : '4rem')};
   svg {
     fill: #44958f;
   }
+  background-color: ${({ $background }) => ($background === 'true' ? '#fff' : 'transparent')};
 `;
