@@ -36,7 +36,7 @@ function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JS
     return (
       <>
         {savedQuestions.length > 0 ? (
-          savedQuestions.map((item: IQuestion) => <QuestionCard me={me ? me : undefined} question={item} key={item.id} />)
+          savedQuestions.map((item: IQuestion) => <QuestionCard me={me} question={item} key={item.id} />)
         ) : (
           <ResultWrapper $background="true">
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -55,7 +55,7 @@ function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JS
       ) : (
         <>
           {data?.length ? (
-            data.map((item: IQuestion) => <QuestionCard me={me ? me : undefined} question={item} key={item.id} />)
+            data.map((item: IQuestion) => <QuestionCard me={me} question={item} key={item.id} />)
           ) : (
             <ResultWrapper>
               <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />

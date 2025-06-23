@@ -13,7 +13,7 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
   const me = useAppSelector((state) => state.login.user);
 
   const arrOfLiked: number[] = me ? me.likedArticles : [];
-  const arrOfFavorites: number[] = me ? me.savedPosts.map((item) => item.id) : [];
+  const arrOfFavIds: number[] = me && me.savedPosts ? me.savedPosts.map((item) => item.id) : [];
 
   const { openAuthModal } = useModal();
   const { needAuthMessage } = useCustomModals();
@@ -74,10 +74,10 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
         {!!token && (
           <SaveButton
             data-testid="save"
-            $blue={arrOfFavorites.includes(article.id) ? 'true' : 'false'}
+            $blue={arrOfFavIds.includes(article.id) ? 'true' : 'false'}
             onClick={(e) => {
               e.preventDefault();
-              if (arrOfFavorites.includes(article.id) && me) {
+              if (arrOfFavIds.includes(article.id) && me) {
                 removeFromFav({ userID: me.id, articleId: article.id });
               } else {
                 if (me) addToFav({ userID: me.id, articleId: article.id });

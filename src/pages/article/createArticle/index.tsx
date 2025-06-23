@@ -86,7 +86,6 @@ function CreateArticle() {
     chosedkeywords.forEach((keyword) => {
       formData.append('keywords[]', `${keyword}`);
     });
-    !state && me && formData.append('userID', `${me.id}`);
 
     for (let i = 0; i < fileList.length; i++) {
       formData.append('images', fileList[i].originFileObj as File);
@@ -229,7 +228,7 @@ function CreateArticle() {
           <Button
             key="submit"
             type="primary"
-            disabled={title.trim().length <= 0 || articleBody.trim().length <= 0 || chosedkeywords.length > 5}
+            disabled={title.trim().length <= 0 || articleBody.trim().length < 500 || chosedkeywords.length > 5}
             onClick={me ? createPost : undefined}
           >
             {state ? t('articles.save') : t('articles.publish')}

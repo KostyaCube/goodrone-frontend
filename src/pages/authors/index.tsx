@@ -35,7 +35,7 @@ function Authors({ token }: IProps) {
   const { needAuthMessage } = useCustomModals();
   const { openAuthModal } = useModal();
 
-  const arrOfSunscriptions = me ? me.subscriptions : [];
+  const arrOfSunscriptions = me && me.subscriptions ? me.subscriptions : [];
 
   const items: TabsProps['items'] = [
     {

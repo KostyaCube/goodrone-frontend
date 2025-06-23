@@ -14,7 +14,7 @@ import { useCustomModals, useModal } from '@src/app/providers/modals';
 type IProps = {
   question: IQuestion;
   fromSearch?: boolean;
-  me?: User;
+  me?: User | null;
 };
 
 export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element {
@@ -31,7 +31,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
   const token = useAppSelector((state) => state.login.token);
 
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
-  const arrOfFavIds: number[] = me ? me.savedQuestions.map((item) => item.id) : [];
+  const arrOfFavIds: number[] = me && me.savedQuestions ? me.savedQuestions.map((item) => item.id) : [];
 
   function voteUp(questionId: number): void {
     if (me) {

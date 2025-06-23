@@ -10,7 +10,7 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
   const token = useAppSelector((state) => state.login.token);
   const me = useAppSelector((state) => state.login.user);
 
-  const arrOfFavIds: number[] = me ? me.likedComments : [];
+  const arrOfFavIds: number[] = me && me.likedComments ? me.likedComments : [];
   const { t } = useTranslation();
 
   const { needAuthMessage } = useCustomModals();
