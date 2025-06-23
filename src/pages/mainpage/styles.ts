@@ -216,7 +216,6 @@ export const Footer = styled.footer`
     0px -5.5px 12.6px -5px rgba(0, 0, 0, 0.035),
     0px -13.3px 30.4px -5px rgba(0, 0, 0, 0.046),
     0px -44px 101px -5px rgba(0, 0, 0, 0.07);
-
   a {
     font-size: 20px;
     color: #535354;

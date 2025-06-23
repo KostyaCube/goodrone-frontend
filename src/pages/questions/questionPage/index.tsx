@@ -8,8 +8,12 @@ import { MoreOutlined } from '@ant-design/icons';
 import { Edit, Remove } from '@src/assets/icons/icon-components';
 import { useAppSelector } from '@src/app/store';
 import { Chips, Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
-import { IFile, IKeyword } from '@src/shared/types';
+import { IAnswer, IFile, IKeyword } from '@src/shared/types';
 import { useDeleteQuestionMutation, useGetQuestionByIdQuery, useMakeViewedMutation } from '@src/app/store/api/questions';
+import { useCreateAnswerMutation } from '@src/app/store/api/question-answers';
+import { fileNameExtractor } from '@src/shared/utils';
+import { useCustomModals, useModal } from '@src/app/providers/modals';
+import CreateModal from '../create';
 
 type Iprops = {
   setOpenCreateModal?: Dispatch<SetStateAction<boolean>>;
@@ -27,16 +31,34 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
   const token = useAppSelector((state) => state.login.token);
   const me = useAppSelector((state) => state.login.user);
 
-  // const [createMessage] = useCreateMessageMutation();
   const { data, isLoading } = useGetQuestionByIdQuery(id);
   const [deleteQuestion, { isSuccess }] = useDeleteQuestionMutation();
+  const { openAuthModal } = useModal();
+  const { showDeletingConfirm } = useCustomModals();
 
   const [makeViewed] = useMakeViewedMutation();
-  // const [sendAnswer] = useCreateAnswerMutation();
+  const [sendAnswer] = useCreateAnswerMutation();
 
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
 
-  function answerSending() {}
+  function answerSending() {
+    const formData = new FormData();
+
+    formData.append('body', answerBody);
+    formData.append('questionId', `${id}`);
+
+    for (let i = 0; i < answerFileList.length; i++) {
+      formData.append('images', answerFileList[i].originFileObj as File);
+    }
+
+    sendAnswer(formData)
+      .then(() => {})
+      .catch((err: any) => {
+        console.error(err?.message);
+      });
+    setAnswerBody('');
+    setAnswerFileList([]);
+  }
 
   function keysHandler(e: KeyboardEvent) {
     if (e.key === 'Escape') {
@@ -73,7 +95,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
           label: (
             <ActionButton
               onClick={() => {
-                // showDeletingConfirm({ callback: deleteQuestion, id: `${data.id}`, text: `${t('questions.deleteConfirm')}` });
+                showDeletingConfirm({ callback: deleteQuestion, id: `${data.id}`, text: `${t('questions.deleteConfirm')}` });
               }}
             >
               <Remove />
@@ -127,6 +149,8 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
             )}
           </Flex>
 
+          <CreateModal state={data} openCreateModal={openEditModal} setOpenCreateModal={setOpenEditModal} />
+
           <Heading>{data.title}</Heading>
           <div>
             <LightSpan>
@@ -148,7 +172,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
                       style={{ maxHeight: `${data.files.length > 2 ? '200px' : '300px'}` }}
                       src={image.link}
                     ></Image>
-                    {/* <ImageDesc>{fileNameExtractor(image.link)}</ImageDesc> */}
+                    <ImageDesc>{fileNameExtractor(image.link)}</ImageDesc>
                   </div>
                 ))}
               </Image.PreviewGroup>
@@ -171,13 +195,37 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
             </ChipsWrapper>
           )}
 
-          {/* {!!data.answers.length && (
-            <Answers>
-              {data.answers.map((answer: IAnswer) => {
-                return <Answer answer={answer} me={me ? me : undefined} key={answer.id} />;
-              })}
-            </Answers>
-          )} */}
+          <Answers>
+            {!!data.answers.length && (
+              <>
+                {data.answers.map((answer: IAnswer) => {
+                  return <div />;
+                })}
+              </>
+            )}
+
+            {me && token ? (
+              <>
+                <ReachEditor
+                  placeholder={t('questions.writeA')}
+                  fileList={answerFileList}
+                  setFileList={setAnswerFileList}
+                  body={answerBody}
+                  setBody={setAnswerBody}
+                />
+                <Button onClick={me && token ? answerSending : undefined} disabled={answerBody.trim().length < 20} style={{ marginTop: '1rem' }}>
+                  {t('questions.sendA')}
+                </Button>
+              </>
+            ) : (
+              <p>
+                <Link onClick={openAuthModal} to={''}>
+                  {t('questions.enter')}
+                </Link>
+                {t('questions.toWrite')}
+              </p>
+            )}
+          </Answers>
         </Wrapper>
       ) : (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />

@@ -16,16 +16,20 @@ export const URLs = {
 
   FILE: 'file',
   USER: 'user',
+  PROFILE: 'profile',
   SUBSCRIPTION: 'subscriptions/create',
   SUBSCRIPTION_DEL: 'subscriptions',
-  PROFILE: 'profile',
 
   QUESTIONS: 'questions',
   QUESTIONS_LIKE: 'user/questions/like',
   QUESTIONS_MAKE_VIEWED: 'questions/make-viewed',
   QUESTIONS_FAVORITES: 'questions/favorites',
   QUESTIONS_SEARCH: 'questions-search',
-  QUESTIONS_LENGTH: 'questions-length'
+  QUESTIONS_LENGTH: 'questions-length',
+
+  ANSWERS: 'answers',
+  ANSWER_UP: 'answers/up',
+  ANSWER_DOWN: 'answers/down'
 };
 
 export const languages = [

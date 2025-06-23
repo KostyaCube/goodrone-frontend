@@ -36,3 +36,13 @@ export function getTime(input: string): string {
   const date = new Date(input);
   return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 }
+
+export function fileNameExtractor(link: string | undefined): string {
+  if (!link || link.trim().length === 0) return '';
+  const parsed = link.split('/');
+  const name = parsed[parsed.length - 1];
+  const arr = name.split('.');
+  const filename = arr[0];
+  const extension = name.split('.')[arr.length - 1];
+  return `${filename}.${extension}`;
+}

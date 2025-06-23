@@ -45,7 +45,7 @@ export const Content = styled.div`
 `;
 
 export const Answers = styled.div`
-  margin-top: 12px;
+  margin-top: 1.5rem;
 `;
 
 export const ChipsWrapper = styled.div`

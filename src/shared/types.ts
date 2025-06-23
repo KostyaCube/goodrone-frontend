@@ -128,3 +128,15 @@ export type IMenuItem = {
   body: string;
   link?: string;
 };
+
+export interface IAnswer {
+  id: number;
+  rating: number;
+  body: string;
+  authorId: number;
+  author: User;
+  questionId: number;
+  created_at: string;
+  updated_at: string;
+  files: IFile[];
+}
