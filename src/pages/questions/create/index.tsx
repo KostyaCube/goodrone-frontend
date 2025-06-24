@@ -204,7 +204,8 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
               tagRender={tagRender}
               tokenSeparators={[' ']}
               onChange={onChangeKeywords}
-              popupRender={() => <div style={{ display: 'none' }} />}
+              // popupRender={() => <div style={{ display: 'none' }} />}
+              dropdownStyle={{ display: 'none' }}
               placeholder={t('questions.tagsPlaceholder')}
               value={chosedkeywords as unknown as RadioChangeEvent}
               defaultValue={state?.keywords.map((word) => word.body) as unknown as RadioChangeEvent}

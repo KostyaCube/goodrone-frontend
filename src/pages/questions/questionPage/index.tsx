@@ -14,6 +14,7 @@ import { useCreateAnswerMutation } from '@src/app/store/api/question-answers';
 import { fileNameExtractor } from '@src/shared/utils';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import CreateModal from '../create';
+import Answer from '../answer';
 
 type Iprops = {
   setOpenCreateModal?: Dispatch<SetStateAction<boolean>>;
@@ -132,7 +133,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
         <Wrapper>
           <Flex $justify="between">
             <Flex>
-              <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="default">
+              <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="large">
                 {data.author.firstname?.charAt(0).toUpperCase() || 'U'}
               </Avatar>
               <div>
@@ -199,7 +200,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
             {!!data.answers.length && (
               <>
                 {data.answers.map((answer: IAnswer) => {
-                  return <div />;
+                  return <Answer answer={answer} key={answer.id} me={me} />;
                 })}
               </>
             )}

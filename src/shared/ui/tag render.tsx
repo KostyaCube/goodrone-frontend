@@ -18,7 +18,7 @@ export const tagRender = (props: CustomTagProps) => {
         fontSize: 16,
         fontWeight: 100,
         borderRadius: 16,
-        padding: '2px 12px',
+        padding: '1px 12px 2px 12px',
         background: '#44958f',
         color: '#FFF'
       }}

@@ -4,7 +4,7 @@ import { IComment } from '@src/shared/types';
 
 const commentsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    addComment: builder.mutation<void, { body: string; postId: number; replyOn?: string }>({
+    addComment: builder.mutation<void, { body: string; postId: number; replyOn?: number }>({
       query: (body) => {
         return {
           url: URLs.COMMENTS,

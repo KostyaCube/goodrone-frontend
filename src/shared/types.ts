@@ -8,6 +8,8 @@ export interface User {
   likedArticles: number[];
   likedComments: number[];
   likedQuestions: number[];
+  likedAnswers: number[];
+  dislikedAnswers: number[];
 
   savedPosts: IArticle[];
   savedQuestions: IQuestion[];
