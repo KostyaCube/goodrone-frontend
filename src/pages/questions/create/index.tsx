@@ -30,9 +30,9 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
 
   const { t } = useTranslation();
   const { data: keywords } = useGetKeywordsQuery(10);
-  const [create, { isSuccess, isError }] = useCreateQuestionMutation();
-  const [update, { isSuccess: updtSucc, isError: updtErr }] = useUpdateQuestionMutation();
-  const [deleteFileRequest, { isSuccess: delSucc, isError: delErr }] = useDeleteFileMutation();
+  const [create, { isSuccess }] = useCreateQuestionMutation();
+  const [update, { isSuccess: updtSucc }] = useUpdateQuestionMutation();
+  const [deleteFileRequest, { isSuccess: delSucc }] = useDeleteFileMutation();
 
   const { showConfirm, showDeletingConfirm } = useCustomModals();
 
@@ -92,8 +92,6 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
             //   }
             // }
             clear();
-          } else {
-            console.error('error:', res.error);
           }
         });
       }
@@ -121,8 +119,7 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
   //   if (isSuccess || updtSucc || delSucc) {
   //     success();
   //   }
-  //   if (isError || updtErr || delErr) error();
-  // }, [isSuccess, updtSucc, delSucc, isError, updtErr, delErr]);
+  // }, [isSuccess, updtSucc, delSucc]);
 
   useEffect(() => {
     document.addEventListener('keydown', keysHandler);

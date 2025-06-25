@@ -1,4 +1,6 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { RcFile } from 'antd/es/upload';
+import { NestErrorResponse } from './types';
 
 export function extractTextFromHTML(html: string): string {
   const tempDiv = document.createElement('div');
@@ -45,4 +47,20 @@ export function fileNameExtractor(link: string | undefined): string {
   const filename = arr[0];
   const extension = name.split('.')[arr.length - 1];
   return `${filename}.${extension}`;
+}
+
+function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
+  return typeof error === 'object' && error !== null && 'status' in error && 'data' in error;
+}
+
+export function getNestErrorMessage(error: unknown): string {
+  if (isFetchBaseQueryError(error)) {
+    const data = error.data as NestErrorResponse;
+
+    if (!data?.message) return 'Unknown server error';
+
+    return Array.isArray(data.message) ? data.message.join(', ') : data.message;
+  }
+
+  return 'An error occurred while retrieving the request.';
 }

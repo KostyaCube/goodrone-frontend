@@ -1,20 +1,40 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { API_URL, URLs } from '@src/shared/constants';
 import { IKeyword } from '@src/shared/types';
+import type { BaseQueryFn } from '@reduxjs/toolkit/query';
+import { notification } from 'antd';
+import { getNestErrorMessage } from '@src/shared/utils';
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: API_URL,
+  prepareHeaders: (headers) => {
+    headers.set('Access-Control-Allow-Origin', '*');
+    const token = sessionStorage.getItem('token') ? sessionStorage.getItem('token') : localStorage.getItem('token');
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+});
+
+const baseQueryWithNotify: BaseQueryFn<any, unknown, unknown> = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+
+  if ('error' in result) {
+    const message = getNestErrorMessage(result.error as FetchBaseQueryError);
+
+    notification.error({
+      message: 'Error',
+      description: message
+    });
+  }
+
+  return result;
+};
 
 export const baseApi = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    prepareHeaders: (headers) => {
-      headers.set('Access-Control-Allow-Origin', '*');
-      const token = sessionStorage.getItem('token') ? sessionStorage.getItem('token') : localStorage.getItem('token');
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-      return headers;
-    }
-  }),
+  baseQuery: baseQueryWithNotify,
   tagTypes: ['User', 'Articles', 'Words', 'Questions'],
 
   endpoints: (builder) => ({

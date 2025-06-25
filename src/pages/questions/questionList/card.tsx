@@ -19,7 +19,7 @@ type IProps = {
 
 export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element {
   const [voteQuestion] = useVoteQuestionMutation();
-  const [deleteQuestion, { isSuccess, isError }] = useDeleteQuestionMutation();
+  const [deleteQuestion, { isSuccess }] = useDeleteQuestionMutation();
   const [addToFav] = useSaveToFavoritesMutation();
   const [removeFromFav] = useRemoveFromFavoritesMutation();
 

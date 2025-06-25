@@ -26,9 +26,9 @@ function CreateArticle() {
   const [form] = Form.useForm();
   const { t } = useTranslation();
   const { data: keywords } = useGetKeywordsQuery(10);
-  const [deleteFileRequest, { isSuccess: delSucc, isError: delErr }] = useDeleteFileMutation();
-  const [create, { isSuccess, isError, data }] = useCreatePostMutation();
-  const [update, { isSuccess: updtSucc, isError: updtErr }] = useEditPostMutation();
+  const [deleteFileRequest, { isSuccess: delSucc }] = useDeleteFileMutation();
+  const [create, { isSuccess, data }] = useCreatePostMutation();
+  const [update, { isSuccess: updtSucc }] = useEditPostMutation();
   const notify = useNotification();
 
   const [articleBody, setarticleBody] = useState<string>(state?.body || '');
@@ -127,8 +127,7 @@ function CreateArticle() {
   //   if (isSuccess || updtSucc || delSucc) {
   //     success();
   //   }
-  //   if (isError || updtErr || delErr) error();
-  // }, [isSuccess, updtSucc, delSucc, isError, updtErr, delErr]);
+  // }, [isSuccess, updtSucc, delSucc]);
 
   useEffect(() => {
     if (!token || !me) {

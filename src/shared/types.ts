@@ -142,3 +142,9 @@ export interface IAnswer {
   updated_at: string;
   files: IFile[];
 }
+
+export type NestErrorResponse = {
+  statusCode: number;
+  message: string | string[];
+  error?: string;
+};
