@@ -130,6 +130,7 @@ function ArticlePage() {
         }
       />
     );
+
   return (
     <MainContainer>
       <LeftBlock>

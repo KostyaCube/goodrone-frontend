@@ -17,6 +17,7 @@ export const Container = styled(MainContainer)`
     /* margin-top: 8px; */
     display: flex;
     min-width: 270px;
+    min-height: 37px;
     button {
       background-color: transparent;
       border: none;

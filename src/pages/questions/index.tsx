@@ -37,10 +37,10 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data: keywords } = useGetKeywordsQuery(10);
+  const { data: keywords } = useGetKeywordsQuery(20);
   const { openAuthModal } = useModal();
 
-  const { needAuthMessage, showDeletingConfirm } = useCustomModals();
+  const { needAuthMessage } = useCustomModals();
 
   let menus: IMenuItem[] = [
     { id: '0', body: t('questions.menuQuestions'), link: '/questions' },
@@ -57,7 +57,7 @@ function Questions({ token, openMenu, setOpenMenu, mobileInputSearch }: Iprops):
     {
       key: '2',
       label: t('questions.filterPopular'),
-      by: 'views'
+      by: 'rating'
     },
     {
       key: '3',

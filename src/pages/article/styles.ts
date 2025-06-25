@@ -118,7 +118,7 @@ export const ArticleWrapper = styled(Article)`
     img {
       object-fit: cover;
       border-radius: 8px;
-      max-height: 500px;
+      /* max-height: 500px; */
       max-width: 100%;
     }
   }

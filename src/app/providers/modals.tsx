@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { Modal } from 'antd';
 import i18n from '@src/shared/localization/config';
 import { ExclamationCircleFilled } from '@ant-design/icons';
@@ -39,6 +39,12 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const closeAuthModal = () => setOpenModal(false);
 
   const [modal, contextHolder] = Modal.useModal();
+
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.width = '100%';
+    }
+  }, [openModal]);
 
   return (
     <ModalContext.Provider

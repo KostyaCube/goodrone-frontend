@@ -18,9 +18,8 @@ const answersApi = baseApi.injectEndpoints({
     answerUp: builder.mutation<void, { answerId: number }>({
       query: (body) => {
         return {
-          url: `${URLs.ANSWER_UP}`,
-          method: 'post',
-          body
+          url: `${URLs.ANSWER_UP}/${body.answerId}`,
+          method: 'post'
         };
       },
       invalidatesTags: [{ type: 'User' }]
@@ -29,9 +28,8 @@ const answersApi = baseApi.injectEndpoints({
     answerDown: builder.mutation<void, { answerId: number }>({
       query: (body) => {
         return {
-          url: `${URLs.ANSWER_DOWN}`,
-          method: 'post',
-          body
+          url: `${URLs.ANSWER_DOWN}/${body.answerId}`,
+          method: 'post'
         };
       },
       invalidatesTags: [{ type: 'User' }]
