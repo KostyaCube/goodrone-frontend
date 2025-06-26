@@ -128,6 +128,12 @@ function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps)
     };
   }, []);
 
+  useEffect(() => {
+    if (openCreateModal) {
+      document.body.style.width = '100%';
+    }
+  }, [openCreateModal]);
+
   return (
     <Modal
       title={t('questions.askQ')}

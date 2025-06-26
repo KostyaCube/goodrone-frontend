@@ -4,6 +4,7 @@ import { IKeyword } from '@src/shared/types';
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 import { notification } from 'antd';
 import { getNestErrorMessage } from '@src/shared/utils';
+import { logout } from '../reducers/user';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
@@ -27,6 +28,10 @@ const baseQueryWithNotify: BaseQueryFn<any, unknown, unknown> = async (args, api
       message: 'Error',
       description: message
     });
+
+    if (result.error && result.error.status === 401) {
+      api.dispatch(logout());
+    }
   }
 
   return result;

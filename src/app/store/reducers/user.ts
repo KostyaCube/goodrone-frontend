@@ -33,5 +33,5 @@ export const login = createSlice({
   }
 });
 
-export const { setUser, setToken } = login.actions;
+export const { setUser, setToken, logout } = login.actions;
 export default login.reducer;
