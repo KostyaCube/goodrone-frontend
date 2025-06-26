@@ -14,6 +14,11 @@ export const AnswerContainer = styled.div`
       margin-left: 1rem;
     }
   }
+  .dropdown {
+    position: absolute;
+    right: 9px;
+    top: 14px;
+  }
 `;
 
 export const ReplyContainer = styled.div`

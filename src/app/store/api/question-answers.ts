@@ -15,6 +15,27 @@ const answersApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'User' }]
     }),
 
+    editAnswer: builder.mutation<void, { answerId: number; formData: FormData }>({
+      query: ({ answerId, formData }) => {
+        return {
+          url: `${URLs.ANSWERS}/${answerId}`,
+          method: 'PUT',
+          body: formData
+        };
+      },
+      invalidatesTags: [{ type: 'User' }]
+    }),
+
+    deleteAnswer: builder.mutation<void, { answerId: number }>({
+      query: ({ answerId }) => {
+        return {
+          url: `${URLs.ANSWERS}/${answerId}`,
+          method: 'DELETE'
+        };
+      },
+      invalidatesTags: [{ type: 'User' }]
+    }),
+
     answerUp: builder.mutation<void, { answerId: number }>({
       query: (body) => {
         return {
@@ -37,4 +58,4 @@ const answersApi = baseApi.injectEndpoints({
   })
 });
 
-export const { useCreateAnswerMutation, useAnswerUpMutation, useAnswerDownMutation } = answersApi;
+export const { useCreateAnswerMutation, useAnswerUpMutation, useAnswerDownMutation, useEditAnswerMutation, useDeleteAnswerMutation } = answersApi;

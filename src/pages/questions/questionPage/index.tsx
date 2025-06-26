@@ -10,7 +10,7 @@ import { useAppSelector } from '@src/app/store';
 import { Chips, Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
 import { IAnswer, IFile, IKeyword } from '@src/shared/types';
 import { useDeleteQuestionMutation, useGetQuestionByIdQuery, useMakeViewedMutation } from '@src/app/store/api/questions';
-import { useCreateAnswerMutation } from '@src/app/store/api/question-answers';
+import { useCreateAnswerMutation, useEditAnswerMutation } from '@src/app/store/api/question-answers';
 import { fileNameExtractor } from '@src/shared/utils';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import CreateModal from '../create';
@@ -39,8 +39,10 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
 
   const [makeViewed] = useMakeViewedMutation();
   const [sendAnswer] = useCreateAnswerMutation();
+  const [editAnswer] = useEditAnswerMutation();
 
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [edited, setEdited] = useState<IAnswer | null>(null);
 
   function answerSending() {
     const formData = new FormData();
@@ -52,13 +54,20 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
       formData.append('images', answerFileList[i].originFileObj as File);
     }
 
-    sendAnswer(formData)
-      .then(() => {})
-      .catch((err: any) => {
-        console.error(err?.message);
+    if (edited) {
+      formData.delete('questionId');
+      editAnswer({ answerId: edited.id, formData }).then(() => {
+        setAnswerBody('');
+        setAnswerFileList([]);
       });
-    setAnswerBody('');
-    setAnswerFileList([]);
+    } else {
+      sendAnswer(formData).then(() => {
+        setAnswerBody('');
+        setAnswerFileList([]);
+      });
+    }
+
+    setEdited(null);
   }
 
   function keysHandler(e: KeyboardEvent) {
@@ -89,6 +98,10 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
       document.removeEventListener('keydown', keysHandler);
     };
   }, []);
+
+  useEffect(() => {
+    if (edited) setAnswerBody(edited.body);
+  }, [edited]);
 
   const dropDownMenus: MenuProps['items'] = data
     ? [
@@ -200,7 +213,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
             {!!data.answers.length && (
               <>
                 {data.answers.map((answer: IAnswer) => {
-                  return <Answer answer={answer} key={answer.id} me={me} />;
+                  return <Answer answer={answer} key={answer.id} me={me} setEdited={setEdited} />;
                 })}
               </>
             )}
@@ -215,7 +228,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
                   setBody={setAnswerBody}
                 />
                 <Button onClick={me && token ? answerSending : undefined} disabled={answerBody.trim().length < 20} style={{ marginTop: '1rem' }}>
-                  {t('questions.sendA')}
+                  {edited ? t('articles.save') : t('questions.sendA')}
                 </Button>
               </>
             ) : (
