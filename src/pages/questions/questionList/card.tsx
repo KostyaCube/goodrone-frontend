@@ -10,6 +10,7 @@ import { QuestionWrapper, Rating, SaveButton } from './styles';
 import { useAppSelector } from '@src/app/store';
 import { useDeleteQuestionMutation, useRemoveFromFavoritesMutation, useSaveToFavoritesMutation, useVoteQuestionMutation } from '@src/app/store/api/questions';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
+import moment from 'moment';
 
 type IProps = {
   question: IQuestion;
@@ -60,7 +61,7 @@ export function QuestionCard({ question, fromSearch, me }: IProps): JSX.Element 
               {`${question?.author.lastname?.charAt(0)}${question?.author.firstname?.charAt(0)}` || 'U'}
             </Avatar>
             <h4 className="nomargin">{question.author.firstname.charAt(0).toUpperCase() + question.author.firstname.slice(1) || 'Unknown user'}</h4>
-            <span className="span position">{question.author.activity || `${t('questions.position')}`}</span>
+            <span className="span position">registered {moment(question.author?.registered).format('D MMMM YYYY')}</span>
           </Flex>
           <Flex>
             {me && token && me.id === question.authorId ? (

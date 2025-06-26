@@ -79,6 +79,9 @@ export const Article = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+    .name {
+      font-size: 16px;
+    }
     &:hover {
       .name {
         text-decoration: underline;
@@ -92,7 +95,7 @@ export const Article = styled.div`
     /* max-height: 500px; */
   }
   span {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     margin: 8px;
   }
@@ -120,14 +123,9 @@ export const Article = styled.div`
     }
   }
   .ava {
-    width: 30px;
-    height: 30px;
-    position: relative;
     span {
       font-weight: 400;
       font-size: 14px;
-      margin: 0;
-      position: absolute;
     }
   }
   .more-info {

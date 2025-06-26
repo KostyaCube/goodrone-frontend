@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Avatar, MenuProps, Dropdown } from 'antd';
-import { ActionButton, MoreButton, Position } from './styles';
+import { ActionButton, MoreButton, Registered } from './styles';
 import { MoreOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { Edit, Remove } from '@src/assets/icons/icon-components';
@@ -67,7 +67,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
     <div className="container">
       <Flex $justify="between">
         <Flex>
-          <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="default">
+          <Avatar style={{ verticalAlign: 'middle', backgroundColor: '#553c70', gap: 4, marginRight: '8px' }} size="large">
             {`${comment?.author.lastname?.charAt(0)}${comment?.author.firstname?.charAt(0)}` || 'U'}
           </Avatar>
           <div>
@@ -75,7 +75,7 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
               {comment.author.lastname.charAt(0).toUpperCase() + comment.author.lastname.slice(1)}{' '}
               {comment.author.firstname.charAt(0).toUpperCase() + comment.author.firstname.slice(1)}
             </h4>
-            {!simple && <Position>{comment.author.activity || `${t('articles.position')}`}</Position>}
+            {!simple && <Registered>registered {moment(comment.author?.registered).format('D MMMM YYYY')}</Registered>}
           </div>
           {simple && (
             <div className="date-wrapper">

@@ -6,10 +6,11 @@ export const Wrapper = styled.div`
   padding: 16px;
 `;
 
-export const Position = styled.span`
+export const Registered = styled.span`
   color: #6c6c6c;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 400 !important;
+  margin: 0 !important;
 `;
 
 export const Heading = styled.h4`

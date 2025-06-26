@@ -13,6 +13,7 @@ import { useGetCommentsByUserIdQuery } from '@src/app/store/api/comments';
 import { useCreateSubsMutation, useDeleteSubsMutation, useGetUserInfoByIdQuery } from '@src/app/store/api/authors';
 import { ISubscription } from '@src/shared/types';
 import { useGetUserPostsLengthQuery } from '@src/app/store/api/articles';
+import moment from 'moment';
 
 type IProps = {
   token: string | null | undefined;
@@ -75,7 +76,7 @@ function Authors({ token }: IProps) {
             </div>
             <div>
               <h3>{author ? author.firstname : 'Loading..'}</h3>
-              <span className="position">{author && author.activity ? author.activity : 'Activity not provided'}</span>
+              <span className="position">registered {moment(author?.registered).format('D MMMM YYYY')}</span>
             </div>
           </div>
 

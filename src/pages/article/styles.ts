@@ -48,9 +48,6 @@ export const ArticleWrapper = styled(Article)`
   h1 {
     font-size: 48px;
   }
-  span {
-    margin: 8px;
-  }
   h4 {
     font-size: 18px;
     span {
@@ -65,7 +62,7 @@ export const ArticleWrapper = styled(Article)`
   .date {
     font-weight: 400;
     display: block;
-    margin: 8px 0 16px 0;
+    margin: 16px 0;
     font-size: 12px;
   }
   .keystyled {
@@ -123,15 +120,14 @@ export const ArticleWrapper = styled(Article)`
     }
   }
   .ava {
-    width: 30px;
-    height: 30px;
-    position: relative;
     span {
       font-weight: 400;
       font-size: 14px;
-      margin: 0;
-      position: absolute;
     }
+  }
+  .name {
+    font-size: 18px;
+    margin: 0;
   }
 `;
 

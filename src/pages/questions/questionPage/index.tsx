@@ -2,7 +2,7 @@ import { Dispatch, JSX, SetStateAction, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Empty, Spin, Image, UploadFile, Button, MenuProps, Dropdown } from 'antd';
-import { Position, Heading, LightSpan, ImagesContainer, ActionButton, Content, ChipsWrapper, Wrapper, ImageDesc, MoreButton, Answers } from './styles';
+import { Registered, Heading, LightSpan, ImagesContainer, ActionButton, Content, ChipsWrapper, Wrapper, ImageDesc, MoreButton, Answers } from './styles';
 import { ReachEditor } from '@src/components/reachEditor';
 import { MoreOutlined } from '@ant-design/icons';
 import { Edit, Remove } from '@src/assets/icons/icon-components';
@@ -15,6 +15,7 @@ import { fileNameExtractor } from '@src/shared/utils';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import CreateModal from '../create';
 import Answer from '../answer';
+import moment from 'moment';
 
 type Iprops = {
   setOpenCreateModal?: Dispatch<SetStateAction<boolean>>;
@@ -151,7 +152,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
               </Avatar>
               <div>
                 <h4>{data.author.firstname.charAt(0).toUpperCase() + data.author.firstname.slice(1) || 'Unknown user'}</h4>
-                <Position>{data.author.activity || `${t('questions.position')}`}</Position>
+                <Registered>registered {moment(data.author?.registered).format('D MMMM YYYY')}</Registered>
               </div>
             </Flex>
             {token && me && me.id === data.authorId && (

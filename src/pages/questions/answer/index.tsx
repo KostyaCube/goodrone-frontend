@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import { IAnswer, User } from '@src/shared/types';
 import { useAnswerDownMutation, useAnswerUpMutation, useDeleteAnswerMutation } from '@src/app/store/api/question-answers';
-import { Content, ImageDesc, ImagesContainer, MoreButton, Position } from '../questionPage/styles';
+import { Content, ImageDesc, ImagesContainer, MoreButton, Registered } from '../questionPage/styles';
 import { Flex } from '@src/shared/ui/styled components';
 import { fileNameExtractor } from '@src/shared/utils';
 import { ActionButton } from '@src/components/articleFeed/comment/styles';
 import { MoreOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 type IProps = {
   answer: IAnswer;
@@ -93,7 +94,7 @@ function Answer({ answer, me, setEdited }: IProps): JSX.Element {
             </Avatar>
             <div>
               <h4>{`${answer.author.firstname.charAt(0).toUpperCase()}${answer.author.firstname.slice(1)}` || 'Unknown user'}</h4>
-              <Position>{answer.author.activity || `${t('questions.position')}`}</Position>
+              <Registered>registered {moment(answer.author?.registered).format('D MMMM YYYY')}</Registered>
             </div>
           </Flex>
 

@@ -16,6 +16,7 @@ import { defaultLang, languages } from '@src/shared/constants';
 import { tagRender } from '@src/shared/ui/tag render';
 import { Chips } from '@src/shared/ui/styled components';
 import { useCustomModals } from '@src/app/providers/modals';
+import i18n from '@src/shared/localization/config';
 
 function CreateArticle() {
   const location = useLocation();
@@ -33,7 +34,7 @@ function CreateArticle() {
 
   const [articleBody, setarticleBody] = useState<string>(state?.body || '');
   const [title, setTitle] = useState<string>(state?.title || '');
-  const [language, setLanguage] = useState<string>(state?.lang || '');
+  const [language, setLanguage] = useState<string>(state?.lang || i18n.language);
   const [chosedkeywords, setkeywords] = useState<string[]>(state?.keywords.map((item: any) => item.body) || []);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [arrOfImageLinks, setArrOfImage] = useState<any[]>([]);
@@ -95,6 +96,7 @@ function CreateArticle() {
         update({ id: `${state.id}`, formData }).then(() => {
           navigate(`/articles/${state.id}`);
           state = null;
+          clear(true);
         });
       } else {
         token &&
@@ -102,10 +104,10 @@ function CreateArticle() {
           create(formData).then((res: any) => {
             if ('data' in res) {
               navigate(`/articles/${res.data.id}`);
+              clear(true);
             }
           });
       }
-      clear(true);
     } catch (err: any) {
       notify('error', err?.message);
     }

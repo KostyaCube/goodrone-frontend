@@ -3,7 +3,7 @@ export interface User {
   email: string;
   firstname: string;
   lastname: string;
-  activity: string | null;
+  registered: Date;
 
   likedArticles: number[];
   likedComments: number[];

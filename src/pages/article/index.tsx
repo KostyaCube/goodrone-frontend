@@ -19,6 +19,7 @@ import ActionButtons from '@src/components/articleFeed/actions/articleButtons';
 import UserComment from '@src/components/articleFeed/comment/comment';
 import { ReachEditor } from '@src/components/reachEditor';
 import { useAddCommentMutation, useEditCommentMutation } from '@src/app/store/api/comments';
+import { Registered } from '../questions/questionPage/styles';
 
 function ArticlePage() {
   let { id } = useParams();
@@ -156,12 +157,15 @@ function ArticlePage() {
                   data && navigate(`/authors/${data.authorId}`, { state: { id: data.author.id } });
                 }}
               >
-                <Avatar className="ava" style={{ backgroundColor: '#553c70', margin: 0 }} size="small">
+                <Avatar className="ava" style={{ backgroundColor: '#44958f', margin: 0 }} size="large">
                   {`${data?.author.lastname?.charAt(0)}${data?.author.firstname?.charAt(0)}` || 'U'}
                 </Avatar>
-                <span className="name">
-                  {data?.author.lastname} {data?.author.firstname}
-                </span>
+                <Flex style={{ flexDirection: 'column', alignItems: 'flex-start', marginLeft: '1rem' }}>
+                  <span className="name">
+                    {data?.author.firstname} {data?.author.lastname}
+                  </span>
+                  <Registered>registered {moment(data?.author?.registered).format('D MMMM YYYY')}</Registered>
+                </Flex>
               </div>
               {token && me && me.id === data?.authorId && (
                 <Flex className="actions-buttons">
