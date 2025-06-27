@@ -9,8 +9,7 @@ export const authApi = baseApi.injectEndpoints({
         url: URLs.SIGNIN,
         method: 'POST',
         body: credentials
-      }),
-      invalidatesTags: [{ type: 'User' }]
+      })
     }),
 
     register: builder.mutation<AuthResponse, ISignup>({

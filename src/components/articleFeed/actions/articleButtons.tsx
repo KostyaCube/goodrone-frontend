@@ -7,10 +7,11 @@ import { useAppSelector } from '@src/app/store';
 import { IArticle } from '@src/shared/types';
 import { usePostLikeMutation, useRemovePostFromFavMutation, useSavePostToFavMutation } from '@src/app/store/api/articles';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 function ActionButtons({ article }: { article: IArticle | undefined }) {
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
   const arrOfLiked: number[] = me ? me.likedArticles : [];
   const arrOfFavIds: number[] = me && me.savedPosts ? me.savedPosts.map((item) => item.id) : [];

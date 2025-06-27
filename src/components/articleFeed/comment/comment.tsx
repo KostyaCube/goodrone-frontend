@@ -13,6 +13,7 @@ import { Flex } from '@src/shared/ui/styled components';
 import { useDeleteCommentMutation } from '@src/app/store/api/comments';
 import CommentActionButton from '../actions/commentButtons';
 import { useCustomModals } from '@src/app/providers/modals';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 export type CommentProps = {
   comment: IComment;
@@ -22,7 +23,7 @@ export type CommentProps = {
 
 function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { setEdited: Dispatch<SetStateAction<IComment | null>> }) {
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
   const navigate = useNavigate();
   const { showDeletingConfirm } = useCustomModals();

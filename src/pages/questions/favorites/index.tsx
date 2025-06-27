@@ -1,12 +1,14 @@
-import { useAppSelector } from '@src/app/store';
 import { Result } from 'antd';
 import { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import QuestionList from '../questionList';
 import { ResultWrapper } from '@src/shared/ui/styled components';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
+import { useAppSelector } from '@src/app/store';
 
 function Favorites(): JSX.Element {
-  const me = useAppSelector((state) => state.login.user);
+  const token = useAppSelector((state) => state.login.token);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
   const { t } = useTranslation();
 
   if (!me)

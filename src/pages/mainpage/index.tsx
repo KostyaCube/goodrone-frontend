@@ -9,8 +9,8 @@ import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as 
 import { Flex } from '@src/shared/ui/styled components';
 import { useModal } from '@src/app/providers/modals';
 import { FeedNavigation } from '@src/components/articleFeed/styles';
-import { useAppSelector } from '@src/app/store';
 import ArticleFeed from '@src/components/articleFeed';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 type Iprops = {
   token: string | null | undefined;
@@ -59,7 +59,7 @@ function MainPage({ token }: Iprops): JSX.Element {
     }
   ];
 
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
   const [uid, setuid] = useState<string>('');
   const [saved, setSaved] = useState<string>('');
   const navigate = useNavigate();

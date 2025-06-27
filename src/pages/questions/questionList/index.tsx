@@ -1,10 +1,11 @@
-import { useAppSelector } from '@src/app/store';
 import { IKeyword, IQuestion } from '@src/shared/types';
 import { ResultWrapper, SpinnerWrapper } from '@src/shared/ui/styled components';
 import { Spin, Empty, Pagination, PaginationProps } from 'antd';
 import { JSX, useState } from 'react';
 import { QuestionCard } from './card';
 import { useGetQuestionsCountQuery, useGetQuestionsQuery } from '@src/app/store/api/questions';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
+import { useAppSelector } from '@src/app/store';
 
 type IProps = {
   chosenWords: IKeyword[];
@@ -14,7 +15,8 @@ type IProps = {
 };
 
 function QuestionList({ chosenWords, sorting, own, savedQuestions }: IProps): JSX.Element {
-  const me = useAppSelector((state) => state.login.user);
+  const token = useAppSelector((state) => state.login.token);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
   const [skip, setskip] = useState<number>(0);
 
   const { data: count } = useGetQuestionsCountQuery();

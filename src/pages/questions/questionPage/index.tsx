@@ -16,6 +16,7 @@ import { useCustomModals, useModal } from '@src/app/providers/modals';
 import CreateModal from '../create';
 import Answer from '../answer';
 import moment from 'moment';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 type Iprops = {
   setOpenCreateModal?: Dispatch<SetStateAction<boolean>>;
@@ -31,7 +32,7 @@ function Question({ setOpenCreateModal, openCreateModal }: Iprops): JSX.Element 
   const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
   const { data, isLoading } = useGetQuestionByIdQuery(id);
   const [deleteQuestion, { isSuccess }] = useDeleteQuestionMutation();

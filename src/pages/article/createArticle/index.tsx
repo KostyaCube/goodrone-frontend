@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ImagesUploader from '@src/components/reachEditor/imagesUploader';
 import { useAppSelector } from '@src/app/store';
-import { useDeleteFileMutation, useGetKeywordsQuery } from '@src/app/store/api/APIbase';
+import { useDeleteFileMutation, useGetKeywordsQuery, useGetMeQuery } from '@src/app/store/api/APIbase';
 import { useCreatePostMutation, useEditPostMutation } from '@src/app/store/api/articles';
 import { useNotification } from '@src/app/providers/notifications';
 import { IFile, IKeyword } from '@src/shared/types';
@@ -40,7 +40,7 @@ function CreateArticle() {
   const [arrOfImageLinks, setArrOfImage] = useState<any[]>([]);
 
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
   const onChangeKeywords = (e: RadioChangeEvent) => {
     setkeywords(e as unknown as string[]);

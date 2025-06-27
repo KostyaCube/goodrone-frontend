@@ -6,12 +6,12 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Container, ImagesContainer } from './styles';
 import { useTranslation } from 'react-i18next';
 import { IKeyword, IQuestion } from '@src/shared/types';
-import { useDeleteFileMutation, useGetKeywordsQuery } from '@src/app/store/api/APIbase';
-import { useAppSelector } from '@src/app/store';
+import { useDeleteFileMutation, useGetKeywordsQuery, useGetMeQuery } from '@src/app/store/api/APIbase';
 import { useCreateQuestionMutation, useUpdateQuestionMutation } from '@src/app/store/api/questions';
 import { Chips } from '@src/shared/ui/styled components';
 import { useCustomModals } from '@src/app/providers/modals';
 import { tagRender } from '@src/shared/ui/tag render';
+import { useAppSelector } from '@src/app/store';
 
 interface ModalProps {
   openCreateModal: boolean;
@@ -20,7 +20,8 @@ interface ModalProps {
 }
 
 function CreateModal({ openCreateModal, setOpenCreateModal, state }: ModalProps): JSX.Element {
-  const me = useAppSelector((state) => state.login.user);
+  const token = useAppSelector((state) => state.login.token);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
   const [form] = Form.useForm();
 
   const [body, setBody] = useState<string>(state?.body || '');

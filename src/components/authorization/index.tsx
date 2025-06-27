@@ -1,6 +1,6 @@
 import { JSX, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setToken, setUser } from '@src/app/store/reducers/user';
+import { setToken } from '@src/app/store/reducers/user';
 import { useLoginMutation, useRegisterMutation } from '@src/app/store/api/auth';
 import { useTranslation } from 'react-i18next';
 
@@ -22,9 +22,7 @@ function Authorization({ close }: { close: () => void }): JSX.Element {
 
   const processResponse = (res: AuthResponse, remember: boolean) => {
     dispatch(setToken(res.token));
-    dispatch(setUser(res.user));
     const storage = remember ? localStorage : sessionStorage;
-    storage.setItem('user', JSON.stringify(res.user));
     storage.setItem('token', res.token);
   };
 

@@ -1,4 +1,4 @@
-import { Dispatch, JSX, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, JSX, SetStateAction, useEffect } from 'react';
 import { Avatar, Dropdown, Image, MenuProps } from 'antd';
 import { Arrow, Edit, Remove } from '@src/assets/icons/icon-components';
 import { AnswerContainer, RatingUp, RatingDown } from './styles';
@@ -15,7 +15,7 @@ import moment from 'moment';
 
 type IProps = {
   answer: IAnswer;
-  me: User | null;
+  me: User | undefined;
   setEdited: Dispatch<SetStateAction<IAnswer | null>>;
 };
 

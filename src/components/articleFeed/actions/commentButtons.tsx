@@ -5,10 +5,11 @@ import { LikeButton } from '../styles';
 import { useLikeCommentMutation } from '@src/app/store/api/comments';
 import { CommentProps } from '../comment/comment';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 function CommentActionButton({ comment, setReply }: CommentProps) {
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
   const arrOfFavIds: number[] = me && me.likedComments ? me.likedComments : [];
   const { t } = useTranslation();

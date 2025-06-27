@@ -20,6 +20,7 @@ import UserComment from '@src/components/articleFeed/comment/comment';
 import { ReachEditor } from '@src/components/reachEditor';
 import { useAddCommentMutation, useEditCommentMutation } from '@src/app/store/api/comments';
 import { Registered } from '../questions/questionPage/styles';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 function ArticlePage() {
   let { id } = useParams();
@@ -27,7 +28,7 @@ function ArticlePage() {
   const { data, isLoading } = useGetOnePostQuery(id);
 
   const token = useAppSelector((state) => state.login.token);
-  const me = useAppSelector((state) => state.login.user);
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
   const navigate = useNavigate();
   const location = useLocation();

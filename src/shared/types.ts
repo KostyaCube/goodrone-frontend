@@ -19,7 +19,6 @@ export interface User {
 }
 
 export interface UserState {
-  user: User | null;
   token: string;
 }
 

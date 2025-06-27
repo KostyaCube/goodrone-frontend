@@ -7,13 +7,13 @@ import { CheckOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { AuthorHeader, Container } from './styles';
 import type { TabsProps } from 'antd';
 import Comments from './comments';
-import { useAppSelector } from '@src/app/store';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import { useGetCommentsByUserIdQuery } from '@src/app/store/api/comments';
 import { useCreateSubsMutation, useDeleteSubsMutation, useGetUserInfoByIdQuery } from '@src/app/store/api/authors';
 import { ISubscription } from '@src/shared/types';
 import { useGetUserPostsLengthQuery } from '@src/app/store/api/articles';
 import moment from 'moment';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 type IProps = {
   token: string | null | undefined;
@@ -28,9 +28,9 @@ function Authors({ token }: IProps) {
   const [deleteSubs] = useDeleteSubsMutation();
 
   const length = useGetUserPostsLengthQuery(id || '').data;
-  const me = useAppSelector((state) => state.login.user);
 
   const author = useGetUserInfoByIdQuery(id || '').data;
+  const { data: me } = useGetMeQuery(undefined, { skip: !token });
   const { data } = useGetCommentsByUserIdQuery(id);
 
   const { needAuthMessage } = useCustomModals();

@@ -31,6 +31,7 @@ const baseQueryWithNotify: BaseQueryFn<any, unknown, unknown> = async (args, api
 
     if (result.error && result.error.status === 401) {
       api.dispatch(logout());
+      api.dispatch(baseApi.util.resetApiState());
     }
   }
 
