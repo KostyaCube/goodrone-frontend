@@ -29,7 +29,7 @@ export const SpinnerWrapper = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  max-width: 1980px;
+  max-width: 2030px;
   margin: 0 auto;
 `;
 

@@ -16,6 +16,7 @@ export const URLs = {
 
   FILE: 'file',
   USER: 'user',
+  ME: 'user/me',
   PROFILE: 'profile',
   SUBSCRIPTION: 'subscriptions/create',
   SUBSCRIPTION_DEL: 'subscriptions',

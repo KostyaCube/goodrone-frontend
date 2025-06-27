@@ -7,7 +7,7 @@ import i18n from '@src/shared/localization/config';
 import { extractTextFromHTML } from '@src/shared/utils';
 
 function Popular() {
-  const { data } = useGetPostsQuery({ order: 'rating', lang: i18n.language });
+  const { data } = useGetPostsQuery({ order: 'views', lang: i18n.language });
   const { t } = useTranslation();
   const navigate = useNavigate();
 

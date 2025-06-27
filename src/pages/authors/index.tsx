@@ -142,7 +142,7 @@ function Authors({ token }: IProps) {
             )}
           </div>
         </AuthorHeader>
-        <Tabs className="tabs" items={token ? items : items.slice(1)} />
+        <Tabs className="tabs" items={items} />
       </div>
 
       <div className="right-column">

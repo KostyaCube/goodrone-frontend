@@ -91,7 +91,7 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]
+      invalidatesTags: [{ type: 'Articles' }, { type: 'User', id: 'ME' }]
     }),
 
     savePostToFav: builder.mutation<void, { userID: number; articleId: number }>({
@@ -101,7 +101,7 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     }),
 
     removePostFromFav: builder.mutation<void, { userID: number; articleId: number }>({
@@ -111,7 +111,7 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]
+      invalidatesTags: [{ type: 'Articles' }, { type: 'User', id: 'ME' }]
     })
   })
 });

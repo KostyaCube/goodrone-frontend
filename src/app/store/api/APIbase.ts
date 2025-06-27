@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { API_URL, URLs } from '@src/shared/constants';
-import { IKeyword } from '@src/shared/types';
+import { IKeyword, User } from '@src/shared/types';
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 import { notification } from 'antd';
 import { getNestErrorMessage } from '@src/shared/utils';
@@ -43,6 +43,11 @@ export const baseApi = createApi({
   tagTypes: ['User', 'Articles', 'Words', 'Questions'],
 
   endpoints: (builder) => ({
+    getMe: builder.query<User, void>({
+      query: () => `${URLs.ME}`,
+      providesTags: [{ type: 'User', id: 'ME' }]
+    }),
+
     getKeywords: builder.query<IKeyword[], number>({
       query: (take) => (take > 0 ? `${URLs.KEYWORDS}?take=${take}` : URLs.KEYWORDS),
       providesTags: [{ type: 'Words' }]
@@ -60,4 +65,4 @@ export const baseApi = createApi({
   })
 });
 
-export const { useGetKeywordsQuery, useDeleteFileMutation } = baseApi;
+export const { useGetKeywordsQuery, useDeleteFileMutation, useGetMeQuery } = baseApi;
