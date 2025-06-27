@@ -2,18 +2,17 @@ import { useState, type JSX } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button, Tabs } from 'antd';
-import { LinkedinOutlined, YoutubeOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined } from '@ant-design/icons';
 import pencil from '/src/assets/icons/pencil.svg';
 import i18n from '@src/shared/localization/config';
-import { Container, Marketing, Navigation, Copyright, Footer, Register, Link as StyledLink } from './styles';
-import { Flex } from '@src/shared/ui/styled components';
+import { Container, Marketing, Navigation, Register, Link as StyledLink } from './styles';
 import { useModal } from '@src/app/providers/modals';
 import { FeedNavigation } from '@src/components/articleFeed/styles';
 import ArticleFeed from '@src/components/articleFeed';
 import { useGetMeQuery } from '@src/app/store/api/APIbase';
 
 type Iprops = {
-  token: string | null | undefined;
+  token: string | undefined;
 };
 
 function MainPage({ token }: Iprops): JSX.Element {
@@ -66,7 +65,6 @@ function MainPage({ token }: Iprops): JSX.Element {
   const { t } = useTranslation();
 
   const { openAuthModal } = useModal();
-  const today = new Date();
 
   function handleChangeSorting(e: string) {
     if (e == '1') {
@@ -142,23 +140,6 @@ function MainPage({ token }: Iprops): JSX.Element {
           <ArticleFeed uid={uid} saved={saved} />
         </div>
       </Container>
-
-      <Footer>
-        <Flex $justify="between">
-          <Flex>
-            <a href="#" target="_blank">
-              <LinkedinOutlined />
-            </a>
-            <a href="#" target="_blank">
-              <YoutubeOutlined style={{ marginLeft: '20px' }} />
-            </a>
-          </Flex>
-          <Copyright>© Goodrone {today.getFullYear()}</Copyright>
-          <div style={{ paddingLeft: '60px' }}>
-            <img src="/src/assets/black-logo.svg" alt="black-logo"></img>
-          </div>
-        </Flex>
-      </Footer>
     </>
   );
 }

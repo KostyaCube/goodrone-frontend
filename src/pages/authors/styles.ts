@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 120px 24px 24px 260px;
+  padding: 112px 24px 24px 260px;
   display: grid;
   grid-template-columns: 973px 408px;
   gap: 16px;

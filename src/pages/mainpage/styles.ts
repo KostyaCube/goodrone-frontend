@@ -210,7 +210,16 @@ export const Footer = styled.footer`
   margin: 0 auto;
   max-width: 1980px;
   background-color: #fff;
-  padding: 25px 80px;
+  padding: 16px 80px;
+  h6 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 16px;
+  }
+  img {
+    width: 42px;
+    border-radius: 8px;
+  }
   box-shadow:
     0px -2px 4.6px -5px rgba(0, 0, 0, 0.024),
     0px -5.5px 12.6px -5px rgba(0, 0, 0, 0.035),
@@ -218,7 +227,7 @@ export const Footer = styled.footer`
     0px -44px 101px -5px rgba(0, 0, 0, 0.07);
   a {
     font-size: 20px;
-    color: #535354;
+    color: black;
   }
   svg {
     &:hover {
@@ -237,10 +246,4 @@ export const Footer = styled.footer`
   @media (max-width: 650px) {
     padding: 10px 16px;
   }
-`;
-
-export const Copyright = styled.h6`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 16px;
 `;

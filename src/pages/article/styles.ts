@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 export const MainContainer = styled(Container)`
   margin: 0;
   min-height: 87vh;
-  padding: 104px 120px 24px 120px;
+  padding: 112px 120px 24px 120px;
   display: grid;
   grid-template-columns: 216px auto 336px;
   gap: 16px;
@@ -200,7 +200,6 @@ export const CommentWrapper = styled.div`
 export const InputContainer = styled.div`
   background-color: white;
   padding: 0 16px 16px 16px;
-  margin-bottom: 16px;
   border-radius: 0 0 8px 8px;
   .replyFor {
     font-size: 14px;

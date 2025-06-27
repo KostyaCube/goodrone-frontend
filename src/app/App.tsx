@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { MainContainer } from '../shared/ui/styled components';
+import { Flex, MainContainer } from '../shared/ui/styled components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@src/components/header';
@@ -11,6 +11,9 @@ import CreateArticle from '@src/pages/article/createArticle';
 import Authors from '@src/pages/authors';
 import Questions from '@src/pages/questions';
 import Question from '@src/pages/questions/questionPage';
+import { LinkedinOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { Footer } from '@src/pages/mainpage/styles';
+import logo from '/src/assets/goodrone-logo.png';
 
 function App() {
   const token = useAppSelector((state) => state.login.token);
@@ -20,6 +23,7 @@ function App() {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const today = new Date();
 
   return (
     <MainContainer>
@@ -58,6 +62,20 @@ function App() {
                   }
                 />
               </Routes>
+              <Footer>
+                <Flex $justify="between">
+                  <Flex>
+                    <a href="#" target="_blank">
+                      <LinkedinOutlined />
+                    </a>
+                    <a href="#" target="_blank">
+                      <YoutubeOutlined style={{ marginLeft: '20px' }} />
+                    </a>
+                  </Flex>
+                  <h6>© Goodrone {today.getFullYear()}</h6>
+                  <img className="logo" src={logo} alt="logo" />
+                </Flex>
+              </Footer>
             </>
           }
         />
