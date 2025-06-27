@@ -41,7 +41,7 @@ const baseQueryWithNotify: BaseQueryFn<any, unknown, unknown> = async (args, api
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithNotify,
-  tagTypes: ['User', 'Articles', 'Words', 'Questions'],
+  tagTypes: ['User', 'Articles', 'Words', 'Questions', 'Profile'],
 
   endpoints: (builder) => ({
     getMe: builder.query<User, void>({

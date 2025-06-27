@@ -12,7 +12,7 @@ const articlesApi = baseApi.injectEndpoints({
           body
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'Words' }]
+      invalidatesTags: [{ type: 'Articles', id: 'LIST' }, { type: 'Words' }]
     }),
 
     editPost: builder.mutation<void, { id: string; formData: FormData }>({
@@ -23,7 +23,7 @@ const articlesApi = baseApi.injectEndpoints({
           body: body.formData
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'Words' }]
+      invalidatesTags: (result, error, arg) => [{ type: 'Articles', id: arg.id }, { type: 'Words' }]
     }),
 
     deletePost: builder.mutation<void, number | string>({
@@ -33,7 +33,10 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }]
+      invalidatesTags: (result, error, id) => [
+        { type: 'Articles', id },
+        { type: 'Articles', id: 'LIST' }
+      ]
     }),
 
     getPosts: builder.query<IArticle[], { lang: string; skip?: string; userID?: string; order?: string; saved?: string }>({
@@ -58,14 +61,17 @@ const articlesApi = baseApi.injectEndpoints({
         const queryString = queryParams.toString();
         return `${URLs.ARTICLES}${queryString ? `?${queryString}` : ''}`;
       },
-      providesTags: [{ type: 'Articles' }]
+      providesTags: (result) =>
+        result
+          ? [{ type: 'Articles' as const, id: 'LIST' }, ...result.map((post) => ({ type: 'Articles' as const, id: post.id }))]
+          : [{ type: 'Articles' as const, id: 'LIST' }]
     }),
 
     getOnePost: builder.query<IArticle, string | undefined>({
       query: (id) => {
         return `${URLs.ARTICLES}/${id}`;
       },
-      providesTags: [{ type: 'Articles' }]
+      providesTags: (result, error, id) => [{ type: 'Articles', id }]
     }),
 
     getUserPostsLength: builder.query<number, string | undefined>({
@@ -81,7 +87,7 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'get'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }]
+      invalidatesTags: (result, error, id) => [{ type: 'Articles', id }]
     }),
 
     postLike: builder.mutation<void, { articleId: number }>({
@@ -91,7 +97,10 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'User', id: 'ME' }]
+      invalidatesTags: (result, error, { articleId }) => [
+        { type: 'Articles', id: articleId },
+        { type: 'User', id: 'ME' }
+      ]
     }),
 
     savePostToFav: builder.mutation<void, { userID: number; articleId: number }>({
@@ -111,7 +120,10 @@ const articlesApi = baseApi.injectEndpoints({
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'User', id: 'ME' }]
+      invalidatesTags: (result, error, { articleId }) => [
+        { type: 'User', id: 'ME' },
+        { type: 'Articles', id: articleId }
+      ]
     })
   })
 });

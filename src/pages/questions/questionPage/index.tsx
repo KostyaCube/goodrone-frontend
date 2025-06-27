@@ -10,7 +10,7 @@ import { useAppSelector } from '@src/app/store';
 import { Chips, Flex, SpinnerWrapper } from '@src/shared/ui/styled components';
 import { IAnswer, IFile, IKeyword } from '@src/shared/types';
 import { useDeleteQuestionMutation, useGetQuestionByIdQuery, useMakeViewedMutation } from '@src/app/store/api/questions';
-import { useCreateAnswerMutation, useEditAnswerMutation } from '@src/app/store/api/question-answers';
+import { useCreateAnswerMutation, useEditAnswerMutation } from '@src/app/store/api/qAnswers';
 import { fileNameExtractor } from '@src/shared/utils';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import CreateModal from '../create';

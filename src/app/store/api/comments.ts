@@ -12,26 +12,26 @@ const commentsApi = baseApi.injectEndpoints({
           body
         };
       },
-      invalidatesTags: [{ type: 'Articles' }]
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Articles', id: postId }]
     }),
 
-    editComment: builder.mutation<void, { id: string; commentBody: string }>({
+    editComment: builder.mutation<void, { id: string; commentBody: string; postId: number }>({
       query: ({ id, commentBody }) => ({
         url: `${URLs.COMMENTS}/${id}`,
         method: 'PUT',
         body: { body: commentBody }
       }),
-      invalidatesTags: [{ type: 'Articles' }]
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Articles', id: postId }]
     }),
 
-    deleteComment: builder.mutation<void, number | string>({
-      query: (id) => {
+    deleteComment: builder.mutation<void, { id: string; postId: number }>({
+      query: ({ id }) => {
         return {
           url: `${URLs.COMMENTS}/${id}`,
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }]
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Articles', id: postId }]
     }),
 
     likeComment: builder.mutation<void, { commentId: number }>({
@@ -41,13 +41,14 @@ const commentsApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'Articles' }, { type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     }),
 
     getCommentsByUserId: builder.query<IComment[], string | undefined>({
       query: (userId) => {
         return `${URLs.COMMENTS}/${userId}`;
-      }
+      },
+      providesTags: (result, error, userId) => [{ type: 'User', id: userId }]
     })
   })
 });

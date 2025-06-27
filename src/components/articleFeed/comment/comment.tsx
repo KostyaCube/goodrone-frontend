@@ -31,13 +31,17 @@ function UserComment({ comment, setReply, setEdited, simple }: CommentProps & { 
   const { t } = useTranslation();
   const [deleteComment] = useDeleteCommentMutation();
 
+  function deleting(id: string) {
+    deleteComment({ id, postId: comment.postId });
+  }
+
   const dropDownMenus: MenuProps['items'] = comment
     ? [
         {
           label: (
             <ActionButton
               onClick={() => {
-                showDeletingConfirm({ callback: deleteComment, id: `${comment.id}`, text: `${t('articles.deleteConfirmComment')}` });
+                showDeletingConfirm({ callback: deleting, id: `${comment.id}`, text: `${t('articles.deleteConfirmComment')}` });
               }}
             >
               <Remove />

@@ -23,7 +23,7 @@ const questionsApi = baseApi.injectEndpoints({
           body: body.formData
         };
       },
-      invalidatesTags: [{ type: 'Questions' }, { type: 'User' }, { type: 'Words' }]
+      invalidatesTags: (result, error, body) => [{ type: 'Questions', id: body.id }, { type: 'Words' }]
     }),
 
     getQuestions: builder.query<IQuestion[], { keywords: string[]; order: string; userID: string; skip: string }>({
@@ -39,7 +39,7 @@ const questionsApi = baseApi.injectEndpoints({
 
     getQuestionById: builder.query<IQuestion, string | undefined>({
       query: (id) => `${URLs.QUESTIONS}/${id}`,
-      providesTags: [{ type: 'User' }]
+      providesTags: (result, error, id) => [{ type: 'Questions', id }]
     }),
 
     deleteQuestion: builder.mutation<void, number | string>({
@@ -59,7 +59,7 @@ const questionsApi = baseApi.injectEndpoints({
           method: 'get'
         };
       },
-      invalidatesTags: [{ type: 'Questions' }, { type: 'User' }]
+      invalidatesTags: (result, error, id) => [{ type: 'Questions', id }]
     }),
 
     getQuestionsSearch: builder.query<IQuestion[], string>({
@@ -78,7 +78,10 @@ const questionsApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'Questions' }, { type: 'User' }]
+      invalidatesTags: (result, error, body) => [
+        { type: 'Questions', id: body.questionId },
+        { type: 'User', id: 'ME' }
+      ]
     }),
 
     saveToFavorites: builder.mutation<void, { questionId: number }>({
@@ -88,7 +91,7 @@ const questionsApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     }),
 
     removeFromFavorites: builder.mutation<void, { questionId: number }>({
@@ -98,7 +101,7 @@ const questionsApi = baseApi.injectEndpoints({
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     })
   })
 });

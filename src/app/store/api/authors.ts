@@ -6,12 +6,12 @@ const authorsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getUserInfoById: builder.query<User, string>({
       query: (id) => `${URLs.USER}/${id}`,
-      providesTags: [{ type: 'User' }]
+      providesTags: (result, error, id) => [{ type: 'User', id }]
     }),
 
     getAuthorProfile: builder.query<IProfile, string>({
       query: (id) => `${URLs.PROFILE}/${id}`,
-      providesTags: [{ type: 'User' }]
+      providesTags: (result, error, id) => [{ type: 'Profile', id }]
     }),
 
     createSubs: builder.mutation<ISubscription, { subscriberId: number; subscribedToId: number }>({
@@ -22,7 +22,10 @@ const authorsApi = baseApi.injectEndpoints({
           body
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: (result, error, { subscriberId, subscribedToId }) => [
+        { type: 'User', id: subscriberId },
+        { type: 'User', id: subscribedToId }
+      ]
     }),
 
     deleteSubs: builder.mutation<void, number | string>({
@@ -32,7 +35,7 @@ const authorsApi = baseApi.injectEndpoints({
           method: 'delete'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     })
   })
 });

@@ -55,7 +55,7 @@ function ArticlePage() {
   function commentSending() {
     try {
       if (edited) {
-        editComment({ id: `${edited.id}`, commentBody });
+        editComment({ id: `${edited.id}`, commentBody, postId: edited.postId });
       } else {
         if (id && me) {
           replyingComment ? sendComment({ body: commentBody, postId: +id, replyOn: replyingComment.id }) : sendComment({ body: commentBody, postId: +id });

@@ -5,7 +5,7 @@ import { AnswerContainer, RatingUp, RatingDown } from './styles';
 import { useTranslation } from 'react-i18next';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import { IAnswer, User } from '@src/shared/types';
-import { useAnswerDownMutation, useAnswerUpMutation, useDeleteAnswerMutation } from '@src/app/store/api/question-answers';
+import { useAnswerDownMutation, useAnswerUpMutation, useDeleteAnswerMutation } from '@src/app/store/api/qAnswers';
 import { Content, ImageDesc, ImagesContainer, MoreButton, Registered } from '../questionPage/styles';
 import { Flex } from '@src/shared/ui/styled components';
 import { fileNameExtractor } from '@src/shared/utils';
@@ -41,7 +41,7 @@ function Answer({ answer, me, setEdited }: IProps): JSX.Element {
   }
 
   function del(id: string) {
-    deleteAnswer({ answerId: +id });
+    deleteAnswer({ answerId: +id, questionId: answer.questionId });
   }
 
   useEffect(() => {

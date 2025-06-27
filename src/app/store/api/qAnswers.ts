@@ -12,7 +12,10 @@ const answersApi = baseApi.injectEndpoints({
           body
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: (result, error, formData) => {
+        const questionId = Number(formData.get('questionId'));
+        return [{ type: 'Questions', id: questionId }];
+      }
     }),
 
     editAnswer: builder.mutation<void, { answerId: number; formData: FormData }>({
@@ -26,14 +29,14 @@ const answersApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'User' }]
     }),
 
-    deleteAnswer: builder.mutation<void, { answerId: number }>({
+    deleteAnswer: builder.mutation<void, { answerId: number; questionId: number }>({
       query: ({ answerId }) => {
         return {
           url: `${URLs.ANSWERS}/${answerId}`,
           method: 'DELETE'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: (result, error, { questionId }) => [{ type: 'Questions', id: questionId }]
     }),
 
     answerUp: builder.mutation<void, { answerId: number }>({
@@ -43,7 +46,7 @@ const answersApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     }),
 
     answerDown: builder.mutation<void, { answerId: number }>({
@@ -53,7 +56,7 @@ const answersApi = baseApi.injectEndpoints({
           method: 'post'
         };
       },
-      invalidatesTags: [{ type: 'User' }]
+      invalidatesTags: [{ type: 'User', id: 'ME' }]
     })
   })
 });
