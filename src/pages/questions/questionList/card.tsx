@@ -1,7 +1,7 @@
 import { JSX, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, message } from 'antd';
-import { Remove, Edit, Share, Save, Arrow } from '@src/assets/icons/icon-components';
+import { Remove, Edit, Save, Arrow, Share } from '@src/assets/icons/icon-components';
 import { useTranslation } from 'react-i18next';
 import { IKeyword, IQuestion, User } from '@src/shared/types';
 import { extractTextFromHTML, getDay, getTime } from '@src/shared/utils';

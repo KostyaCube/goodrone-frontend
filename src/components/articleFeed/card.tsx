@@ -7,6 +7,7 @@ import ActionButtons from './actions/articleButtons';
 import { IArticle, IKeyword } from '@src/shared/types';
 import { extractTextFromHTML } from '@src/shared/utils';
 import { Flex } from '@src/shared/ui/styled components';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
 function ArticleCard({ data }: { data: IArticle }) {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ function ArticleCard({ data }: { data: IArticle }) {
           {data.author.lastname} {data.author.firstname}
         </span>
 
-        <span>{moment(data.created_at).fromNow()}</span>
+        <span className="date">{moment(data.created_at).fromNow()}</span>
       </div>
 
       {!!data.files.length && <img className="cover" src={`${data.files[0].link}`} />}
@@ -46,7 +47,7 @@ function ArticleCard({ data }: { data: IArticle }) {
       <h5>{data.title}</h5>
       <p className="short-desc">{extractTextFromHTML(data.body)}</p>
       <Link className="more-info" to={`/articles/${data.id}`}>
-        {t('articles.more')}
+        {t('articles.more')} <ArrowRightOutlined />
       </Link>
 
       <ActionButtons article={data} />

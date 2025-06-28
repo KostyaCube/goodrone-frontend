@@ -1,11 +1,11 @@
-import { Like } from '@src/assets/icons/icon-components';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@src/app/store';
-import { LikeButton } from '../styles';
 import { useLikeCommentMutation } from '@src/app/store/api/comments';
 import { CommentProps } from '../comment/comment';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import { useGetMeQuery } from '@src/app/store/api/APIbase';
+import { Button } from './styles';
+import { LikeOutlined } from '@ant-design/icons';
 
 function CommentActionButton({ comment, setReply }: CommentProps) {
   const token = useAppSelector((state) => state.login.token);
@@ -28,7 +28,7 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
   if (comment)
     return (
       <div className="actions">
-        <LikeButton
+        <Button
           $blue={arrOfFavIds.includes(comment.id) ? 'true' : 'false'}
           onClick={() => {
             token
@@ -41,9 +41,9 @@ function CommentActionButton({ comment, setReply }: CommentProps) {
                 });
           }}
         >
-          <Like />
+          <LikeOutlined />
           {comment.rating > 0 && <span className="count">{comment.rating}</span>}
-        </LikeButton>
+        </Button>
         {token && (
           <button onClick={() => setReply(comment)} className="reply" data-testid="reply">
             {t('articles.reply')}

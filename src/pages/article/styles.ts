@@ -152,7 +152,6 @@ export const CommentWrapper = styled.div`
     }
   }
   .actions {
-    margin-top: 0;
     display: flex;
     justify-content: space-between;
     button:first-child {
@@ -163,6 +162,9 @@ export const CommentWrapper = styled.div`
         span {
           color: black !important;
         }
+        svg {
+          fill: black;
+        }
         svg path {
           stroke: black;
         }
@@ -170,14 +172,14 @@ export const CommentWrapper = styled.div`
     }
   }
   .reply {
+    background: transparent;
+    border: none;
+    cursor: pointer;
     color: #44958f;
     font-size: 14px;
     &:hover {
       opacity: 0.8;
     }
-  }
-  .count {
-    margin-top: 8px;
   }
   .look {
     display: flex;

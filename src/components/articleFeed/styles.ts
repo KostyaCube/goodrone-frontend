@@ -13,37 +13,6 @@ export const Container = styled(MainContainer)`
     font-weight: 700;
     text-align: center;
   }
-  .actions {
-    /* margin-top: 8px; */
-    display: flex;
-    min-width: 270px;
-    min-height: 37px;
-    button {
-      background-color: transparent;
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      &:not(:first-child):hover {
-        cursor: pointer;
-        span {
-          color: black !important;
-        }
-        svg path {
-          stroke: black;
-        }
-      }
-    }
-    @media (max-width: 400px) {
-      transform: scale(0.95);
-    }
-  }
-  .count {
-    margin-left: 8px;
-    margin-bottom: 5px;
-    color: #6c6c6c;
-    font-weight: 400;
-    font-size: 16px;
-  }
   .keyword {
     margin: 0 16px 16px 0;
     font-size: 16px;
@@ -92,14 +61,13 @@ export const Article = styled.div`
     width: 100%;
     object-fit: cover;
     border-radius: 8px;
-    /* max-height: 500px; */
   }
-  span {
-    font-size: 16px;
+  .name {
     font-weight: 700;
     margin: 8px;
   }
-  span:nth-child(3) {
+  .date {
+    font-size: 16px;
     font-weight: 400;
     color: #6c6c6c;
   }
@@ -122,18 +90,15 @@ export const Article = styled.div`
       font-size: 14px;
     }
   }
-  .ava {
-    span {
-      font-weight: 400;
-      font-size: 14px;
-    }
-  }
   .more-info {
     color: #44958f;
     text-decoration: none;
     display: block;
     width: 100%;
     text-align: right;
+    svg {
+      margin-left: 8px;
+    }
     &:hover {
       opacity: 0.8;
     }
@@ -188,27 +153,8 @@ export const Discuss = styled.div`
     max-height: 3em;
     overflow: hidden;
   }
-  .actions {
-    button {
-      transform: scale(0.8);
-    }
-    justify-content: space-between;
-  }
-  .count {
-    margin-bottom: -4px;
-  }
   @media (max-width: 1000px) {
     display: none;
-  }
-`;
-
-export const LikeButton = styled.button<{ $blue?: string }>`
-  color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
-  svg path {
-    stroke: ${(props) => (props.$blue === 'true' ? '#44958f' : '')};
-  }
-  .count {
-    color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
   }
 `;
 
@@ -229,20 +175,5 @@ export const FeedNavigation = styled.div`
         display: none;
       }
     }
-  }
-`;
-
-export const SaveButton = styled.button<{ $blue?: string }>`
-  color: ${(props) => (props.$blue === 'true' ? '#44958f' : '#6C6C6C')};
-  svg {
-    fill: ${(props) => (props.$blue === 'true' ? '#44958f' : '')} !important;
-  }
-  svg path {
-    stroke: ${(props) => (props.$blue === 'true' ? '#44958f' : '')} !important;
-  }
-  .save-article {
-    transform: scale(1.4) !important;
-    display: flex;
-    margin: 2px 20px 0 13px;
   }
 `;

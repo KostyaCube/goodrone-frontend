@@ -24,7 +24,7 @@ function Popular() {
                     {item.title}
                   </h6>
                   <p className="content">{extractTextFromHTML(item.body)}</p>
-                  <ActionButtons article={item} />
+                  <ActionButtons simple article={item} />
                 </div>
               );
           })}

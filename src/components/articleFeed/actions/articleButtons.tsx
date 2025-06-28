@@ -1,15 +1,15 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
-import { LikeButton, SaveButton } from '../styles';
-import { Comments, Like, Save, ShareArrow, Views } from '@src/assets/icons/icon-components';
+import { CommentOutlined, DeleteOutlined, SaveOutlined, EyeOutlined, LikeOutlined, LinkOutlined } from '@ant-design/icons';
 import { useAppSelector } from '@src/app/store';
 import { IArticle } from '@src/shared/types';
 import { usePostLikeMutation, useRemovePostFromFavMutation, useSavePostToFavMutation } from '@src/app/store/api/articles';
 import { useCustomModals, useModal } from '@src/app/providers/modals';
 import { useGetMeQuery } from '@src/app/store/api/APIbase';
+import { ActionButtonsWrapper, Button } from './styles';
 
-function ActionButtons({ article }: { article: IArticle | undefined }) {
+function ActionButtons({ article, simple }: { article: IArticle | undefined; simple?: boolean }) {
   const token = useAppSelector((state) => state.login.token);
   const { data: me } = useGetMeQuery(undefined, { skip: !token });
 
@@ -46,13 +46,12 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
 
   if (article)
     return (
-      <div className="actions">
-        <button data-testid="views">
-          <Views />
+      <ActionButtonsWrapper $simple={String(simple)}>
+        <Button>
+          <EyeOutlined />
           <span className="count">{article.views || 1}</span>
-        </button>
-        <LikeButton
-          data-testid="like"
+        </Button>
+        <Button
           $blue={arrOfLiked.includes(article.id) && token ? 'true' : 'false'}
           onClick={() => {
             token
@@ -65,16 +64,17 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
                 });
           }}
         >
-          <Like />
+          <LikeOutlined />
           <span className="count">{article.rating}</span>
-        </LikeButton>
-        <button data-testid="comments" onClick={() => navigate(`/articles/${article.id}?comments`)}>
-          <Comments />
+        </Button>
+
+        <Button onClick={() => navigate(`/articles/${article.id}?comments`)}>
+          <CommentOutlined />
           <span className="count">{article.comments.length}</span>
-        </button>
-        {!!token && (
-          <SaveButton
-            data-testid="save"
+        </Button>
+
+        {!!token && !simple && (
+          <Button
             $blue={arrOfFavIds.includes(article.id) ? 'true' : 'false'}
             onClick={(e) => {
               e.preventDefault();
@@ -85,16 +85,16 @@ function ActionButtons({ article }: { article: IArticle | undefined }) {
               }
             }}
           >
-            <div className="save-article">
-              <Save />
-            </div>
-          </SaveButton>
+            <div className="save-article">{arrOfFavIds.includes(article.id) ? <DeleteOutlined /> : <SaveOutlined />}</div>
+          </Button>
         )}
-        <button onClick={(e) => copyToClipboard(e, article.id)} data-testid="share">
-          <ShareArrow />
-          <span className="count" />
-        </button>
-      </div>
+        {!simple && (
+          <Button onClick={(e) => copyToClipboard(e, article.id)}>
+            <LinkOutlined />
+            <span className="count" />
+          </Button>
+        )}
+      </ActionButtonsWrapper>
     );
   return <div />;
 }
