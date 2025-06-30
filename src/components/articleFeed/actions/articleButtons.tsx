@@ -79,9 +79,9 @@ function ActionButtons({ article, simple }: { article: IArticle | undefined; sim
             onClick={(e) => {
               e.preventDefault();
               if (arrOfFavIds.includes(article.id) && me) {
-                removeFromFav({ userID: me.id, articleId: article.id });
+                removeFromFav({ articleId: article.id });
               } else {
-                if (me) addToFav({ userID: me.id, articleId: article.id });
+                if (me) addToFav({ articleId: article.id });
               }
             }}
           >

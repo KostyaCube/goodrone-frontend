@@ -103,20 +103,20 @@ const articlesApi = baseApi.injectEndpoints({
       ]
     }),
 
-    savePostToFav: builder.mutation<void, { userID: number; articleId: number }>({
+    savePostToFav: builder.mutation<void, { articleId: number }>({
       query: (params) => {
         return {
-          url: `${URLs.ARTICLES_FAVORITES}/${params.userID}/${params.articleId}`,
+          url: `${URLs.ARTICLES_FAVORITES}/${params.articleId}`,
           method: 'post'
         };
       },
       invalidatesTags: [{ type: 'User', id: 'ME' }]
     }),
 
-    removePostFromFav: builder.mutation<void, { userID: number; articleId: number }>({
+    removePostFromFav: builder.mutation<void, { articleId: number }>({
       query: (params) => {
         return {
-          url: `${URLs.ARTICLES_FAVORITES}/${params.userID}/${params.articleId}`,
+          url: `${URLs.ARTICLES_FAVORITES}/${params.articleId}`,
           method: 'delete'
         };
       },
