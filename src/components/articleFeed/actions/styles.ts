@@ -9,12 +9,13 @@ export const ActionButtonsWrapper = styled.div<{ $simple?: string }>`
   button {
     transform: ${(props) => (props.$simple === 'true' ? 'scale(0.7)' : 'scale(1)')};
     &:first-child {
-      margin-left: ${(props) => (props.$simple === 'true' ? '-12px' : '0')};
+      margin-left: ${(props) => (props.$simple === 'true' ? '-17px' : '0')};
     }
   }
 `;
 
 export const Button = styled.button<{ $blue?: string }>`
+  flex: 1;
   background-color: transparent;
   border: none;
   display: flex;
@@ -48,4 +49,12 @@ export const Button = styled.button<{ $blue?: string }>`
       stroke: black;
     }
   }
+  /* &:not(:first-child) {
+    display: flex;
+    justify-content: center;
+  }
+  &:last-child {
+    display: flex;
+    justify-content: flex-end;
+  } */
 `;

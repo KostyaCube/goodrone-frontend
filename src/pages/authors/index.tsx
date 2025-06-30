@@ -14,6 +14,8 @@ import { ISubscription } from '@src/shared/types';
 import { useGetUserPostsLengthQuery } from '@src/app/store/api/articles';
 import moment from 'moment';
 import { useGetMeQuery } from '@src/app/store/api/APIbase';
+import AuthorProfile from './authorProfile';
+import Subscribers from './subscribers';
 
 type IProps = {
   token: string | null | undefined;
@@ -36,18 +38,29 @@ function Authors({ token }: IProps) {
   const { needAuthMessage } = useCustomModals();
   const { openAuthModal } = useModal();
 
+  console.log(author);
   const arrOfSunscriptions = me && me.subscriptions ? me.subscriptions : [];
 
   const items: TabsProps['items'] = [
     {
       key: '1',
+      label: t('Authors.profile'),
+      children: <AuthorProfile id={id || ''} />
+    },
+    {
+      key: '2',
       label: `${t('authors.all')}${length ? ` (${length})` : ''}`,
       children: <ArticleFeed simple uid={`${id}` || ''} />
     },
     {
-      key: '2',
+      key: '3',
       label: `${t('authors.comments')}${data ? ` (${data.length})` : ''}`,
       children: <Comments data={data || []} />
+    },
+    {
+      key: '4',
+      label: `${t('Authors.subscribers')}${author ? ` (${author.subscribers.length})` : ''}`,
+      children: <Subscribers users={author && author.subscribers ? author.subscribers.map((item: ISubscription) => item.subscriber).filter(Boolean) : []} />
     }
   ];
 

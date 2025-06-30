@@ -37,7 +37,8 @@ function UserCard({ user }: { user: any }) {
   );
 }
 
-function Subscribers({ users }: { users: User[] }) {
+function Subscribers({ users }: { users: any }) {
+  //TODO
   return (
     <div>
       {users.length ? (
