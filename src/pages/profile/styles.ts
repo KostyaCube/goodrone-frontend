@@ -2,8 +2,8 @@ import { Flex, MainContainer } from '@src/shared/ui/styled components';
 import styled from 'styled-components';
 
 export const Container = styled(MainContainer)`
-  background: #f7f9fa;
-  padding: 120px;
+  background: transparent;
+  padding: 112px;
   padding-bottom: 20px;
   min-width: 300px;
   .avatar {
@@ -65,49 +65,14 @@ export const Header = styled(Flex)`
 
 export const ContentWrapper = styled(Flex)`
   margin-top: 24px;
-  .ant-collapse-header {
-    padding-left: 0 !important;
-    padding-top: 0 !important;
-  }
-  .ant-collapse-header-text {
-    font-weight: 600;
-  }
-  .ant-collapse-content-box {
-    padding: 0 !important;
-    margin-bottom: 2rem !important;
-  }
-  .exp-value {
-    color: #6c6c6c;
-  }
-`;
-
-export const Sidebar = styled(Flex)`
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  background: #fff;
-  padding: 40px;
-  flex: 1;
-  min-height: 300px;
-  a {
-    text-decoration: none;
-    color: black;
-    padding: 8px 0;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-  @media (max-width: 800px) {
-    display: none;
-  }
 `;
 
 export const Content = styled(Flex)`
   flex-direction: column;
-  margin-left: 16px;
+
   border-radius: 16px;
   background: #fff;
-  padding: 40px 320px 40px 40px;
+  padding: 40px;
   flex: 3;
   @media (max-width: 1600px) {
     padding: 40px 120px 40px 40px;

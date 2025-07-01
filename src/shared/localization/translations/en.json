@@ -196,5 +196,23 @@
     "toLike": "To like articles",
     "toFollow": "To follow users",
     "chat": "Chat"
+  },
+  "profile": {
+    "whatsApp": "Phone number",
+    "whatsPlace": "Your phone number",
+    "manage": "Manage your account",
+    "personal": "Personal data",
+    "uploadPhoto": "Upload photo",
+    "deletePhoto": "Delete",
+    "sureDelete": "Are you sure want to delete your avatar?",
+    "name": "Name",
+    "namePlaceholder": "Please, enter your real name",
+    "location": "Location",
+    "city": "City",
+    "birthdate": "Birthdate",
+    "sex": "Sex",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell about yourself",
+    "save": "Save changes"
   }
 }

@@ -14,6 +14,7 @@ import Question from '@src/pages/questions/questionPage';
 import { LinkedinOutlined, YoutubeOutlined } from '@ant-design/icons';
 import { Footer } from '@src/pages/mainpage/styles';
 import logo from '/src/assets/goodrone-logo.png';
+import Profile from '@src/pages/profile';
 
 function App() {
   const token = useAppSelector((state) => state.login.token);
@@ -29,6 +30,7 @@ function App() {
     <MainContainer>
       <Routes>
         <Route path="/" element={<Navigate to="/main" />} />
+        <Route path="/profile" element={<Navigate to="/profile/data" />} />
         <Route
           path="*"
           element={
@@ -45,11 +47,12 @@ function App() {
                 >
                   <Route path="/questions/:id" element={<Question />} />
                 </Route>
+                <Route path="/profile/*" element={<Profile token={token ? token : ''} />} />
                 <Route
                   path="/*"
                   element={
                     <Result
-                      style={{ paddingTop: '180px' }}
+                      style={{ paddingTop: '180px', height: '92vh' }}
                       status="404"
                       title="404"
                       subTitle={t('mainPage.notExist')}

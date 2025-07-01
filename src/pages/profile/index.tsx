@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
-import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { Button, Avatar, Input, Form, Collapse, DatePicker, Upload, UploadProps, Select } from 'antd';
-import { Container, Header, ContentWrapper, Sidebar, Content, FlexCentered } from './styles';
-import type { CollapseProps, DatePickerProps } from 'antd';
-import { EnvironmentOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Avatar, Input, Form, DatePicker, Upload, UploadProps } from 'antd';
+import { Container, Header, ContentWrapper, Content, FlexCentered } from './styles';
+import type { DatePickerProps } from 'antd';
+import { EnvironmentOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import { useGetMeQuery } from '@src/app/store/api/APIbase';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const { TextArea } = Input;
 
 function Profile({ token }: { token: string }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { data: me, isLoading } = useGetMeQuery(undefined, { skip: !token });
 
   const [username, setusername] = useState<string>('');
   const [location, setlocation] = useState<string>('');
@@ -28,7 +31,11 @@ function Profile({ token }: { token: string }) {
   async function deletePhoto() {}
 
   const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
-    // setbirthDate(dateString);
+    if (Array.isArray(dateString)) {
+      setbirthDate(dateString[0]);
+    } else {
+      setbirthDate(dateString);
+    }
   };
 
   const uploadAvatar: UploadProps = {
@@ -51,64 +58,21 @@ function Profile({ token }: { token: string }) {
     // }
   };
 
-  if (!token) return <Navigate to="/main" />;
+  if (!isLoading && !me) return <Navigate to="/main" />;
 
   return (
     <Container>
       <Header>
-        {/* <Avatar src={avatar} className="avatar">
-          {name.charAt(0).toUpperCase()}
-        </Avatar> */}
+        <Avatar /* src={avatar} */ className="avatar">{me?.firstname.charAt(0).toUpperCase() || 'U'}</Avatar>
         <div className="name-wrapper">
-          {/* <h4>{name}</h4> */}
+          <h4>
+            {me?.firstname} {me?.lastname}
+          </h4>
           <span>{t('profile.manage')}</span>
         </div>
       </Header>
 
-      <Select
-        size="large"
-        options={[
-          {
-            label: (
-              <div
-                className="select-link"
-                onClick={() => {
-                  navigate('/profile/data');
-                }}
-              >
-                {t('profile.personal')}
-              </div>
-            ),
-            value: 1
-          },
-          {
-            label: (
-              <div
-                className="select-link"
-                onClick={() => {
-                  navigate('/profile/experience');
-                }}
-              >
-                {t('profile.exp')}
-              </div>
-            ),
-            value: 2
-          }
-        ]}
-        className="pages-select"
-        defaultValue={1}
-      ></Select>
-
       <ContentWrapper>
-        <Sidebar>
-          {/* <Link style={{ marginBottom: '16px', borderBottom: `1px solid ${adds.pathname.includes('data') ? 'black' : 'white'}` }} to={'/profile/data'}>
-            {t('profile.personal')}
-          </Link>
-          <Link style={{ borderBottom: `1px solid ${adds.pathname.includes('experience') ? 'black' : 'white'}` }} to={'/profile/experience'}>
-            {t('profile.exp')}
-          </Link> */}
-        </Sidebar>
-
         <Content>
           <Routes>
             <Route
@@ -116,9 +80,7 @@ function Profile({ token }: { token: string }) {
               element={
                 <>
                   <FlexCentered>
-                    {/* <Avatar src={avatar} className="avatar">
-                      {name.charAt(0).toUpperCase()}
-                    </Avatar> */}
+                    <Avatar /* src={avatar} */ className="avatar">{me?.firstname.charAt(0).toUpperCase() || 'U'}</Avatar>
                     <Upload {...uploadAvatar}>
                       <Button style={{ borderRadius: '8px' }} type="primary">
                         {t('profile.uploadPhoto')}
@@ -146,14 +108,14 @@ function Profile({ token }: { token: string }) {
                     </Form.Item>
 
                     <Form.Item label={t('profile.whatsApp')}>
-                      {/* <PhoneInput
+                      <PhoneInput
                         country={'kg'}
                         value={phone}
                         onChange={(phone) => setphone(phone)}
                         inputStyle={{ width: '100%', height: '40px', borderRadius: '8px' }}
                         dropdownStyle={{ borderRadius: '8px' }}
                         buttonStyle={{ borderRadius: '8px 0 0 8px' }}
-                      /> */}
+                      />
                     </Form.Item>
 
                     <Form.Item label={t('profile.location')}>
