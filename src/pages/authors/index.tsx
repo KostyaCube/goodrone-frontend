@@ -18,7 +18,7 @@ import AuthorProfile from './authorProfile';
 import Subscribers from './subscribers';
 
 type IProps = {
-  token: string | null | undefined;
+  token: string | undefined;
 };
 
 function Authors({ token }: IProps) {
@@ -38,7 +38,6 @@ function Authors({ token }: IProps) {
   const { needAuthMessage } = useCustomModals();
   const { openAuthModal } = useModal();
 
-  console.log(author);
   const arrOfSunscriptions = me && me.subscriptions ? me.subscriptions : [];
 
   const items: TabsProps['items'] = [
@@ -95,7 +94,7 @@ function Authors({ token }: IProps) {
 
           <div className="buttons">
             {token && me && me.id == Number(id) ? (
-              <Button onClick={() => navigate('/profile/data')}>
+              <Button onClick={() => navigate('/settings')}>
                 <EditOutlined />
                 {t('authors.editProfile')}
               </Button>

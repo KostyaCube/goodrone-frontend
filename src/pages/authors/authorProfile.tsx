@@ -3,12 +3,17 @@ import moment from 'moment';
 import { ProfileInfo } from './styles';
 import { useAppSelector } from '@src/app/store';
 import { useGetAuthorProfileQuery } from '@src/app/store/api/authors';
+import { useEffect } from 'react';
 
 function AuthorProfile({ id }: { id: string }) {
   const { t } = useTranslation();
   const token = useAppSelector((state) => state.login.token);
 
   const profile = useGetAuthorProfileQuery(id, { skip: !token }).data;
+
+  useEffect(() => {
+    console.log(profile);
+  }, [profile]);
 
   return (
     <ProfileInfo>
@@ -39,10 +44,6 @@ function AuthorProfile({ id }: { id: string }) {
       <div className="info-item">
         <span className="field">{t('profile.phone')}:</span>
         <span className="value">{profile?.phone || '-'}</span>
-      </div>
-      <div className="info-item">
-        <span className="field">{t('profile.userId')}:</span>
-        <span className="value">{profile?.userId ?? '-'}</span>
       </div>
     </ProfileInfo>
   );
